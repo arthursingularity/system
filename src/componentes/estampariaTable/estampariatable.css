@@ -1,0 +1,37 @@
+.tableDiv {
+    width: 730px;
+    overflow-x: auto;
+}
+
+td:nth-child(1), th:nth-child(1) {
+    text-align: center; /* Centraliza o texto na coluna "Código" */
+}
+
+td:nth-child(3), th:nth-child(3) {
+    text-align: center;
+}
+
+.input-placeholder3 {
+    width: 498px;
+}
+
+.copyButton {
+    font-size: 18px;
+    font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+}
+
+.clearInputTable {
+    margin-bottom: 1px;
+    right: 335px;
+    font-size: 15px;
+    font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.divInvisivel {
+    width: 800px;
+    height: 84px;
+}

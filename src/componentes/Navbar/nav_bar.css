@@ -1,0 +1,54 @@
+.navbarLogo {
+    margin-top: 6px;
+}
+
+#navBarNav {
+    z-index: 40;
+}
+
+#logo {
+    top: 10px;
+}
+
+#logo:hover {
+    filter: brightness(85%);
+}
+
+.options.active a {
+    color: #FF6600;
+}
+
+.lista {
+    padding: 16px;
+}
+
+.lista li {
+    padding-right: 35px;
+    letter-spacing: 0.4px;
+    font-size: 15px;
+}
+
+.lista li:hover {
+    color: #FF6600;
+    cursor: pointer;
+}
+
+.user{
+    margin-top: 12.5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.logout{
+    margin-top: 12.5px;
+    padding-top: 0.5px;
+    padding-bottom: 0.5px;
+    padding-right: 6px;
+    padding-left: 8px;
+}
+
+.keyboard_arrow_down {
+    font-variation-settings:'FILL' 0,'wght' 200,'GRAD' 0,'opsz' 24;
+}

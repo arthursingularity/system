@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'SF Pro Thin';
+  src: url(../public/fonts/SFProThin.ttf);
+}
+
+@font-face {
+  font-family: 'SF Pro Light';
+  src: url(../public/fonts/SFProLight.ttf);
+}
+
+@font-face {
+  font-family: 'SF Pro Regular';
+  src: url(../public/fonts/SFProRegular.ttf);
+}
+
+@font-face {
+  font-family: 'SF Pro Medium';
+  src: url(../public/fonts/SFProMedium.ttf);
+}
+
+@font-face {
+  font-family: 'SF Pro Semibold';
+  src: url(../public/fonts/SFProSemibold.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #16171B;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+  -webkit-appearance: none; /* Chrome, Safari, Edge */
+  appearance: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#clearInput {
+  margin-left: 212px;
+  margin-top: 1.5px;
+  font-size: 20px;
+  font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24
+}
+
+#clearPasswordInput {
+  margin-left: 160px;
+  margin-top: 1.5px;
+  font-size: 20px;
+  font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24
+}
+
+#visibilityIcon {
+  margin-left: 212px;
+  margin-top: 1.5px;
+  font-size: 20px;
+  font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24
+}
+
+.comps {
+  padding-right: 10px;
+  padding-left: 11px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.controleTecnor {
+  padding: 3px;
+  font-size: 30px;
+  font-variation-settings:'FILL' 0,'wght' 170,'GRAD' 0,'opsz' 24
+}
+
+.controleTecnor:hover {
+  font-variation-settings:'FILL' 1,'wght' 170,'GRAD' 0,'opsz' 24
+}
+
+::-webkit-scrollbar{
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #3c3e49;
+  border-radius: 5px;
+}
