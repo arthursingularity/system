@@ -59,3 +59,14 @@
 .inputDescription {
     width: 486px;
 }
+
+.resetButton {
+    padding: 3px;
+    font-variation-settings:'FILL' 0,'wght' 200,'GRAD' 0,'opsz' 24;
+    margin-left: 730px;
+    margin-top: 116px;
+}
+
+.resetButton:hover {
+    font-variation-settings:'FILL' 1,'wght' 200,'GRAD' 0,'opsz' 24;
+}

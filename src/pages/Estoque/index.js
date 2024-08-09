@@ -34,6 +34,36 @@ function Estoque() {
         setInputValues(storedValues);
     }, []);
 
+    const handleResetAllInputs = () => {
+        const confirmReset = window.confirm("Você tem certeza de que deseja apagar todos os endereçamentos? Esta ação não pode ser desfeita.");
+    
+        if (confirmReset) {
+            const resetValues = boxIds.reduce((acc, id) => {
+                ['A', 'B', 'TRILHO'].forEach(letter => {
+                    acc[`${id}-${letter}`] = Array(27).fill('');
+                });
+                return acc;
+            }, {});
+    
+            setInputValues(resetValues);
+    
+            boxIds.forEach(id => {
+                ['A', 'B', 'TRILHO'].forEach(letter => {
+                    Array(27).fill('').forEach((_, i) => localStorage.removeItem(`${id}-${letter}-${i}`));
+                });
+            });
+    
+            const resetHighlighted = boxIds.reduce((acc, id) => {
+                ['A', 'B', 'TRILHO'].forEach(letter => {
+                    acc[`${id}-${letter}`] = false;
+                });
+                return acc;
+            }, {});
+    
+            setHighlightedLetters(resetHighlighted);
+        }
+    };
+
     const toggleListaVisibility = () => setIsListaVisible(prev => !prev);
 
     const handleAbBoxClick = (id, letter) => {
@@ -116,11 +146,19 @@ function Estoque() {
                     </span>
                 )}
                 <button
-                    className="absolute colarButton border border-stam-border rounded-full px-3 text-sm text-stam-border hover:bg-stam-border hover:text-white font-regular z-30"
+                    className="absolute colarButton bg-stam-bg-3 border border-stam-border rounded-full px-3 text-sm text-stam-border hover:bg-stam-border hover:text-white font-regular z-30"
                     onClick={handlePaste}
                 >
                     Colar
                 </button>
+                <div className="flex justify-center">
+                    <span
+                        className="material-symbols-outlined z-30 resetButton text-stam-border border border-stam-border rounded-full hover:bg-stam-vermelho cursor-pointer hover:border-stam-vermelho hover:text-black"
+                        onClick={handleResetAllInputs}
+                    >
+                        delete_forever
+                    </span>
+                </div>
                 <div className="flex justify-center space-x-3 bg-stam-bg-3 py-3 menuDiv rounded-full z-20 absolute">
                     <span
                         className="material-symbols-outlined text-white p-1 border border-stam-border rounded-full hover:bg-stam-orange cursor-pointer hover:border-stam-orange"
@@ -173,19 +211,19 @@ function Estoque() {
                         </div>
                     </div>
                     <div className="prateleira9 flex space-x-1 -ml-9 mt-8">
-                            {['box45'].map(boxId => (
-                                <AbBox
-                                    props="-rotate-90"
-                                    letterVisibility="hidden"
-                                    key={boxId}
-                                    id={boxId}
-                                    letter1="TRILHO"
-                                    selectedLetterId={selectedLetterId}
-                                    highlightedLetters={highlightedLetters}
-                                    onClick={handleAbBoxClick}
-                                />
-                            ))}
-                        </div>
+                        {['box45'].map(boxId => (
+                            <AbBox
+                                props="-rotate-90"
+                                letterVisibility="hidden"
+                                key={boxId}
+                                id={boxId}
+                                letter1="TRILHO"
+                                selectedLetterId={selectedLetterId}
+                                highlightedLetters={highlightedLetters}
+                                onClick={handleAbBoxClick}
+                            />
+                        ))}
+                    </div>
                     <div className="flex">
                         <div className="block">
                             <div className="prateleira3 flex space-x-1 ml-10 mt-8 -mb-3">

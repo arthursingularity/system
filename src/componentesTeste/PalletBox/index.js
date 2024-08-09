@@ -10,10 +10,9 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
             setAnimationClass('visible');
         } else {
             setAnimationClass('hide');
-            // Aguardar o tempo da animação para remover a classe
             const timer = setTimeout(() => {
                 setAnimationClass('');
-            }, 230); // Ajuste este tempo para corresponder ao tempo de transição CSS
+            }, 230);
             return () => clearTimeout(timer);
         }
     }, [isVisible]);
@@ -40,11 +39,15 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
 
     const handlePasteClick = (index) => {
         navigator.clipboard.readText().then(text => {
-            const trimmedText = text.trim(); // Remove espaços extras
+            const trimmedText = text.trim();
             onInputChange(index, trimmedText);
         }).catch(err => {
             console.error('Failed to paste text: ', err);
         });
+    };
+
+    const handleChange = (index, value) => {
+        onInputChange(index, value);
     };
 
     return (
@@ -58,10 +61,10 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                         <div className="space-y-1">
                             {values.slice(0, 3).map((value, index) => (
                                 <div className="relative" key={index}>
-                                    <input
+                                     <input
                                         value={value}
-                                        onChange={(e) => onInputChange(index, e.target.value.trim())} // Remove espaços extras
-                                        className="bg-stam-bg-3 inputProduct border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-white px-2"
+                                        onChange={(e) => handleChange(index, e.target.value.trim())}
+                                        className={`bg-stam-bg-3 inputProduct border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -97,8 +100,8 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                 <div className="relative" key={index + 3}>
                                     <input
                                         value={value}
-                                        onChange={(e) => onInputChange(index + 3, e.target.value.trim())} // Remove espaços extras
-                                        className="bg-stam-bg-3 inputProduct2 border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-white px-2"
+                                        onChange={(e) => handleChange(index + 3, e.target.value.trim())}
+                                        className={`bg-stam-bg-3 inputProduct2 border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -134,8 +137,8 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                 <div className="relative" key={index + 6}>
                                     <input
                                         value={value}
-                                        onChange={(e) => onInputChange(index + 6, e.target.value.trim())} // Remove espaços extras
-                                        className="bg-stam-bg-3 inputProduct2 border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-white px-2"
+                                        onChange={(e) => handleChange(index + 6, e.target.value.trim())}
+                                        className={`bg-stam-bg-3 inputProduct2 border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -178,8 +181,8 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                 <div className="relative" key={index + 9}>
                                     <input
                                         value={value}
-                                        onChange={(e) => onInputChange(index + 9, e.target.value.trim())} // Remove espaços extras
-                                        className="bg-stam-bg-3 inputProduct border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-white px-2"
+                                        onChange={(e) => handleChange(index + 9, e.target.value.trim())}
+                                        className={`bg-stam-bg-3 inputProduct border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -215,8 +218,8 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                 <div className="relative" key={index + 12}>
                                     <input
                                         value={value}
-                                        onChange={(e) => onInputChange(index + 12, e.target.value.trim())} // Remove espaços extras
-                                        className="bg-stam-bg-3 inputProduct2 border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-white px-2"
+                                        onChange={(e) => handleChange(index + 12, e.target.value.trim())}
+                                        className={`bg-stam-bg-3 inputProduct2 border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -252,8 +255,8 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                 <div className="relative" key={index + 15}>
                                     <input
                                         value={value}
-                                        onChange={(e) => onInputChange(index + 15, e.target.value.trim())} // Remove espaços extras
-                                        className="bg-stam-bg-3 inputProduct2 border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-white px-2"
+                                        onChange={(e) => handleChange(index + 15, e.target.value.trim())}
+                                        className={`bg-stam-bg-3 inputProduct2 border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -296,8 +299,8 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                 <div className="relative" key={index + 18}>
                                     <input
                                         value={value}
-                                        onChange={(e) => onInputChange(index + 18, e.target.value.trim())} // Remove espaços extras
-                                        className="bg-stam-bg-3 inputProduct border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-white px-2"
+                                        onChange={(e) => handleChange(index + 18, e.target.value.trim())}
+                                        className={`bg-stam-bg-3 inputProduct border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -333,8 +336,8 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                 <div className="relative" key={index + 21}>
                                     <input
                                         value={value}
-                                        onChange={(e) => onInputChange(index + 21, e.target.value.trim())} // Remove espaços extras
-                                        className="bg-stam-bg-3 inputProduct2 border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-white px-2"
+                                        onChange={(e) => handleChange(index + 21, e.target.value.trim())}
+                                        className="bg-stam-bg-3 inputProduct2 border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-stam-orange px-2"
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -370,8 +373,8 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                 <div className="relative" key={index + 24}>
                                     <input
                                         value={value}
-                                        onChange={(e) => onInputChange(index + 24, e.target.value.trim())} // Remove espaços extras
-                                        className="bg-stam-bg-3 inputProduct2 border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-white px-2"
+                                        onChange={(e) => handleChange(index + 24, e.target.value.trim())}
+                                        className="bg-stam-bg-3 inputProduct2 border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-stam-orange px-2"
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
