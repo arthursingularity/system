@@ -83,7 +83,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     {value && (
                                         <span
                                             className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-verde-lucro hover:text-stam-bg-3'}`}
+                                        ${activeIcon === index ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
                                             onClick={() => handleCopyClick(index)}
                                         >
                                             {activeIcon === index ? 'check' : 'content_copy'}
@@ -120,7 +120,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     {value && (
                                         <span
                                             className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 3 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-verde-lucro hover:text-stam-bg-3'}`}
+                                        ${activeIcon === index + 3 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
                                             onClick={() => handleCopyClick(index + 3)}
                                         >
                                             {activeIcon === index + 3 ? 'check' : 'content_copy'}
@@ -157,7 +157,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     {value && (
                                         <span
                                             className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 6 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-verde-lucro hover:text-stam-bg-3'}`}
+                                        ${activeIcon === index + 6 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
                                             onClick={() => handleCopyClick(index + 6)}
                                         >
                                             {activeIcon === index + 6 ? 'check' : 'content_copy'}
@@ -201,7 +201,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     {value && (
                                         <span
                                             className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 9 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-verde-lucro hover:text-stam-bg-3'}`}
+                                        ${activeIcon === index + 9 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
                                             onClick={() => handleCopyClick(index + 9)}
                                         >
                                             {activeIcon === index + 9 ? 'check' : 'content_copy'}
@@ -238,7 +238,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     {value && (
                                         <span
                                             className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 12 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-verde-lucro hover:text-stam-bg-3'}`}
+                                        ${activeIcon === index + 12 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
                                             onClick={() => handleCopyClick(index + 12)}
                                         >
                                             {activeIcon === index + 12 ? 'check' : 'content_copy'}
@@ -275,7 +275,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     {value && (
                                         <span
                                             className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 15 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-verde-lucro hover:text-stam-bg-3'}`}
+                                        ${activeIcon === index + 15 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
                                             onClick={() => handleCopyClick(index + 15)}
                                         >
                                             {activeIcon === index + 15 ? 'check' : 'content_copy'}
@@ -319,7 +319,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     {value && (
                                         <span
                                             className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 18 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-verde-lucro hover:text-stam-bg-3'}`}
+                                        ${activeIcon === index + 18 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
                                             onClick={() => handleCopyClick(index + 18)}
                                         >
                                             {activeIcon === index + 18 ? 'check' : 'content_copy'}
@@ -356,7 +356,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     {value && (
                                         <span
                                             className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 21 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-verde-lucro hover:text-stam-bg-3'}`}
+                                        ${activeIcon === index + 21 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
                                             onClick={() => handleCopyClick(index + 21)}
                                         >
                                             {activeIcon === index + 21 ? 'check' : 'content_copy'}
@@ -393,7 +393,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     {value && (
                                         <span
                                             className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 24 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-verde-lucro hover:text-stam-bg-3'}`}
+                                        ${activeIcon === index + 24 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
                                             onClick={() => handleCopyClick(index + 24)}
                                         >
                                             {activeIcon === index + 24 ? 'check' : 'content_copy'}
