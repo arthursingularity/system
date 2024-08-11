@@ -1,4 +1,5 @@
 .palletBox {
+    z-index: 50;
     border-radius: 37px;
     width: 1157px;
     height: 485px;
@@ -21,12 +22,14 @@
     width: 322px;
     height: 27.5px;
     margin-left: 107px;
+    caret-color: #FF6600;
 }
 .inputProduct2 {
     padding-right: 48px;
     width: 322px;
     height: 27.5px;
     margin-left: 7px;
+    caret-color: #FF6600;
 }
 
 .inputProduct::placeholder {
@@ -87,4 +90,9 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+}
+
+.text-stam-orange {
+    color: #FF6600;
+    border-color: #FF6600;
 }

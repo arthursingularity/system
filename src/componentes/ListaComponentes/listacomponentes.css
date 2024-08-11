@@ -1,24 +1,24 @@
 .listaComponentes {
     border-radius: 37px;
     position: absolute;
-    top: 180px;
+    top: 176px;
     width: 1157px;
     height: 485px;
     overflow: hidden;
     z-index: 40;
-    transform: scale(0); /* Inicialmente escondido */
-    transform-origin: center; /* Origem da transformação */
-    transition: transform 0.3s ease; /* Transição suave */
+    transform: scale(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
 }
 
 .listaComponentes.visible {
-    transform: scale(1); /* Visível após a animação */
+    transform: scale(1);
 }
 
 .listaComponentes-inner {
     width: 100%;
     height: 100%;
-    overflow-y: auto; /* Adiciona a barra de rolagem vertical */
-    overflow-x: hidden; /* Esconde a barra de rolagem horizontal */
+    overflow-y: auto;
+    overflow-x: hidden;
     box-sizing: border-box;
 }

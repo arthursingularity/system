@@ -1,9 +1,11 @@
 import "./palletbox.css";
 import React, { useEffect, useState } from 'react';
 
-function PalletBox({ values, onInputChange, onClose, isVisible }) {
+function PalletBox({ values, onInputChange, onClose, isVisible, descricao }) {
     const [animationClass, setAnimationClass] = useState('');
     const [activeIcon, setActiveIcon] = useState(null);
+    const [matchingInputPositions, setMatchingInputPositions] = useState([]);
+    const [searchTriggered, setSearchTriggered] = useState(false);
 
     useEffect(() => {
         if (isVisible) {
@@ -16,6 +18,15 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
             return () => clearTimeout(timer);
         }
     }, [isVisible]);
+
+    useEffect(() => {
+        if (searchTriggered) {
+            const trimmedDescricao = descricao.trim();
+            const matchedIndices = values.map((value, index) => value.trim() === trimmedDescricao ? index : null).filter(index => index !== null);
+            setMatchingInputPositions(matchedIndices);
+            setSearchTriggered(false); 
+        }
+    }, [searchTriggered, descricao, values]);
 
     const handleCopyClick = (index) => {
         const textToCopy = values[index];
@@ -39,21 +50,42 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
 
     const handlePasteClick = (index) => {
         navigator.clipboard.readText().then(text => {
-            const trimmedText = text.trim();
-            onInputChange(index, trimmedText);
+            const cleanedText = cleanInputValue(text);
+            onInputChange(index, cleanedText);
         }).catch(err => {
             console.error('Failed to paste text: ', err);
         });
     };
 
     const handleChange = (index, value) => {
-        onInputChange(index, value);
+        const cleanedValue = cleanInputValue(value);
+        onInputChange(index, cleanedValue);
+    };
+
+    const cleanInputValue = (value) => {
+        return value.replace(/\s{2,}/g, ' ').trim();
+    };
+
+    const isAnyInputMatchDescricao = (startIndex, endIndex) => {
+        return values.slice(startIndex, endIndex).some(value => value.trim() === descricao.trim() && value.trim() !== '');
+    };
+
+    const getInputProductClass = (value, descricao) => {
+        return `bg-stam-bg-3 inputProduct border border-stam-border rounded-full outline-none font-light text-white px-2 ${
+            value === descricao.trim() && value !== "" ? 'text-stam-orange font-semibold' : ''
+        }`;
+    };
+
+    const getInputProduct2Class = (value, descricao) => {
+        return `bg-stam-bg-3 inputProduct2 border border-stam-border rounded-full outline-none font-light text-white px-2 ${
+            value === descricao.trim() && value !== "" ? 'text-stam-orange font-semibold' : ''
+        }`;
     };
 
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center z-50">
             <div className={`bg-stam-bg-3 palletBox absolute border border-stam-border p-4 ${animationClass}`}>
-                <div className="border border-stam-border borders">
+                <div className={`border ${isAnyInputMatchDescricao(0, 9) ? 'border-stam-orange' : 'border-stam-border'} borders`}>
                     <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-2xl">
                         <p className="font-medium text-white text-6xl">3</p>
                     </div>
@@ -61,10 +93,10 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                         <div className="space-y-1">
                             {values.slice(0, 3).map((value, index) => (
                                 <div className="relative" key={index}>
-                                     <input
+                                    <input
                                         value={value}
                                         onChange={(e) => handleChange(index, e.target.value.trim())}
-                                        className={`bg-stam-bg-3 inputProduct border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
+                                        className={getInputProductClass(value, descricao)}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -101,7 +133,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     <input
                                         value={value}
                                         onChange={(e) => handleChange(index + 3, e.target.value.trim())}
-                                        className={`bg-stam-bg-3 inputProduct2 border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
+                                        className={getInputProduct2Class(value, descricao)}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -138,7 +170,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     <input
                                         value={value}
                                         onChange={(e) => handleChange(index + 6, e.target.value.trim())}
-                                        className={`bg-stam-bg-3 inputProduct2 border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
+                                        className={getInputProduct2Class(value, descricao)}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -171,7 +203,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                         </div>
                     </div>
                 </div>
-                <div className="border border-stam-border borders mt-3">
+                <div className={`border ${isAnyInputMatchDescricao(9, 18) ? 'border-stam-orange' : 'border-stam-border'} borders mt-3`}>
                     <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-2xl">
                         <p className="font-medium text-white text-6xl">2</p>
                     </div>
@@ -182,7 +214,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     <input
                                         value={value}
                                         onChange={(e) => handleChange(index + 9, e.target.value.trim())}
-                                        className={`bg-stam-bg-3 inputProduct border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
+                                        className={getInputProductClass(value, descricao)}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -219,7 +251,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     <input
                                         value={value}
                                         onChange={(e) => handleChange(index + 12, e.target.value.trim())}
-                                        className={`bg-stam-bg-3 inputProduct2 border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
+                                        className={getInputProduct2Class(value, descricao)}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -256,7 +288,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     <input
                                         value={value}
                                         onChange={(e) => handleChange(index + 15, e.target.value.trim())}
-                                        className={`bg-stam-bg-3 inputProduct2 border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
+                                        className={getInputProduct2Class(value, descricao)}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -289,7 +321,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                         </div>
                     </div>
                 </div>
-                <div className="border border-stam-border borders mt-3">
+                <div className={`border ${isAnyInputMatchDescricao(18, 27) ? 'border-stam-orange' : 'border-stam-border'} borders mt-3`}>
                     <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-2xl">
                         <p className="font-medium text-white text-6xl">1</p>
                     </div>
@@ -300,7 +332,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     <input
                                         value={value}
                                         onChange={(e) => handleChange(index + 18, e.target.value.trim())}
-                                        className={`bg-stam-bg-3 inputProduct border rounded-full outline-none font-light text-stam-orange px-2 ${value ? 'border-stam-orange' : 'border-stam-border'}`}
+                                        className={getInputProductClass(value, descricao)}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -337,7 +369,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     <input
                                         value={value}
                                         onChange={(e) => handleChange(index + 21, e.target.value.trim())}
-                                        className="bg-stam-bg-3 inputProduct2 border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-stam-orange px-2"
+                                        className={getInputProduct2Class(value, descricao)}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (
@@ -374,7 +406,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible }) {
                                     <input
                                         value={value}
                                         onChange={(e) => handleChange(index + 24, e.target.value.trim())}
-                                        className="bg-stam-bg-3 inputProduct2 border border-stam-border caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-stam-orange px-2"
+                                        className={getInputProduct2Class(value, descricao)}
                                         placeholder="Endereçar"
                                     />
                                     {!value && (

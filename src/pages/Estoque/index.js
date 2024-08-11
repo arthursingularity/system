@@ -1,6 +1,5 @@
 import ListaComponentes from "../../componentes/ListaComponentes";
 import Navbar from "../../componentes/Navbar";
-import Trilho from "../../componentes/Trilho";
 import AbBox from "../../componentesTeste/AbBox";
 import PalletBox from "../../componentesTeste/PalletBox";
 import "./teste.css";
@@ -21,6 +20,9 @@ function Estoque() {
     const [highlightedLetters, setHighlightedLetters] = useState({});
     const [isListaVisible, setIsListaVisible] = useState(false);
     const [inputBorderClass, setInputBorderClass] = useState('border-stam-border');
+    const [resetState, setResetState] = useState(false);
+    const [matchingInputPositions, setMatchingInputPositions] = useState({});
+    const [searchResults, setSearchResults] = useState({});
 
     useEffect(() => {
         const storedValues = boxIds.reduce((acc, id) => {
@@ -34,9 +36,35 @@ function Estoque() {
         setInputValues(storedValues);
     }, []);
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                if (isListaVisible) {
+                    toggleListaVisibility();
+                } else {
+                    handlePalletBoxClose();
+                }
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isListaVisible, selectedLetterId]);
+
+    useEffect(() => {
+        const handleEnterKey = (e) => {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        };
+
+        window.addEventListener('keydown', handleEnterKey);
+        return () => window.removeEventListener('keydown', handleEnterKey);
+    }, [searchValue]);
+
     const handleResetAllInputs = () => {
         const confirmReset = window.confirm("Você tem certeza de que deseja apagar todos os endereçamentos? Esta ação não pode ser desfeita.");
-    
+
         if (confirmReset) {
             const resetValues = boxIds.reduce((acc, id) => {
                 ['A', 'B', 'TRILHO'].forEach(letter => {
@@ -44,22 +72,22 @@ function Estoque() {
                 });
                 return acc;
             }, {});
-    
+
             setInputValues(resetValues);
-    
+
             boxIds.forEach(id => {
                 ['A', 'B', 'TRILHO'].forEach(letter => {
                     Array(27).fill('').forEach((_, i) => localStorage.removeItem(`${id}-${letter}-${i}`));
                 });
             });
-    
+
             const resetHighlighted = boxIds.reduce((acc, id) => {
                 ['A', 'B', 'TRILHO'].forEach(letter => {
                     acc[`${id}-${letter}`] = false;
                 });
                 return acc;
             }, {});
-    
+
             setHighlightedLetters(resetHighlighted);
         }
     };
@@ -74,7 +102,8 @@ function Estoque() {
     const handlePaste = async () => {
         try {
             const text = await navigator.clipboard.readText();
-            setSearchValue(text.toUpperCase().trim());
+            const cleanedText = cleanText(text);
+            setSearchValue(cleanedText.toUpperCase().trim());
         } catch (error) {
             console.error('Falha ao acessar a área de transferência:', error);
         }
@@ -125,6 +154,25 @@ function Estoque() {
         }
     };
 
+    const handleResetHighlightedBoxes = () => {
+        setResetState(true);
+        setHighlightedLetters({});
+        setTimeout(() => setResetState(false), 0);
+    };
+
+    const handlePasteInput = (e) => {
+        e.preventDefault();
+        const paste = e.clipboardData.getData('text');
+        const processedText = cleanText(paste);
+        setSearchValue(processedText.toUpperCase().trim());
+    };
+
+    const cleanText = (text) => {
+        return text.replace(/\s{2,}/g, ' ').trim();
+    };
+
+    const shouldHideBoxNumbersDiv = visiblePalletBox || isListaVisible;
+
     return (
         <div>
             <Navbar />
@@ -153,11 +201,21 @@ function Estoque() {
                 </button>
                 <div className="flex justify-center">
                     <span
-                        className="material-symbols-outlined z-30 resetButton text-stam-border border border-stam-border rounded-full hover:bg-stam-vermelho cursor-pointer hover:border-stam-vermelho hover:text-black"
-                        onClick={handleResetAllInputs}
+                        className="material-symbols-outlined z-30 resetHighlitedBoxes text-stam-border border border-stam-border rounded-full hover:bg-stam-vermelho cursor-pointer hover:border-stam-vermelho hover:text-black"
+                        onClick={handleResetHighlightedBoxes}
                     >
-                        delete_forever
+                        disabled_by_default
                     </span>
+                    {!isListaVisible && !visiblePalletBox && (
+                        <div className="justify-center">
+                            <span
+                                className="material-symbols-outlined z-30 resetButton absolute text-stam-border border border-stam-border rounded-full hover:bg-stam-vermelho cursor-pointer hover:border-stam-vermelho hover:text-black"
+                                onClick={handleResetAllInputs}
+                            >
+                                delete_forever
+                            </span>
+                        </div>
+                    )}
                 </div>
                 <div className="flex justify-center space-x-3 bg-stam-bg-3 py-3 menuDiv rounded-full z-20 absolute">
                     <span
@@ -169,6 +227,7 @@ function Estoque() {
                     <input
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value.toUpperCase().trim())}
+                        onPaste={handlePasteInput}
                         className={`bg-stam-bg-3 inputDescription border ${inputBorderClass} pl-8 caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-white px-2`}
                         placeholder="Descrição"
                     />
@@ -193,6 +252,7 @@ function Estoque() {
                                     selectedLetterId={selectedLetterId}
                                     highlightedLetters={highlightedLetters}
                                     onClick={handleAbBoxClick}
+                                    resetState={resetState}
                                 />
                             ))}
                         </div>
@@ -206,6 +266,7 @@ function Estoque() {
                                     selectedLetterId={selectedLetterId}
                                     highlightedLetters={highlightedLetters}
                                     onClick={handleAbBoxClick}
+                                    resetState={resetState}
                                 />
                             ))}
                         </div>
@@ -221,6 +282,7 @@ function Estoque() {
                                 selectedLetterId={selectedLetterId}
                                 highlightedLetters={highlightedLetters}
                                 onClick={handleAbBoxClick}
+                                resetState={resetState}
                             />
                         ))}
                     </div>
@@ -236,6 +298,7 @@ function Estoque() {
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
+                                        resetState={resetState}
                                     />
                                 ))}
                             </div>
@@ -249,6 +312,7 @@ function Estoque() {
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
+                                        resetState={resetState}
                                     />
                                 ))}
                             </div>
@@ -262,6 +326,7 @@ function Estoque() {
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
+                                        resetState={resetState}
                                     />
                                 ))}
                             </div>
@@ -277,6 +342,7 @@ function Estoque() {
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
+                                        resetState={resetState}
                                     />
                                 ))}
                             </div>
@@ -290,6 +356,7 @@ function Estoque() {
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
+                                        resetState={resetState}
                                     />
                                 ))}
                             </div>
@@ -303,6 +370,7 @@ function Estoque() {
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
+                                        resetState={resetState}
                                     />
                                 ))}
                             </div>
@@ -311,15 +379,59 @@ function Estoque() {
                     <div>
                         {visiblePalletBox &&
                             <PalletBox
+                                className="z-50"
                                 values={inputValues[selectedLetterId] || Array(27).fill('')}
                                 onInputChange={(index, value) => handleInputChange(index, value)}
                                 onClose={handlePalletBoxClose}
                                 isVisible={!!visiblePalletBox}
+                                descricao={searchValue}
+                                searchResults={searchResults}
+                                handlePasteInput={handlePasteInput}
                             />
                         }
                     </div>
                 </div>
             </div>
+            {!shouldHideBoxNumbersDiv && (
+                <div className="boxNumbersDiv flex justify-center">
+                    <div className="absolute font-light text-stam-border flex p1 flex">
+                        <p>1</p><p>2</p><p>3</p>
+                    </div>
+                    <div className="absolute font-light text-stam-border flex p2 flex">
+                        <p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p>
+                    </div>
+                    <div className="absolute font-light text-stam-border flex p3 flex">
+                        <p>4</p><p>3</p><p>2</p><p>1</p>
+                    </div>
+                    <div className="absolute font-light text-stam-border flex p4 flex">
+                        <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>
+                    </div>
+                    <div className="absolute font-light text-stam-border flex p5 flex">
+                        <p>1</p><p>2</p><p>3</p><p>4</p>
+                    </div>
+                    <div className="absolute font-light text-stam-border flex p6 flex">
+                        <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>
+                    </div>
+                    <div className="absolute font-light text-stam-border flex p7 flex">
+                        <p>1</p>
+                        <p className="p7n2">2</p>
+                        <p className="p7n3">3</p>
+                        <p className="p7n4">4</p>
+                        <p className="p7n5">5</p>
+                        <p className="p7n6">6</p>
+                        <p className="p7n7">7</p>
+                        <p className="p7n8">8</p>
+                        <p className="p7n9">9</p>
+                        <p className="p7n10">10</p>
+                        <p className="p7n11">11</p>
+                        <p className="p7n12">12</p>
+                    </div>
+                    <div className="absolute font-light text-stam-border block p8">
+                        <p>1</p><p>2</p><p>3</p>
+                    </div>
+                </div>
+            )}
+
             <div className="flex justify-center">
                 <div className="bg-estoque-bg estoqueBg absolute rounded-3xl"></div>
             </div>
