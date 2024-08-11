@@ -37,21 +37,6 @@ function Estoque() {
     }, []);
 
     useEffect(() => {
-        const handleKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                if (isListaVisible) {
-                    toggleListaVisibility();
-                } else {
-                    handlePalletBoxClose();
-                }
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [isListaVisible, selectedLetterId]);
-
-    useEffect(() => {
         const handleEnterKey = (e) => {
             if (e.key === 'Enter') {
                 handleSearch();
@@ -157,7 +142,7 @@ function Estoque() {
     const handleResetHighlightedBoxes = () => {
         setResetState(true);
         setHighlightedLetters({});
-        setTimeout(() => setResetState(false), 0);
+        setInputBorderClass('border-stam-border');
     };
 
     const handlePasteInput = (e) => {
@@ -171,6 +156,27 @@ function Estoque() {
         return text.replace(/\s{2,}/g, ' ').trim();
     };
 
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+
+                if (isListaVisible || visiblePalletBox) {
+                    if (isListaVisible) {
+                        toggleListaVisibility();
+                    }
+                    if (visiblePalletBox) {
+                        handlePalletBoxClose();
+                    }
+                } else {
+                    handleResetHighlightedBoxes();
+                }
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isListaVisible, visiblePalletBox, handlePalletBoxClose, handleResetHighlightedBoxes]);
+
     const shouldHideBoxNumbersDiv = visiblePalletBox || isListaVisible;
 
     return (
@@ -178,10 +184,7 @@ function Estoque() {
             <Navbar />
             <ListaComponentes visible={isListaVisible} toggleVisibility={toggleListaVisibility} />
             <div className="flex justify-center">
-                <div className="text-left absolute z-40 ml-6 title block justify-center">
-                    <p className="text-estoque-text font-light text-lg -mb-2">Estoque</p>
-                    <p className="text-white font-medium text-xl">Estamparia</p>
-                </div>
+
                 <span class="material-symbols-outlined searchIcon absolute text-stam-border text-2xl z-40">
                     search
                 </span>
@@ -199,27 +202,40 @@ function Estoque() {
                 >
                     Colar
                 </button>
-                <div className="flex justify-center">
-                    <span
-                        className="material-symbols-outlined z-30 resetHighlitedBoxes text-stam-border border border-stam-border rounded-full hover:bg-stam-vermelho cursor-pointer hover:border-stam-vermelho hover:text-black"
-                        onClick={handleResetHighlightedBoxes}
-                    >
-                        disabled_by_default
-                    </span>
-                    {!isListaVisible && !visiblePalletBox && (
-                        <div className="justify-center">
+                <div>
+                    <div className="menu2 flex z-10 rounded-full relative justify-center left-12">
+                        <div className="right-0 absolute flex bg-stam-bg-3 px-3 py-3 rounded-full">
                             <span
-                                className="material-symbols-outlined z-30 resetButton absolute text-stam-border border border-stam-border rounded-full hover:bg-stam-vermelho cursor-pointer hover:border-stam-vermelho hover:text-black"
-                                onClick={handleResetAllInputs}
+                                className="material-symbols-outlined z-30 filtrarNecessidadesIcon text-stam-bg-3 bg-stam-border rounded-full hover:bg-stam-orange cursor-pointer"
+                                onClick={handleResetHighlightedBoxes}
                             >
-                                delete_forever
+                                quick_reference_all
+                                <p className="necessidades absolute font-medium text-stam-bg-3 text-base z-50">Necessidades</p>
+                            </span>
+                            <span
+                                className="material-symbols-outlined z-20 resetHighlitedBoxes ml-3 text-stam-bg-3 bg-stam-border rounded-full hover:bg-stam-orange cursor-pointer"
+                                onClick={handleResetHighlightedBoxes}
+                                id="resetBox"
+                            >
+                                disabled_by_default
+                                <p className="resetar absolute font-medium text-stam-bg-3 text-base z-50">Resetar</p>
                             </span>
                         </div>
-                    )}
+                    </div>
                 </div>
+                {!isListaVisible && !visiblePalletBox && (
+                    <div className="justify-center">
+                        <span
+                            className="material-symbols-outlined z-30 resetButton absolute text-stam-border border border-stam-border rounded-full hover:bg-stam-vermelho cursor-pointer hover:border-stam-vermelho hover:text-black"
+                            onClick={handleResetAllInputs}
+                        >
+                            delete_forever
+                        </span>
+                    </div>
+                )}
                 <div className="flex justify-center space-x-3 bg-stam-bg-3 py-3 menuDiv rounded-full z-20 absolute">
                     <span
-                        className="material-symbols-outlined text-white p-1 border border-stam-border rounded-full hover:bg-stam-orange cursor-pointer hover:border-stam-orange"
+                        className="material-symbols-outlined menuIcon text-stam-bg-3 bg-stam-orange p-1 rounded-full hover:bg-stam-orange cursor-pointer"
                         onClick={toggleListaVisibility}
                     >
                         menu
@@ -232,7 +248,7 @@ function Estoque() {
                         placeholder="Descrição"
                     />
                     <button
-                        className="localizarButton bg-stam-orange font-medium px-5 rounded-full"
+                        className="localizarButton bg-stam-orange font-medium px-5 rounded-full no-focus-outline"
                         onClick={handleSearch}
                     >
                         Localizar

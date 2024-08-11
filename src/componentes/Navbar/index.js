@@ -62,7 +62,7 @@ function Navbar() {
         </ul>
         <ul className="lista3 mr-4 fixed justify-center items-center flex list-none right-0 font-medium z-50">
           <a href='/login'>
-            <span className="material-symbols-rounded logout text-xl text-white border boder-white rounded-full cursor-pointer hover:bg-texos-red hover:border-texos-red">
+            <span className="material-symbols-rounded logout text-xl text-stam-border border border-stam-border rounded-full cursor-pointer hover:bg-texos-red hover:border-texos-red hover:text-white">
               logout
             </span>
           </a>
