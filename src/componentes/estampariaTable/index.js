@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useRef, forwardRef, useImperativeHandle } from "react";
 import './estampariatable.css';
 import LinhaTabela from '../LinhaTabela';
 
@@ -607,9 +607,18 @@ const data = [
     { codigo: '11058200001', descricao: 'TRINCO FECHO AUTOMATICO' }
 ];
 
-function EstampariaTable({ onClose }) {
+const EstampariaTable = forwardRef(({ onClose }, ref) => {
     const [buttonState, setButtonState] = useState({});
     const [filterText, setFilterText] = useState('');
+    const inputRef = useRef(null);
+
+    useImperativeHandle(ref, () => ({
+        focusInput() {
+            if (inputRef.current) {
+                inputRef.current.focus();
+            }
+        }
+    }));
 
     const copyToClipboard = (event, rowIndex) => {
         const row = event.currentTarget.closest("tr");
@@ -649,6 +658,7 @@ function EstampariaTable({ onClose }) {
         <div>
             <div className='flex justify-center mt-8 items-center space-x-3'>
                 <input
+                    ref={inputRef}
                     className="input-placeholder3 z-20 absolute py-1 bg-stam-bg-3 ml-3 border border-stam-border rounded-full outline-none px-3 caret-stam-orange hover:border-stam-orange"
                     placeholder="Pesquisar por descrição"
                     type="text"
@@ -699,7 +709,7 @@ function EstampariaTable({ onClose }) {
             </div>
         </div>
     );
-}
+});
 
 export default EstampariaTable;
 

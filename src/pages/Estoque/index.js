@@ -3,7 +3,7 @@ import Navbar from "../../componentes/Navbar";
 import AbBox from "../../componentesTeste/AbBox";
 import PalletBox from "../../componentesTeste/PalletBox";
 import "./teste.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const boxIds = [
     'box1', 'box2', 'box3', 'box4', 'box5', 'box6', 'box7', 'box8', 'box9',
@@ -23,6 +23,7 @@ function Estoque() {
     const [resetState, setResetState] = useState(false);
     const [matchingInputPositions, setMatchingInputPositions] = useState({});
     const [searchResults, setSearchResults] = useState({});
+    const estampariaTableRef = useRef(null);
 
     useEffect(() => {
         const storedValues = boxIds.reduce((acc, id) => {
@@ -46,6 +47,17 @@ function Estoque() {
         window.addEventListener('keydown', handleEnterKey);
         return () => window.removeEventListener('keydown', handleEnterKey);
     }, [searchValue]);
+
+    const focusInputInEstampariaTable = () => {
+        if (estampariaTableRef.current) {
+            estampariaTableRef.current.focusInput();
+        }
+    };
+
+    const handleMenuClick = () => {
+        focusInputInEstampariaTable();
+        toggleListaVisibility();
+    };
 
     const handleResetAllInputs = () => {
         const confirmReset = window.confirm("Você tem certeza de que deseja apagar todos os endereçamentos? Esta ação não pode ser desfeita.");
@@ -159,20 +171,16 @@ function Estoque() {
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') {
-
-                if (isListaVisible || visiblePalletBox) {
-                    if (isListaVisible) {
-                        toggleListaVisibility();
-                    }
-                    if (visiblePalletBox) {
-                        handlePalletBoxClose();
-                    }
+                if (isListaVisible) {
+                    toggleListaVisibility();
+                } else if (visiblePalletBox) {
+                    handlePalletBoxClose();
                 } else {
                     handleResetHighlightedBoxes();
                 }
             }
         };
-
+    
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isListaVisible, visiblePalletBox, handlePalletBoxClose, handleResetHighlightedBoxes]);
@@ -182,9 +190,8 @@ function Estoque() {
     return (
         <div>
             <Navbar />
-            <ListaComponentes visible={isListaVisible} toggleVisibility={toggleListaVisibility} />
+            <ListaComponentes visible={isListaVisible} toggleVisibility={toggleListaVisibility} ref={estampariaTableRef} />
             <div className="flex justify-center">
-
                 <span class="material-symbols-outlined searchIcon absolute text-stam-border text-2xl z-40">
                     search
                 </span>
@@ -236,7 +243,7 @@ function Estoque() {
                 <div className="flex justify-center space-x-3 bg-stam-bg-3 py-3 menuDiv rounded-full z-20 absolute">
                     <span
                         className="material-symbols-outlined menuIcon text-stam-bg-3 bg-stam-orange p-1 rounded-full hover:bg-stam-orange cursor-pointer"
-                        onClick={toggleListaVisibility}
+                        onClick={handleMenuClick}
                     >
                         menu
                     </span>
