@@ -6,8 +6,8 @@
 }
 
 .estoqueBg {
-    width: 1203px;
-    height: 558px;
+    width: 1195px;
+    height: 555px;
     top: 85px;
     border-radius: 45px;
 }
@@ -27,8 +27,8 @@
 }
 
 .colarButton {
-    margin-top: 121px;
-    margin-left: 346px;
+    margin-top: 120px;
+    margin-left: 348px;
 }
 
 .colarButton:focus {
@@ -37,7 +37,7 @@
 }
 
 .clearDescription {
-    margin-top: 123.5px;
+    margin-top: 122px;
     margin-left: 258px;
     font-size: 15px;
     font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 24;
@@ -48,13 +48,17 @@
 }
 
 .searchIcon {
-    margin-right: 523px;
-    margin-top: 116px;
+    margin-right: 526px;
+    margin-top: 115px;
 }
 
 .menuDiv {
     width: 670px;
     margin-top: 104px;
+}
+
+.menuIcon {
+    padding: 3px;
 }
 
 .menuIcon:hover {
@@ -67,6 +71,7 @@
 
 .inputDescription {
     width: 486px;
+    padding-right: 89px;
 }
 
 .resetButton {
@@ -82,7 +87,7 @@
 }
 
 .menu2 {
-    margin-top: 106px;
+    margin-top: 104px;
     z-index: 30;
     margin-left: 1055px;
 }

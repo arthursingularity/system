@@ -2,8 +2,8 @@
     z-index: 50;
     border-radius: 30px;
     width: 1157px;
-    height: 485px;
-    margin-bottom: 207px;
+    height: 440px;
+    margin-bottom: 247px;
     transform: scale(0);
     transform-origin: center;
     transition: transform 0.23s ease;
@@ -48,8 +48,8 @@
     padding: 2px;
     font-size: 13px;
     font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
-    top: 5px;
-    right: 5px;
+    top: 5.5px;
+    right: 5.5px;
 }
 
 .pasteIcons:hover {
@@ -62,12 +62,12 @@
 }
 
 .borders {
-    border-radius: 26px;
+    border-radius: 20px;
     padding: 17px;
 }
 
 .clearEnderecamento {
-    top: 5px;
+    top: 5.5px;
     right: 26px;
     padding: 1px;
     font-size: 15px;
@@ -79,8 +79,8 @@
 }
 
 .arrowPasteIcon {
-    top: 5px;
-    right: 5px;
+    top: 5.5px;
+    right: 5.5px;
     padding: 1px;
     padding-left: 6px;
     padding-right: 5px;

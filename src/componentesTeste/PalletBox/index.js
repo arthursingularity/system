@@ -439,14 +439,6 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao }) {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center">
-                    <button
-                        className="bg-stam-orange fecharButton rounded-full px-20 py-1 font-medium absolute bottom-4"
-                        onClick={onClose}
-                    >
-                        Fechar
-                    </button>
-                </div>
             </div>
         </div>
     );

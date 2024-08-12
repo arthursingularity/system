@@ -1,9 +1,9 @@
 .listaComponentes {
     border-radius: 30px;
     position: absolute;
-    top: 178px;
+    top: 181px;
     width: 1157px;
-    height: 485px;
+    height: 440px;
     overflow: hidden;
     z-index: 40;
     transform: scale(0);

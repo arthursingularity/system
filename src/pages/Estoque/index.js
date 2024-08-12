@@ -212,7 +212,7 @@ function Estoque() {
                 </button>
                 <div>
                     <div className="menu2 flex z-10 rounded-full relative justify-center left-12">
-                        <div className="right-0 absolute flex bg-stam-bg-3 px-3 py-3 rounded-full">
+                        <div className="right-0 absolute flex bg-stam-bg-3 px-3.5 py-3 rounded-full">
                             <span
                                 className="material-symbols-outlined z-30 filtrarNecessidadesIcon text-stam-bg-3 bg-stam-border rounded-full hover:bg-stam-orange cursor-pointer"
                                 onClick={handleResetHighlightedBoxes}
@@ -243,7 +243,7 @@ function Estoque() {
                 )}
                 <div className="flex justify-center space-x-3 bg-stam-bg-3 py-3 menuDiv rounded-full z-20 absolute">
                     <span
-                        className="material-symbols-outlined menuIcon text-stam-bg-3 bg-stam-orange p-1 rounded-full hover:bg-stam-orange cursor-pointer"
+                        className="material-symbols-outlined menuIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer"
                         onClick={handleMenuClick}
                     >
                         menu
@@ -263,7 +263,7 @@ function Estoque() {
                     </button>
                 </div>
             </div>
-            <div className="flex justify-center">
+            <div className="boxes flex justify-center">
                 <div className="bg-stam-bg-3 estoqueDiv p-5 absolute z-20">
                     <div className="flex">
                         <div className="prateleira1 flex space-x-1 ml-10">
@@ -470,7 +470,6 @@ function Estoque() {
                     </div>
                 </div>
             )}
-
             <div className="flex justify-center">
                 <div className="bg-estoque-bg estoqueBg absolute rounded-3xl"></div>
             </div>
