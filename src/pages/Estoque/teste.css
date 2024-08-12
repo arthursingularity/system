@@ -1,8 +1,15 @@
 .estoqueDiv {
     width: 1157px;
-    height: 444px;
+    height: 439px;
     top: 180px;
     border-radius: 30px;
+}
+
+.estoqueBg {
+    width: 1203px;
+    height: 558px;
+    top: 85px;
+    border-radius: 45px;
 }
 
 .AbBoxDiv {
@@ -56,13 +63,6 @@
 
 .localizarButton:hover {
     filter: brightness(85%);
-}
-
-.estoqueBg {
-    width: 1203px;
-    height: 563px;
-    top: 85px;
-    border-radius: 45px;
 }
 
 .inputDescription {

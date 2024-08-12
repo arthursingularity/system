@@ -1,9 +1,9 @@
 .palletBox {
     z-index: 50;
-    border-radius: 37px;
+    border-radius: 30px;
     width: 1157px;
     height: 485px;
-    margin-bottom: 60px;
+    margin-bottom: 207px;
     transform: scale(0);
     transform-origin: center;
     transition: transform 0.23s ease;

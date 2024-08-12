@@ -9,7 +9,8 @@ const boxIds = [
     'box1', 'box2', 'box3', 'box4', 'box5', 'box6', 'box7', 'box8', 'box9',
     'box10', 'box11', 'box12', 'box13', 'box14', 'box15', 'box16', 'box17', 'box18', 'box19', 'box20', 'box21',
     'box22', 'box23', 'box24', 'box25', 'box26', 'box27', 'box28', 'box29', 'box30', 'box31', 'box32', 'box33',
-    'box34', 'box35', 'box36', 'box37', 'box38', 'box39', 'box40', 'box41', 'box42', 'box43', 'box44', 'box45'
+    'box34', 'box35', 'box36', 'box37', 'box38', 'box39', 'box40', 'box41', 'box42', 'box43', 'box44', 'box45',
+    'box46'
 ];
 
 function Estoque() {
@@ -180,7 +181,7 @@ function Estoque() {
                 }
             }
         };
-    
+
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isListaVisible, visiblePalletBox, handlePalletBoxClose, handleResetHighlightedBoxes]);
@@ -339,7 +340,22 @@ function Estoque() {
                                     />
                                 ))}
                             </div>
-                            <div className="prateleira7 absolute flex space-x-1 mt-28 ml-10">
+                            <div className="prateleira10 flex space-x-1 -ml-9 mt-8">
+                                {['box46'].map(boxId => (
+                                    <AbBox
+                                        props="-rotate-90"
+                                        letterVisibility="hidden"
+                                        key={boxId}
+                                        id={boxId}
+                                        letter1="TRILHO"
+                                        selectedLetterId={selectedLetterId}
+                                        highlightedLetters={highlightedLetters}
+                                        onClick={handleAbBoxClick}
+                                        resetState={resetState}
+                                    />
+                                ))}
+                            </div>
+                            <div className="prateleira7 absolute flex space-x-1 mt-8 ml-10">
                                 {['box30', 'box31', 'box32', 'box33', 'box34', 'box35', 'box36', 'box37', 'box38', 'box39', 'box40', 'box41'].map(boxId => (
                                     <AbBox
                                         key={boxId}
