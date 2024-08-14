@@ -47,6 +47,13 @@
     -ms-user-select: none;
 }
 
+.material-symbols-outlined {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
 .searchIcon {
     margin-right: 526px;
     margin-top: 115px;
@@ -79,65 +86,31 @@
     padding: 3px;
     font-variation-settings:'FILL' 0,'wght' 200,'GRAD' 0,'opsz' 24;
     top: 570px;
-    margin-left: 2px;
+    margin-left: 530px;
 }
 
 .resetButton:hover {
     font-variation-settings:'FILL' 1,'wght' 200,'GRAD' 0,'opsz' 24;
 }
 
-.menu2 {
-    margin-top: 104px;
-    z-index: 30;
-    margin-left: 1055px;
-}
-
-.necessidades {
-    top: 15px;
-    right: 85px;
-    transition: opacity 180ms ease-in-out, visibility 0s 180ms;
-    opacity: 0;
-    visibility: hidden;
-}
-
 .filtrarNecessidadesIcon {
     padding: 3px;
     font-variation-settings: 'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;
-    transition: padding-left 200ms;
+    transition: transform 0.15s ease;
 }
 
-.filtrarNecessidadesIcon:hover {
-    padding-left: 114px;
+.modeDiv {
+    width: 61px;
+    top: 114.5px;
+    margin-left: 1080px;
 }
 
-.filtrarNecessidadesIcon:hover .necessidades {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0s;
+.modeDiv:hover .filtrarNecessidadesIcon {
+    background-color: #FF6600;
 }
 
-.resetar {
-    top: 15px;
-    right: 43px;
-    transition: opacity 200ms ease-in-out, visibility 0s 200ms;
-    opacity: 0;
-    visibility: hidden;
-}
-
-.resetHighlitedBoxes {
-    padding: 3px;
-    font-variation-settings: 'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;
-    transition: padding-left 200ms;
-}
-
-.resetHighlitedBoxes:hover {
-    padding-left: 68px;
-}
-
-.resetHighlitedBoxes:hover .resetar {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0s;
+.filtrarNecessidadesIcon.moved {
+    transform: translateX(30px);
 }
 
 .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8 {

@@ -25,6 +25,7 @@ function Estoque() {
     const [matchingInputPositions, setMatchingInputPositions] = useState({});
     const [searchResults, setSearchResults] = useState({});
     const estampariaTableRef = useRef(null);
+    const [isMoved, setIsMoved] = useState(false);
 
     useEffect(() => {
         const storedValues = boxIds.reduce((acc, id) => {
@@ -48,6 +49,10 @@ function Estoque() {
         window.addEventListener('keydown', handleEnterKey);
         return () => window.removeEventListener('keydown', handleEnterKey);
     }, [searchValue]);
+
+    const handleModeDivClick = () => {
+        setIsMoved(!isMoved);
+    };
 
     const focusInputInEstampariaTable = () => {
         if (estampariaTableRef.current) {
@@ -115,10 +120,13 @@ function Estoque() {
     const handlePalletBoxClose = () => {
         setVisiblePalletBox(null);
         setSelectedLetterId('');
-        setHighlightedLetters(prev => {
-            const { [selectedLetterId]: _, ...rest } = prev;
-            return rest;
-        });
+        
+        if (!isMoved) {
+            setHighlightedLetters(prev => {
+                const { [selectedLetterId]: _, ...rest } = prev;
+                return rest;
+            });
+        }
     };
 
     const handleInputChange = (index, value) => {
@@ -134,20 +142,27 @@ function Estoque() {
 
     const handleSearch = () => {
         const trimmedSearchValue = searchValue.trim();
-
+    
         if (trimmedSearchValue === '') {
             setInputBorderClass('border-stam-vermelho');
             return;
         }
-
+    
         const highlighted = Object.entries(inputValues)
             .filter(([_, values]) => values.some(value => value.includes(trimmedSearchValue)))
             .reduce((acc, [letterId]) => ({ ...acc, [letterId]: true }), {});
-
+    
         if (Object.keys(highlighted).length === 0) {
             setInputBorderClass('border-stam-vermelho');
         } else {
-            setHighlightedLetters(highlighted);
+            setHighlightedLetters(prev => {
+                if (isMoved) {
+                    return { ...prev, ...highlighted };
+                } 
+                else {
+                    return highlighted;
+                }
+            });
             setInputBorderClass('border-stam-border');
         }
     };
@@ -176,7 +191,7 @@ function Estoque() {
                     toggleListaVisibility();
                 } else if (visiblePalletBox) {
                     handlePalletBoxClose();
-                } else {
+                } else if (!isMoved) {
                     handleResetHighlightedBoxes();
                 }
             }
@@ -184,7 +199,7 @@ function Estoque() {
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [isListaVisible, visiblePalletBox, handlePalletBoxClose, handleResetHighlightedBoxes]);
+    }, [isListaVisible, visiblePalletBox, isMoved]);
 
     const shouldHideBoxNumbersDiv = visiblePalletBox || isListaVisible;
 
@@ -210,25 +225,17 @@ function Estoque() {
                 >
                     Colar
                 </button>
-                <div>
-                    <div className="menu2 flex z-10 rounded-full relative justify-center left-12">
-                        <div className="right-0 absolute flex bg-stam-bg-3 px-3.5 py-3 rounded-full">
-                            <span
-                                className="material-symbols-outlined z-30 filtrarNecessidadesIcon text-stam-bg-3 bg-stam-border rounded-full hover:bg-stam-orange cursor-pointer"
-                                onClick={handleResetHighlightedBoxes}
-                            >
-                                quick_reference_all
-                                <p className="necessidades absolute font-medium text-stam-bg-3 text-base z-50">Necessidades</p>
-                            </span>
-                            <span
-                                className="material-symbols-outlined z-20 resetHighlitedBoxes ml-3 text-stam-bg-3 bg-stam-border rounded-full hover:bg-stam-orange cursor-pointer"
-                                onClick={handleResetHighlightedBoxes}
-                                id="resetBox"
-                            >
-                                disabled_by_default
-                                <p className="resetar absolute font-medium text-stam-bg-3 text-base z-50">Resetar</p>
-                            </span>
-                        </div>
+                <div className="flex justify-center items-center">
+                    <div
+                        className={`modeDiv absolute bg-stam-bg-3 z-50 flex justify-center border border-stam-border rounded-full h-8 cursor-pointer hover:border-stam-orange
+                        ${isMoved ? 'border-stam-orange' : ''}`}
+                        onClick={handleModeDivClick}>
+                        <span
+                            className={`material-symbols-outlined z-30 absolute left-0 filtrarNecessidadesIcon text-stam-bg-3 bg-stam-border rounded-full 
+                            ${isMoved ? 'moved bg-stam-orange' : ''}`}
+                        >
+                            quick_reference_all
+                        </span>
                     </div>
                 </div>
                 {!isListaVisible && !visiblePalletBox && (
@@ -264,7 +271,7 @@ function Estoque() {
                 </div>
             </div>
             <div className="boxes flex justify-center">
-                <div className="bg-stam-bg-3 estoqueDiv p-5 absolute z-20">
+                <div className={`bg-stam-bg-3 estoqueDiv p-5 absolute border z-20 ${isMoved ? 'border-stam-orange' : 'border-stam-bg-3'}`}>
                     <div className="flex">
                         <div className="prateleira1 flex space-x-1 ml-10">
                             {['box1', 'box2', 'box3'].map(boxId => (
