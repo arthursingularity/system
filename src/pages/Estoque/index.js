@@ -269,10 +269,20 @@ function Estoque() {
                     <input
                         className="bg-stam-bg-3 border border-stam-border rounded-full font-light pl-8 caret-stam-orange outline-none hover:border-stam-orange w-36 text-white"
                         placeholder="Código"
+                        onChange={(e) => {
+                            const onlyNumbers = e.target.value.replace(/\D/g, '');
+                            e.target.value = onlyNumbers;
+                        }}
+                        onPaste={(e) => {
+                            e.preventDefault();
+                            const paste = e.clipboardData.getData('text');
+                            const onlyNumbers = paste.replace(/\D/g, '');
+                            document.execCommand('insertText', false, onlyNumbers);
+                        }}
                     ></input>
                     <input
                         value={searchValue}
-                        onChange={(e) => setSearchValue(e.target.value.toUpperCase().trim())}
+                        onChange={(e) => setSearchValue(e.target.value.toUpperCase())}
                         onPaste={handlePasteInput}
                         className={`bg-stam-bg-3 inputDescription border ${inputBorderClass} pl-8 caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-white px-2`}
                         placeholder="Descrição"
