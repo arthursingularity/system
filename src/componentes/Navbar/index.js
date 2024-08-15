@@ -17,14 +17,14 @@ function Navbar() {
     return () => {
       window.removeEventListener('popstate', handleRouteChange);
       if (hideTimeoutRef.current) {
-        clearTimeout(hideTimeoutRef.current); // Limpa o timeout quando o componente é desmontado
+        clearTimeout(hideTimeoutRef.current);
       }
     };
   }, []);
 
   const handleMouseEnter = () => {
     if (hideTimeoutRef.current) {
-      clearTimeout(hideTimeoutRef.current); // Cancela o timeout se o mouse voltar
+      clearTimeout(hideTimeoutRef.current);
     }
     setIsSuprimentosVisible(true);
   };
@@ -56,6 +56,7 @@ function Navbar() {
               </span>
             </div>
           </li>
+          <li className={`options ${currentPage === '/proposta' ? 'active' : ''}`}><a href='/proposta'>Proposta</a></li>
         </ul>
         <ul className="lista3 fixed justify-center items-center flex list-none right-16 font-medium z-50">
           <li className='user font-medium bg-stam-orange rounded-full'>ARTHURM</li>

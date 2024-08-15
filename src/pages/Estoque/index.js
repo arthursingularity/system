@@ -26,6 +26,7 @@ function Estoque() {
     const [searchResults, setSearchResults] = useState({});
     const estampariaTableRef = useRef(null);
     const [isMoved, setIsMoved] = useState(false);
+    const [isPasting, setIsPasting] = useState(false);
 
     useEffect(() => {
         const storedValues = boxIds.reduce((acc, id) => {
@@ -120,7 +121,7 @@ function Estoque() {
     const handlePalletBoxClose = () => {
         setVisiblePalletBox(null);
         setSelectedLetterId('');
-        
+
         if (!isMoved) {
             setHighlightedLetters(prev => {
                 const { [selectedLetterId]: _, ...rest } = prev;
@@ -131,34 +132,39 @@ function Estoque() {
 
     const handleInputChange = (index, value) => {
         const upperCaseValue = value.toUpperCase();
+        const processedValue = isPasting ? upperCaseValue : upperCaseValue;
+
         setInputValues(prevValues => {
             const [boxId, letter] = selectedLetterId.split('-');
             const newValues = { ...prevValues };
-            newValues[selectedLetterId][index] = upperCaseValue;
-            localStorage.setItem(`${boxId}-${letter}-${index}`, upperCaseValue);
+            newValues[selectedLetterId][index] = processedValue;
+            localStorage.setItem(`${boxId}-${letter}-${index}`, processedValue);
             return newValues;
         });
     };
 
     const handleSearch = () => {
         const trimmedSearchValue = searchValue.trim();
-    
+
         if (trimmedSearchValue === '') {
             setInputBorderClass('border-stam-vermelho');
             return;
         }
-    
-        const highlighted = Object.entries(inputValues)
-            .filter(([_, values]) => values.some(value => value.includes(trimmedSearchValue)))
-            .reduce((acc, [letterId]) => ({ ...acc, [letterId]: true }), {});
-    
+
+        const highlighted = Object.entries(inputValues).reduce((acc, [letterId, values]) => {
+            if (values.includes(trimmedSearchValue)) {
+                acc[letterId] = true;
+            }
+            return acc;
+        }, {});
+
         if (Object.keys(highlighted).length === 0) {
             setInputBorderClass('border-stam-vermelho');
         } else {
             setHighlightedLetters(prev => {
                 if (isMoved) {
                     return { ...prev, ...highlighted };
-                } 
+                }
                 else {
                     return highlighted;
                 }
@@ -175,9 +181,11 @@ function Estoque() {
 
     const handlePasteInput = (e) => {
         e.preventDefault();
+        setIsPasting(true);
         const paste = e.clipboardData.getData('text');
         const processedText = cleanText(paste);
         setSearchValue(processedText.toUpperCase().trim());
+        setIsPasting(false);
     };
 
     const cleanText = (text) => {
@@ -208,6 +216,9 @@ function Estoque() {
             <Navbar />
             <ListaComponentes visible={isListaVisible} toggleVisibility={toggleListaVisibility} ref={estampariaTableRef} />
             <div className="flex justify-center">
+                <span class="material-symbols-outlined codeIcon absolute text-stam-border text-2xl z-40">
+                    numbers
+                </span>
                 <span class="material-symbols-outlined searchIcon absolute text-stam-border text-2xl z-40">
                     search
                 </span>
@@ -255,6 +266,10 @@ function Estoque() {
                     >
                         menu
                     </span>
+                    <input
+                        className="bg-stam-bg-3 border border-stam-border rounded-full font-light pl-8 caret-stam-orange outline-none hover:border-stam-orange w-36 text-white"
+                        placeholder="Código"
+                    ></input>
                     <input
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value.toUpperCase().trim())}

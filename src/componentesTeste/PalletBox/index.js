@@ -67,7 +67,10 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao }) {
     };
 
     const isAnyInputMatchDescricao = (startIndex, endIndex) => {
-        return values.slice(startIndex, endIndex).some(value => value.trim() === descricao.trim() && value.trim() !== '');
+        const trimmedDescricao = descricao.trim();
+        return values.slice(startIndex, endIndex).some(value => 
+            value.trim() !== '' && value.trim() === trimmedDescricao
+        );
     };
 
     const getInputProductClass = (value, descricao) => {

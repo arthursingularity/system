@@ -9,7 +9,7 @@ const LinhaTabela = ({ codigo, descricao, buttonState, onCopyClick, rowIndex }) 
         <button
           className={`w-20 rounded-full font-medium ${buttonState === 'Copiado!' ? 'bg-green-300 text-black' : 'bg-blue-500 text-white'} ${buttonState === 'Copiado!' ? '' : 'hover:bg-blue-600'}`}
           onClick={(e) => onCopyClick(e, rowIndex)}
-          disabled={buttonState === 'Copiado!'} // Desativa o botão enquanto estiver em "Copiado!"
+          disabled={buttonState === 'Copiado!'}
         >
           {buttonState || 'Copiar'}
         </button>

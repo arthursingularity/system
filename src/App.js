@@ -5,6 +5,7 @@ import Erro404 from './pages/erro404/erro404';
 import Tecnor from './pages/tecnor';
 import Sobre from './pages/sobre';
 import Estoque from './pages/Estoque';
+import Proposta from './pages/Proposta';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/sobre' element={<Sobre/>}/>
           <Route path='/tecnor' element={<Tecnor/>}/>
           <Route path='/estoqueestamparia' element={<Estoque/>}/>
+          <Route path='/proposta' element={<Proposta/>}/>
         </Routes>
       </BrowserRouter>
     </div>
