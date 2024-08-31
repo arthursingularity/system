@@ -51,6 +51,17 @@ function Estoque() {
         return () => window.removeEventListener('keydown', handleEnterKey);
     }, [searchValue]);
 
+    useEffect(() => {
+        const handleShiftDown = (e) => {
+            if (e.key === 'Shift') {
+                handleModeDivClick();
+            }
+        };
+
+        window.addEventListener('keydown', handleShiftDown);
+        return () => {window.removeEventListener('keydown', handleShiftDown);};
+    }, [isMoved]);
+
     const handleModeDivClick = () => {
         setIsMoved(!isMoved);
     };
@@ -259,7 +270,12 @@ function Estoque() {
                         </span>
                     </div>
                 )}
-                <div className="flex justify-center space-x-3 bg-stam-bg-3 py-3 menuDiv rounded-full z-20 absolute">
+                <div className="absolute z-50 warning bg-stam-bg-3 rounded-full flex justify-center items-center cursor-pointer">
+                    <span className="text-stam-bg-4 material-symbols-outlined rounded-full hover:text-stam-orange text-4xl warningSpan">
+                        error
+                    </span>
+                </div>
+                <div className="menuDiv flex justify-center space-x-3 bg-stam-bg-3 py-3 rounded-full z-20 absolute">
                     <span
                         className="material-symbols-outlined menuIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer"
                         onClick={handleMenuClick}
@@ -312,7 +328,7 @@ function Estoque() {
                                 />
                             ))}
                         </div>
-                        <div className="prateleira2 flex space-x-1 ml-40">
+                        <div className="prateleira2 flex space-x-1 ml-64">
                             {['box4', 'box5', 'box6', 'box7', 'box8', 'box9'].map(boxId => (
                                 <AbBox
                                     key={boxId}
@@ -465,25 +481,25 @@ function Estoque() {
             </div>
             {!shouldHideBoxNumbersDiv && (
                 <div className="boxNumbersDiv flex justify-center">
-                    <div className="absolute font-light text-stam-border flex p1 flex">
+                    <div className="absolute font-light text-stam-border flex p1">
                         <p>1</p><p>2</p><p>3</p>
                     </div>
-                    <div className="absolute font-light text-stam-border flex p2 flex">
+                    <div className="absolute font-light text-stam-border flex p2">
                         <p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p>
                     </div>
-                    <div className="absolute font-light text-stam-border flex p3 flex">
+                    <div className="absolute font-light text-stam-border flex p3">
                         <p>4</p><p>3</p><p>2</p><p>1</p>
                     </div>
-                    <div className="absolute font-light text-stam-border flex p4 flex">
-                        <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>
+                    <div className="absolute font-light text-stam-border flex p4">
+                        <p>1</p><p className="ml-1">2</p><p>3</p><p>4</p><p>5</p><p>6</p>
                     </div>
-                    <div className="absolute font-light text-stam-border flex p5 flex">
+                    <div className="absolute font-light text-stam-border flex p5">
                         <p>1</p><p>2</p><p>3</p><p>4</p>
                     </div>
-                    <div className="absolute font-light text-stam-border flex p6 flex">
+                    <div className="absolute font-light text-stam-border flex p6">
                         <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>
                     </div>
-                    <div className="absolute font-light text-stam-border flex p7 flex">
+                    <div className="absolute font-light text-stam-border flex p7">
                         <p>1</p>
                         <p className="p7n2">2</p>
                         <p className="p7n3">3</p>

@@ -56,7 +56,6 @@ function Navbar() {
               </span>
             </div>
           </li>
-          <li className={`options ${currentPage === '/proposta' ? 'active' : ''}`}><a href='/proposta'>Proposta</a></li>
         </ul>
         <ul className="lista3 fixed justify-center items-center flex list-none right-16 font-medium z-50">
           <li className='user font-medium bg-stam-orange rounded-full'>ARTHURM</li>
