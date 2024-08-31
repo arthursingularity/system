@@ -1,5 +1,6 @@
 import ListaComponentes from "../../componentes/ListaComponentes";
 import Navbar from "../../componentes/Navbar";
+import SearchSuggestion from "../../componentes/Searchsuggestion";
 import AbBox from "../../componentesTeste/AbBox";
 import PalletBox from "../../componentesTeste/PalletBox";
 import "./teste.css";
@@ -23,10 +24,13 @@ function Estoque() {
     const [inputBorderClass, setInputBorderClass] = useState('border-stam-border');
     const [resetState, setResetState] = useState(false);
     const [matchingInputPositions, setMatchingInputPositions] = useState({});
+    const [isSearchSuggestionVisible, setIsSearchSuggestionVisible] = useState(true);
     const [searchResults, setSearchResults] = useState({});
     const estampariaTableRef = useRef(null);
     const [isMoved, setIsMoved] = useState(false);
     const [isPasting, setIsPasting] = useState(false);
+    const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+    const inputDescriptionRef = useRef(null);
 
     useEffect(() => {
         const storedValues = boxIds.reduce((acc, id) => {
@@ -41,17 +45,6 @@ function Estoque() {
     }, []);
 
     useEffect(() => {
-        const handleEnterKey = (e) => {
-            if (e.key === 'Enter') {
-                handleSearch();
-            }
-        };
-
-        window.addEventListener('keydown', handleEnterKey);
-        return () => window.removeEventListener('keydown', handleEnterKey);
-    }, [searchValue]);
-
-    useEffect(() => {
         const handleShiftDown = (e) => {
             if (e.key === 'Shift') {
                 handleModeDivClick();
@@ -59,7 +52,7 @@ function Estoque() {
         };
 
         window.addEventListener('keydown', handleShiftDown);
-        return () => {window.removeEventListener('keydown', handleShiftDown);};
+        return () => { window.removeEventListener('keydown', handleShiftDown); };
     }, [isMoved]);
 
     const handleModeDivClick = () => {
@@ -114,19 +107,12 @@ function Estoque() {
         setSelectedLetterId(`${id}-${letter}`);
     };
 
-    const handlePaste = async () => {
-        try {
-            const text = await navigator.clipboard.readText();
-            const cleanedText = cleanText(text);
-            setSearchValue(cleanedText.toUpperCase().trim());
-        } catch (error) {
-            console.error('Falha ao acessar a área de transferência:', error);
-        }
-    };
-
     const handleClearInput = () => {
-        setSearchValue('');
-        setInputBorderClass('border-stam-border');
+        setSearchValue('')
+        setInputBorderClass('border-stam-border')
+        if (inputDescriptionRef.current) {
+            inputDescriptionRef.current.focus()
+        }
     };
 
     const handlePalletBoxClose = () => {
@@ -203,6 +189,65 @@ function Estoque() {
         return text.replace(/\s{2,}/g, ' ').trim();
     };
 
+    const handleSuggestionClick = (descricao) => {
+        navigator.clipboard.writeText(descricao)
+            .then(() => {
+                setSearchValue(descricao);
+                setIsSearchSuggestionVisible(false);
+            })
+            .catch(err => {
+                console.error('Falha ao copiar o texto: ', err);
+            });
+    };
+
+    const handleDescricaoChange = (e) => {
+        setIsSearchSuggestionVisible(true);
+        setSearchValue(e.target.value.toUpperCase());
+    };
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (isSearchSuggestionVisible) {
+                if (e.key === 'Enter') {
+                    const items = document.querySelectorAll('.suggestion-item');
+                    const selectedItem = Array.from(items).find(item => item.classList.contains('bg-gray-700'));
+                    
+                    if (selectedItem) {
+                        const descricao = selectedItem.textContent || '';
+                        handleSuggestionClick(descricao);
+                    }
+                } else if (e.key === 'ArrowDown') {
+                    setSelectedItemIndex((prevIndex) => {
+                        const items = document.querySelectorAll('.suggestion-item');
+                        const newIndex = (prevIndex + 1) % items.length;
+                        items.forEach((item, index) => {
+                            item.classList.toggle('bg-gray-700', index === newIndex);
+                        });
+                        return newIndex;
+                    });
+                } else if (e.key === 'ArrowUp') {
+                    setSelectedItemIndex((prevIndex) => {
+                        const items = document.querySelectorAll('.suggestion-item');
+                        const newIndex = (prevIndex - 1 + items.length) % items.length;
+                        items.forEach((item, index) => {
+                            item.classList.toggle('bg-gray-700', index === newIndex);
+                        });
+                        return newIndex;
+                    });
+                }
+            } else if (e.key === 'Enter') {
+                handleSearch();
+            }
+        };
+    
+        window.addEventListener('keydown', handleKeyDown);
+    
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [searchValue, isSearchSuggestionVisible]);
+    
+
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === 'Escape') {
@@ -222,14 +267,17 @@ function Estoque() {
 
     const shouldHideBoxNumbersDiv = visiblePalletBox || isListaVisible;
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+          event.preventDefault();
+        }
+      };
+
     return (
         <div>
             <Navbar />
             <ListaComponentes visible={isListaVisible} toggleVisibility={toggleListaVisibility} ref={estampariaTableRef} />
             <div className="flex justify-center">
-                <span class="material-symbols-outlined codeIcon absolute text-stam-border text-2xl z-40">
-                    numbers
-                </span>
                 <span class="material-symbols-outlined searchIcon absolute text-stam-border text-2xl z-40">
                     search
                 </span>
@@ -241,12 +289,6 @@ function Estoque() {
                         close
                     </span>
                 )}
-                <button
-                    className="absolute colarButton bg-stam-bg-3 border border-stam-border rounded-full px-3 text-sm text-stam-border hover:bg-stam-border hover:text-white font-regular z-30"
-                    onClick={handlePaste}
-                >
-                    Colar
-                </button>
                 <div className="flex justify-center items-center">
                     <div
                         className={`modeDiv absolute bg-stam-bg-3 z-50 flex justify-center border border-stam-border rounded-full h-8 cursor-pointer hover:border-stam-orange
@@ -270,11 +312,7 @@ function Estoque() {
                         </span>
                     </div>
                 )}
-                <div className="absolute z-50 warning bg-stam-bg-3 rounded-full flex justify-center items-center cursor-pointer">
-                    <span className="text-stam-bg-4 material-symbols-outlined rounded-full hover:text-stam-orange text-4xl warningSpan">
-                        error
-                    </span>
-                </div>
+                {searchValue && isSearchSuggestionVisible && <SearchSuggestion searchValue={searchValue} onSuggestionClick={handleSuggestionClick}/>}
                 <div className="menuDiv flex justify-center space-x-3 bg-stam-bg-3 py-3 rounded-full z-20 absolute">
                     <span
                         className="material-symbols-outlined menuIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer"
@@ -283,23 +321,11 @@ function Estoque() {
                         menu
                     </span>
                     <input
-                        className="bg-stam-bg-3 border border-stam-border rounded-full font-light pl-8 caret-stam-orange outline-none hover:border-stam-orange w-36 text-white"
-                        placeholder="Código"
-                        onChange={(e) => {
-                            const onlyNumbers = e.target.value.replace(/\D/g, '');
-                            e.target.value = onlyNumbers;
-                        }}
-                        onPaste={(e) => {
-                            e.preventDefault();
-                            const paste = e.clipboardData.getData('text');
-                            const onlyNumbers = paste.replace(/\D/g, '');
-                            document.execCommand('insertText', false, onlyNumbers);
-                        }}
-                    ></input>
-                    <input
                         value={searchValue}
-                        onChange={(e) => setSearchValue(e.target.value.toUpperCase())}
+                        onChange={handleDescricaoChange}
                         onPaste={handlePasteInput}
+                        onKeyDown={handleKeyDown}
+                        ref={inputDescriptionRef}
                         className={`bg-stam-bg-3 inputDescription border ${inputBorderClass} pl-8 caret-stam-orange rounded-full outline-none hover:border-stam-orange font-light text-white px-2`}
                         placeholder="Descrição"
                     />

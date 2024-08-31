@@ -86,11 +86,15 @@ input[type="number"]::-webkit-outer-spin-button {
   font-variation-settings:'FILL' 1,'wght' 170,'GRAD' 0,'opsz' 24
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 7px;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background-color: #3c3e49;
   border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4a4d5a;
 }
