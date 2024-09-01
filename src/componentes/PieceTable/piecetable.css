@@ -1,0 +1,18 @@
+.pieceTableDiv {
+    width: 1157px;
+    height: 439px;
+    top: 180px;
+    border-radius: 30px;
+}
+
+.inputPieceDescription {
+    height: 32px;
+}
+
+.blurPieceTableBg {
+    width: 1157px;
+    height: 439px;
+    top: -1px; 
+    right: -1px;
+    border-radius: 30px;
+}

@@ -1,5 +1,6 @@
 import ListaComponentes from "../../componentes/ListaComponentes";
 import Navbar from "../../componentes/Navbar";
+import PieceTable from "../../componentes/PieceTable";
 import SearchSuggestion from "../../componentes/Searchsuggestion";
 import AbBox from "../../componentesTeste/AbBox";
 import PalletBox from "../../componentesTeste/PalletBox";
@@ -30,6 +31,7 @@ function Estoque() {
     const [isMoved, setIsMoved] = useState(false);
     const [isPasting, setIsPasting] = useState(false);
     const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+    const [isPieceVisible, setIsPieceVisible] = useState(false)
     const inputDescriptionRef = useRef(null);
 
     useEffect(() => {
@@ -205,6 +207,10 @@ function Estoque() {
         setSearchValue(e.target.value.toUpperCase());
     };
 
+    function togglePieceTableVisibility() {
+        setIsPieceVisible(!isPieceVisible)
+    }
+
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (isSearchSuggestionVisible) {
@@ -255,6 +261,9 @@ function Estoque() {
                     toggleListaVisibility();
                 } else if (visiblePalletBox) {
                     handlePalletBoxClose();
+                } 
+                if (isPieceVisible) {
+                    setIsPieceVisible(!isPieceVisible);
                 } else if (!isMoved) {
                     handleResetHighlightedBoxes();
                 }
@@ -263,7 +272,7 @@ function Estoque() {
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [isListaVisible, visiblePalletBox, isMoved]);
+    }, [isListaVisible, visiblePalletBox, isMoved, isPieceVisible]);
 
     const shouldHideBoxNumbersDiv = visiblePalletBox || isListaVisible;
 
@@ -313,7 +322,14 @@ function Estoque() {
                     </div>
                 )}
                 {searchValue && isSearchSuggestionVisible && <SearchSuggestion searchValue={searchValue} onSuggestionClick={handleSuggestionClick}/>}
+                <PieceTable isPieceVisible={isPieceVisible}/>
                 <div className="menuDiv flex justify-center space-x-3 bg-stam-bg-3 py-3 rounded-full z-20 absolute">
+                    <span
+                        className="material-symbols-outlined pieceIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer"
+                        onClick={togglePieceTableVisibility}
+                    >
+                        extension
+                    </span>
                     <span
                         className="material-symbols-outlined menuIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer"
                         onClick={handleMenuClick}
