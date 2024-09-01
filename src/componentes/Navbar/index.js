@@ -40,6 +40,7 @@ function Navbar() {
       <nav className="navegação">
         <ul className="lista fixed z-50 justify-center items-center flex text-white list-none w-full bg-stam-bg-3 font-light">
           <li><a href='/'><img src='system-logo.png' id='logo' className="navbarLogo absolute w-24 z-20 left-5" alt='logoSymbol' /></a></li>
+          <li><a href='/ambient'>Ambiente de testes</a></li>
           <li
             className={`options ${currentPage === '/suprimentos' ? 'active' : ''}`}
             onMouseEnter={handleMouseEnter}
