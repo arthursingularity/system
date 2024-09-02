@@ -282,6 +282,36 @@ function Estoque() {
         }
       };
 
+      useEffect(() => {
+        function handleKeyDown(event) {
+            if (event.altKey && event.key.toLowerCase() === 'p') {
+                event.preventDefault();
+                togglePieceTableVisibility();
+            }
+        }
+    
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [togglePieceTableVisibility]);
+    
+    useEffect(() => {
+        function handleKeyDown(event) {
+            if (event.key === 'Tab') {
+                event.preventDefault();
+                if (inputDescriptionRef.current) {
+                    inputDescriptionRef.current.focus();
+                }
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
+
     return (
         <div>
             <Navbar />

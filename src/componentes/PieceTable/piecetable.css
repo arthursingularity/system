@@ -12,7 +12,7 @@
 .blurPieceTableBg {
     width: 1157px;
     height: 439px;
-    top: -1px; 
-    right: -1px;
+    top: 0px; 
+    right: 0px;
     border-radius: 30px;
 }
