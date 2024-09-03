@@ -18,7 +18,7 @@ function PieceBox({ description, image, imgSize, onClick }) {
             >
                 <div className={`${isBoxClicked ? 'space-y-8' : 'space-y-3'} block`}>
                     <div className="flex justify-center">
-                        <img src={image} className={`${imgSize} ${isBoxClicked ? 'w-64' : 'mt-1'}`} alt='Piece Image' />
+                        <img src={image} className={`${imgSize} ${isBoxClicked ? 'w-64' : 'mt-1'}`}/>
                     </div>
                     <p className={` text-center text-white ${isBoxClicked ? 'text-2xl font-regular' : 'text-sm font-thin'}`}>{description}</p>
                 </div>

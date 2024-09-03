@@ -259,11 +259,10 @@ function Estoque() {
             if (e.key === 'Escape') {
                 if (isListaVisible) {
                     toggleListaVisibility();
+                } else if (isPieceVisible) {
+                    setIsPieceVisible(!isPieceVisible);
                 } else if (visiblePalletBox) {
                     handlePalletBoxClose();
-                } 
-                if (isPieceVisible) {
-                    setIsPieceVisible(!isPieceVisible);
                 } else if (!isMoved) {
                     handleResetHighlightedBoxes();
                 }
