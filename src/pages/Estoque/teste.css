@@ -50,16 +50,16 @@
 }
 
 .searchIcon {
-    margin-right: 428px;
+    margin-right: 390px;
     margin-top: 115px;
 }
 
 .menuDiv {
-    width: 653px;
+    width: 690px;
     margin-top: 104px;
 }
 
-.pieceIcon {
+.pieceIcon, .infoIcon {
     padding: 3px;
     font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
 }
@@ -68,7 +68,7 @@
     padding: 3px;
 }
 
-.menuIcon:hover, .pieceIcon:hover, .localizarButton:hover {
+.menuIcon:hover, .pieceIcon:hover, .localizarButton:hover, .infoIcon:hover {
     filter: brightness(85%);
 }
 
@@ -83,7 +83,7 @@
     padding-top: 1px;
     padding-bottom: 1px;
     margin-top: 120px;
-    margin-left: 347px;
+    margin-left: 385px;
     font-size: 18px;
     font-variation-settings:'FILL' 1,'wght' 800,'GRAD' 0,'opsz' 24;
 }

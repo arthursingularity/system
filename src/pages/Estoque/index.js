@@ -33,6 +33,7 @@ function Estoque() {
     const [selectedItemIndex, setSelectedItemIndex] = useState(0);
     const [isPieceVisible, setIsPieceVisible] = useState(false)
     const inputDescriptionRef = useRef(null);
+    const [inputPieceDescription, setInputPieceDescription] = useState('');
 
     useEffect(() => {
         const storedValues = boxIds.reduce((acc, id) => {
@@ -352,7 +353,10 @@ function Estoque() {
                 )}
                 {searchValue && isSearchSuggestionVisible && <SearchSuggestion searchValue={searchValue} onSuggestionClick={handleSuggestionClick}/>}
                 <PieceTable isPieceVisible={isPieceVisible}/>
-                <div className="menuDiv flex justify-center space-x-3 bg-stam-bg-3 py-3 rounded-full z-20 absolute">
+                <div className="menuDiv flex justify-center space-x-2.5 bg-stam-bg-3 py-3 rounded-full z-20 absolute">
+                    <span className="material-symbols-outlined infoIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer">
+                        info
+                    </span>
                     <span
                         className="material-symbols-outlined pieceIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer"
                         onClick={togglePieceTableVisibility}
@@ -545,6 +549,7 @@ function Estoque() {
                                 descricao={searchValue}
                                 searchResults={searchResults}
                                 handlePasteInput={handlePasteInput}
+                                togglePieceTableVisibility={togglePieceTableVisibility}
                             />
                         }
                     </div>

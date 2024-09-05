@@ -459,7 +459,7 @@ function PieceTable({ isPieceVisible }) {
         { description: "SUPORTE MOLA 803/1005/1005T /1025", imgSize: "w-20", image: "./lingueta1008grande.svg" },
         { description: "SUPORTE TESTA 1001-1009/1025", imgSize: "w-20", image: "./lingueta1008grande.svg" },
         { description: "SUPORTE TESTA 401", imgSize: "w-20", image: "./lingueta1008grande.svg" },
-        { description: "SUPORTE TESTA 500/600/800/900 /1500/1800/2001", imgSize: "w-16", image: "./illustrations/suportetesta500.svg" },
+        { description: "SUPORTE TESTA 500/600/800/900/1500/1800/2001", imgSize: "w-16", image: "./illustrations/suportetesta500.svg" },
         { description: "SUPORTE TRINCO 500/600/601/620", imgSize: "w-20", image: "./illustrations/suportetrinco500.svg" },
         { description: "SUPORTE TRINCO FECH. ELETRICA", imgSize: "w-20", image: "./lingueta1008grande.svg" },
         { description: "TAMPA 200", imgSize: "w-20", image: "./lingueta1008grande.svg" },

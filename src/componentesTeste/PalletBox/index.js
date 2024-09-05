@@ -1,7 +1,7 @@
 import "./palletbox.css";
 import React, { useEffect, useState } from 'react';
 
-function PalletBox({ values, onInputChange, onClose, isVisible, descricao }) {
+function PalletBox({ values, onInputChange, onClose, isVisible, descricao, togglePieceTableVisibility }) {
     const [animationClass, setAnimationClass] = useState('');
     const [activeIcon, setActiveIcon] = useState(null);
     const [matchingInputPositions, setMatchingInputPositions] = useState([]);
