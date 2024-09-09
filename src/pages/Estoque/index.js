@@ -281,20 +281,6 @@ function Estoque() {
           event.preventDefault();
         }
       };
-
-      useEffect(() => {
-        function handleKeyDown(event) {
-            if (event.altKey && event.key.toLowerCase() === 'p') {
-                event.preventDefault();
-                togglePieceTableVisibility();
-            }
-        }
-    
-        window.addEventListener('keydown', handleKeyDown);
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, [togglePieceTableVisibility]);
     
     useEffect(() => {
         function handleKeyDown(event) {
