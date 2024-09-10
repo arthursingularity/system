@@ -218,7 +218,7 @@ function Estoque() {
                 if (e.key === 'Enter') {
                     const items = document.querySelectorAll('.suggestion-item');
                     const selectedItem = Array.from(items).find(item => item.classList.contains('bg-gray-700'));
-                    
+
                     if (selectedItem) {
                         const descricao = selectedItem.textContent || '';
                         handleSuggestionClick(descricao);
@@ -246,14 +246,14 @@ function Estoque() {
                 handleSearch();
             }
         };
-    
+
         window.addEventListener('keydown', handleKeyDown);
-    
+
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, [searchValue, isSearchSuggestionVisible]);
-    
+
 
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -278,10 +278,10 @@ function Estoque() {
 
     const handleKeyDown = (event) => {
         if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-          event.preventDefault();
+            event.preventDefault();
         }
-      };
-    
+    };
+
     useEffect(() => {
         function handleKeyDown(event) {
             if (event.key === 'Tab') {
@@ -337,8 +337,8 @@ function Estoque() {
                         </span>
                     </div>
                 )}
-                {searchValue && isSearchSuggestionVisible && <SearchSuggestion searchValue={searchValue} onSuggestionClick={handleSuggestionClick}/>}
-                <PieceTable isPieceVisible={isPieceVisible}/>
+                {searchValue && isSearchSuggestionVisible && <SearchSuggestion searchValue={searchValue} onSuggestionClick={handleSuggestionClick} />}
+                <PieceTable isPieceVisible={isPieceVisible} />
                 <div className="menuDiv flex justify-center space-x-2.5 bg-stam-bg-3 py-3 rounded-full z-20 absolute">
                     <span className="material-symbols-outlined infoIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer">
                         info
@@ -581,7 +581,16 @@ function Estoque() {
                 </div>
             )}
             <div className="flex justify-center">
-                <div className="bg-estoque-bg estoqueBg absolute rounded-3xl"></div>
+                <div className="bg-estoque-bg estoqueBg absolute rounded-3xl font-regular text-3xl text-stam-bg-4">
+                    <p className="prateleira1 absolute">1</p>
+                    <p className="prateleira2 absolute">2</p>
+                    <p className="prateleira3 absolute">3</p>
+                    <p className="prateleira4 absolute">4</p>
+                    <p className="prateleira5 absolute">5</p>
+                    <p className="prateleira6 absolute">6</p>
+                    <p className="prateleiraSete absolute">7</p>
+                    <p className="prateleiraOito absolute">8</p>
+                </div>
             </div>
         </div>
     );

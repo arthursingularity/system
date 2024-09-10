@@ -42,7 +42,7 @@ function Navbar() {
           <li><a href='/'><img src='system-logo.png' id='logo' className="navbarLogo absolute w-24 z-20 left-5" alt='logoSymbol' /></a></li>
           <li><a href='/ambient'>Ambiente de testes</a></li>
           <li
-            className={`options ${currentPage === '/suprimentos' ? 'active' : ''}`}
+            className="options"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             aria-haspopup="true"
@@ -50,6 +50,14 @@ function Navbar() {
           >
             <div className='flex'>
               Suprimentos
+              <span class="material-symbols-outlined keyboard_arrow_down">
+                keyboard_arrow_down
+              </span>
+            </div>
+          </li>
+          <li>
+            <div className='flex'>
+              Produção
               <span class="material-symbols-outlined keyboard_arrow_down">
                 keyboard_arrow_down
               </span>

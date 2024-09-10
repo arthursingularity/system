@@ -212,3 +212,51 @@
 .no-focus-outline:focus {
     outline: none;
 }
+
+.prateleira1, .prateleira2, .prateleira3, .prateleira4, .prateleira5, .prateleira6, .prateleiraSete, .prateleiraOito {
+    z-index: 20;
+} 
+
+.prateleira1, .prateleira2 {
+    top: 120px;
+}
+
+.prateleira3, .prateleira4 {
+    top: 270px;
+}
+
+.prateleira1 {
+    left: 350px;
+}
+
+.prateleira2 {
+    left: 560px;
+}
+
+.prateleira3 {
+    left: 435px;
+}
+
+.prateleira4 {
+    left: 474px;
+}
+
+.prateleira5 {
+    top: 325px;
+    left: 435px;
+}
+
+.prateleira6 {
+    top: 325px;
+    left: 474px;
+}
+
+.prateleiraSete {
+    top: 475px;
+    left: 50px;
+}
+
+.prateleiraOito {
+    top: 175px;
+    right: 48px;
+}
