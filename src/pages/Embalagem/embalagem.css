@@ -1,0 +1,10 @@
+.embalagemDiv {
+    width: 1195px;
+    height: 555px;
+    top: 85px;
+    border-radius: 45px;
+}
+
+.consultarButton:hover {
+    filter: brightness(85%);
+}

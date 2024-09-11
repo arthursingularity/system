@@ -218,45 +218,45 @@
 } 
 
 .prateleira1, .prateleira2 {
-    top: 120px;
+    top: 204px;
 }
 
 .prateleira3, .prateleira4 {
-    top: 270px;
+    top: 357px;
 }
 
 .prateleira1 {
-    left: 350px;
+    right: 235px;
 }
 
 .prateleira2 {
-    left: 560px;
+    right: 15px;
 }
 
 .prateleira3 {
-    left: 435px;
+    right: 148px;
 }
 
 .prateleira4 {
-    left: 474px;
+    right: 104px;
 }
 
 .prateleira5 {
-    top: 325px;
-    left: 435px;
+    top: 408px;
+    right: 148px;
 }
 
 .prateleira6 {
-    top: 325px;
-    left: 474px;
+    top: 408px;
+    right: 104px;
 }
 
 .prateleiraSete {
-    top: 475px;
-    left: 50px;
+    top: 561px;
+    right: 525px;
 }
 
 .prateleiraOito {
-    top: 175px;
-    right: 48px;
+    top: 265px;
+    left: 532px;
 }

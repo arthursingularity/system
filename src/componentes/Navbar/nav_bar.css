@@ -28,12 +28,26 @@
     font-size: 15px;
 }
 
-.lista li:hover {
-    color: #FF6600;
-    cursor: pointer;
+.productionBox {
+    margin-top: 15px;
+    margin-left: -32px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.1s, visibility 0s 0.3s;
 }
 
-.user{
+.productionLi:hover .productionBox,
+.productionBox:hover {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.embalagemIcon {
+    font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+}
+
+.user {
     margin-top: 12.5px;
     padding-top: 3px;
     padding-bottom: 3px;
@@ -41,7 +55,7 @@
     padding-left: 15px;
 }
 
-.logout{
+.logout {
     margin-top: 12.5px;
     padding-top: 0.5px;
     padding-bottom: 0.5px;
@@ -50,5 +64,5 @@
 }
 
 .keyboard_arrow_down {
-    font-variation-settings:'FILL' 0,'wght' 200,'GRAD' 0,'opsz' 24;
+    font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
 }

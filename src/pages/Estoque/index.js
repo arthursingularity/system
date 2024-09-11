@@ -275,6 +275,7 @@ function Estoque() {
     }, [isListaVisible, visiblePalletBox, isMoved, isPieceVisible]);
 
     const shouldHideBoxNumbersDiv = visiblePalletBox || isListaVisible;
+    const shouldHidePrateleirasDiv = visiblePalletBox || isListaVisible;
 
     const handleKeyDown = (event) => {
         if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
@@ -578,18 +579,22 @@ function Estoque() {
                     <div className="absolute font-light text-stam-border block p8">
                         <p>1</p><p>2</p><p>3</p>
                     </div>
+                    <div>
+                        <div className="absolute rounded-3xl font-regular text-3xl text-stam-bg-4">
+                            <p className="prateleira1 absolute">1</p>
+                            <p className="prateleira2 absolute">2</p>
+                            <p className="prateleira3 absolute">3</p>
+                            <p className="prateleira4 absolute">4</p>
+                            <p className="prateleira5 absolute">5</p>
+                            <p className="prateleira6 absolute">6</p>
+                            <p className="prateleiraSete absolute">7</p>
+                            <p className="prateleiraOito absolute">8</p>
+                        </div>
+                    </div>
                 </div>
             )}
             <div className="flex justify-center">
-                <div className="bg-estoque-bg estoqueBg absolute rounded-3xl font-regular text-3xl text-stam-bg-4">
-                    <p className="prateleira1 absolute">1</p>
-                    <p className="prateleira2 absolute">2</p>
-                    <p className="prateleira3 absolute">3</p>
-                    <p className="prateleira4 absolute">4</p>
-                    <p className="prateleira5 absolute">5</p>
-                    <p className="prateleira6 absolute">6</p>
-                    <p className="prateleiraSete absolute">7</p>
-                    <p className="prateleiraOito absolute">8</p>
+                <div className="bg-estoque-bg estoqueBg absolute">
                 </div>
             </div>
         </div>
