@@ -4,7 +4,6 @@ import Home from './pages/home/home';
 import Erro404 from './pages/erro404/erro404';
 import Estoque from './pages/Estoque';
 import Ambient from './pages/Ambient';
-import Embalagem from './pages/Embalagem';
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
           <Route path='*' element={<Erro404/>}/>
           <Route path='/estoqueestamparia' element={<Estoque/>}/>
           <Route path='/ambient' element={<Ambient/>}/>
-          <Route path='/embalagem' element={<Embalagem/>}/>
         </Routes>
       </BrowserRouter>
     </div>

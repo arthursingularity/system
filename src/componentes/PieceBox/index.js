@@ -16,11 +16,11 @@ function PieceBox({ description, image, imgSize, onClick }) {
                             ${isBoxClicked ? 'w-96 absolute z-50 h-96 top-0 left-96' : 'w-36 h-40'}`}
                 onClick={toggleBoxClicked}
             >
-                <div className={`${isBoxClicked ? 'space-y-8' : 'space-y-3'} block`}>
+                <div className={`${isBoxClicked ? 'space-y-8' : 'space-y-3'} block text-white`}>
                     <div className="flex justify-center">
                         <img src={image} className={`${imgSize} ${isBoxClicked ? 'w-64' : 'mt-1'}`}/>
                     </div>
-                    <p className={` text-center text-white ${isBoxClicked ? 'text-2xl font-regular' : 'text-sm font-thin'}`}>{description}</p>
+                    <p className={`text-center ${isBoxClicked ? 'text-2xl font-regular' : 'text-sm font-thin'}`}>{description}</p>
                 </div>
             </div>
         </div>

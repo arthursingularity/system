@@ -56,22 +56,11 @@ function Navbar() {
             </div>
           </li>
           <li className='productionLi'>
-            <div className="production flex hover:text-stam-orange cursor-pointer">
-              Produção
-              <span className="material-symbols-outlined keyboard_arrow_down">
-                keyboard_arrow_down
-              </span>
-            </div>
-            <div className="productionBox absolute z-50 bg-stam-bg-4 p-4 pl-4 pr-6 rounded-lg invisible opacity-0">
-              <a
-                className="flex justify-center items-center cursor-pointer hover:text-stam-orange"
-                href='/embalagem'>
-                <span className="embalagemIcon material-symbols-outlined mr-2">
-                  box
-                </span>
-                Embalagem
-              </a>
-            </div>
+            <a href='/consultor'>
+              <div className="production flex hover:text-stam-orange cursor-pointer">
+                Consultor
+              </div>
+            </a>
           </li>
 
         </ul>
