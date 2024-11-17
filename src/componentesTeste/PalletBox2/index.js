@@ -88,8 +88,8 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
     return (
         <div className="flex justify-center items-center z-50">
             <div className={`bg-stam-bg-3 palletBoxVB absolute border border-stam-border p-4 ${animationClass}`}>
-                <div className={`border ${isAnyInputMatchDescricao(0, 9) ? 'border-stam-orange' : 'border-stam-border'} borders`}>
-                    <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-2xl">
+            <div className={`border ${isAnyInputMatchDescricao(0, 9) ? 'border-stam-orange' : 'border-stam-border'} borders`}>
+                    <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-xl">
                         <p className="font-medium text-white text-6xl">3</p>
                     </div>
                     <div className="flex">
@@ -104,7 +104,7 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     />
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined text-stam-bg-3 cursor-pointer arrowPasteIcon absolute bg-stam-border rounded-full hover:bg-verde-lucro"
+                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
                                             onClick={() => handlePasteClick(index)}
                                         >
                                             arrow_forward
@@ -112,19 +112,13 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-stam-bg-3 bg-stam-border material-symbols-outlined bg-stam-bg-3 absolute cursor-pointer hover:bg-stam-vermelho rounded-full"
-                                            onClick={() => handleClearClick(index)}
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            onClick={() => {
+                                                handleClearClick(index);
+                                                handleCopyClick(index);
+                                            }}
                                         >
                                             close
-                                        </span>
-                                    )}
-                                    {value && (
-                                        <span
-                                            className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
-                                            onClick={() => handleCopyClick(index)}
-                                        >
-                                            {activeIcon === index ? 'check' : 'content_copy'}
                                         </span>
                                     )}
                                 </div>
@@ -141,7 +135,7 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     />
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined text-stam-bg-3 cursor-pointer arrowPasteIcon absolute bg-stam-border rounded-full hover:bg-verde-lucro"
+                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
                                             onClick={() => handlePasteClick(index + 3)}
                                         >
                                             arrow_forward
@@ -149,19 +143,13 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-stam-bg-3 bg-stam-border material-symbols-outlined bg-stam-bg-3 absolute cursor-pointer hover:bg-stam-vermelho rounded-full"
-                                            onClick={() => handleClearClick(index + 3)}
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            onClick={() => {
+                                                handleClearClick(index + 3)
+                                                handleCopyClick(index + 3)
+                                            }}
                                         >
                                             close
-                                        </span>
-                                    )}
-                                    {value && (
-                                        <span
-                                            className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 3 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
-                                            onClick={() => handleCopyClick(index + 3)}
-                                        >
-                                            {activeIcon === index + 3 ? 'check' : 'content_copy'}
                                         </span>
                                     )}
                                 </div>
@@ -178,7 +166,7 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     />
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined text-stam-bg-3 cursor-pointer arrowPasteIcon absolute bg-stam-border rounded-full hover:bg-verde-lucro"
+                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
                                             onClick={() => handlePasteClick(index + 6)}
                                         >
                                             arrow_forward
@@ -186,19 +174,13 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-stam-bg-3 bg-stam-border material-symbols-outlined bg-stam-bg-3 absolute cursor-pointer hover:bg-stam-vermelho rounded-full"
-                                            onClick={() => handleClearClick(index + 6)}
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            onClick={() => {
+                                                handleClearClick(index + 6)
+                                                handleCopyClick(index + 6)
+                                            }}
                                         >
                                             close
-                                        </span>
-                                    )}
-                                    {value && (
-                                        <span
-                                            className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 6 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
-                                            onClick={() => handleCopyClick(index + 6)}
-                                        >
-                                            {activeIcon === index + 6 ? 'check' : 'content_copy'}
                                         </span>
                                     )}
                                 </div>
@@ -207,7 +189,7 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                     </div>
                 </div>
                 <div className={`border ${isAnyInputMatchDescricao(9, 18) ? 'border-stam-orange' : 'border-stam-border'} borders mt-3`}>
-                    <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-2xl">
+                    <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-xl">
                         <p className="font-medium text-white text-6xl">2</p>
                     </div>
                     <div className="flex">
@@ -222,7 +204,7 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     />
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined text-stam-bg-3 cursor-pointer arrowPasteIcon absolute bg-stam-border rounded-full hover:bg-verde-lucro"
+                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
                                             onClick={() => handlePasteClick(index + 9)}
                                         >
                                             arrow_forward
@@ -230,19 +212,13 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-stam-bg-3 bg-stam-border material-symbols-outlined bg-stam-bg-3 absolute cursor-pointer hover:bg-stam-vermelho rounded-full"
-                                            onClick={() => handleClearClick(index + 9)}
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            onClick={() => {
+                                                handleClearClick(index + 9)
+                                                handleCopyClick(index + 9)
+                                            }}
                                         >
                                             close
-                                        </span>
-                                    )}
-                                    {value && (
-                                        <span
-                                            className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 9 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
-                                            onClick={() => handleCopyClick(index + 9)}
-                                        >
-                                            {activeIcon === index + 9 ? 'check' : 'content_copy'}
                                         </span>
                                     )}
                                 </div>
@@ -259,7 +235,7 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     />
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined text-stam-bg-3 cursor-pointer arrowPasteIcon absolute bg-stam-border rounded-full hover:bg-verde-lucro"
+                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
                                             onClick={() => handlePasteClick(index + 12)}
                                         >
                                             arrow_forward
@@ -267,19 +243,13 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-stam-bg-3 bg-stam-border material-symbols-outlined bg-stam-bg-3 absolute cursor-pointer hover:bg-stam-vermelho rounded-full"
-                                            onClick={() => handleClearClick(index + 12)}
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            onClick={() => {
+                                                handleClearClick(index + 12)
+                                                handleCopyClick(index + 12)
+                                            }}
                                         >
                                             close
-                                        </span>
-                                    )}
-                                    {value && (
-                                        <span
-                                            className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 12 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
-                                            onClick={() => handleCopyClick(index + 12)}
-                                        >
-                                            {activeIcon === index + 12 ? 'check' : 'content_copy'}
                                         </span>
                                     )}
                                 </div>
@@ -296,7 +266,7 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     />
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined text-stam-bg-3 cursor-pointer arrowPasteIcon absolute bg-stam-border rounded-full hover:bg-verde-lucro"
+                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
                                             onClick={() => handlePasteClick(index + 15)}
                                         >
                                             arrow_forward
@@ -304,19 +274,13 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-stam-bg-3 bg-stam-border material-symbols-outlined bg-stam-bg-3 absolute cursor-pointer hover:bg-stam-vermelho rounded-full"
-                                            onClick={() => handleClearClick(index + 15)}
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            onClick={() => {
+                                                handleClearClick(index + 15)
+                                                handleCopyClick(index + 15)
+                                            }}
                                         >
                                             close
-                                        </span>
-                                    )}
-                                    {value && (
-                                        <span
-                                            className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 15 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
-                                            onClick={() => handleCopyClick(index + 15)}
-                                        >
-                                            {activeIcon === index + 15 ? 'check' : 'content_copy'}
                                         </span>
                                     )}
                                 </div>
@@ -325,7 +289,7 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                     </div>
                 </div>
                 <div className={`border ${isAnyInputMatchDescricao(18, 27) ? 'border-stam-orange' : 'border-stam-border'} borders mt-3`}>
-                    <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-2xl">
+                    <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-xl">
                         <p className="font-medium text-white text-6xl">1</p>
                     </div>
                     <div className="flex">
@@ -340,7 +304,7 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     />
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined text-stam-bg-3 cursor-pointer arrowPasteIcon absolute bg-stam-border rounded-full hover:bg-verde-lucro"
+                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
                                             onClick={() => handlePasteClick(index + 18)}
                                         >
                                             arrow_forward
@@ -348,19 +312,13 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-stam-bg-3 bg-stam-border material-symbols-outlined bg-stam-bg-3 absolute cursor-pointer hover:bg-stam-vermelho rounded-full"
-                                            onClick={() => handleClearClick(index + 18)}
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            onClick={() => {
+                                                handleClearClick(index + 18)
+                                                handleCopyClick(index + 18)
+                                            }}
                                         >
                                             close
-                                        </span>
-                                    )}
-                                    {value && (
-                                        <span
-                                            className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 18 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
-                                            onClick={() => handleCopyClick(index + 18)}
-                                        >
-                                            {activeIcon === index + 18 ? 'check' : 'content_copy'}
                                         </span>
                                     )}
                                 </div>
@@ -377,7 +335,7 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     />
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined text-stam-bg-3 cursor-pointer arrowPasteIcon absolute bg-stam-border rounded-full hover:bg-verde-lucro"
+                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
                                             onClick={() => handlePasteClick(index + 21)}
                                         >
                                             arrow_forward
@@ -385,19 +343,13 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-stam-bg-3 bg-stam-border material-symbols-outlined bg-stam-bg-3 absolute cursor-pointer hover:bg-stam-vermelho rounded-full"
-                                            onClick={() => handleClearClick(index + 21)}
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            onClick={() => {
+                                                handleClearClick(index + 21)
+                                                handleCopyClick(index + 21)
+                                            }}
                                         >
                                             close
-                                        </span>
-                                    )}
-                                    {value && (
-                                        <span
-                                            className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 21 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
-                                            onClick={() => handleCopyClick(index + 21)}
-                                        >
-                                            {activeIcon === index + 21 ? 'check' : 'content_copy'}
                                         </span>
                                     )}
                                 </div>
@@ -414,7 +366,7 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     />
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined text-stam-bg-3 cursor-pointer arrowPasteIcon absolute bg-stam-border rounded-full hover:bg-verde-lucro"
+                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
                                             onClick={() => handlePasteClick(index + 24)}
                                         >
                                             arrow_forward
@@ -422,19 +374,13 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-stam-bg-3 bg-stam-border material-symbols-outlined bg-stam-bg-3 absolute cursor-pointer hover:bg-stam-vermelho rounded-full"
-                                            onClick={() => handleClearClick(index + 24)}
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            onClick={() => {
+                                                handleClearClick(index + 24)
+                                                handleCopyClick(index + 24)
+                                            }}
                                         >
                                             close
-                                        </span>
-                                    )}
-                                    {value && (
-                                        <span
-                                            className={`material-symbols-outlined pasteIcons text-stam-bg-3 absolute bg-stam-border rounded-full 
-                                        ${activeIcon === index + 24 ? 'bg-verde-lucro text-black border-verde-lucro cursor-default' : 'cursor-pointer hover:bg-azul-claro hover:text-stam-bg-3'}`}
-                                            onClick={() => handleCopyClick(index + 24)}
-                                        >
-                                            {activeIcon === index + 24 ? 'check' : 'content_copy'}
                                         </span>
                                     )}
                                 </div>
