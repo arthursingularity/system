@@ -48,42 +48,11 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-#clearInput {
-  margin-left: 212px;
-  margin-top: 1.5px;
-  font-size: 20px;
-  font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24
-}
-
-#clearPasswordInput {
-  margin-left: 160px;
-  margin-top: 1.5px;
-  font-size: 20px;
-  font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24
-}
-
-#visibilityIcon {
-  margin-left: 212px;
-  margin-top: 1.5px;
-  font-size: 20px;
-  font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24
-}
-
 .comps {
   padding-right: 10px;
   padding-left: 11px;
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-.controleTecnor {
-  padding: 3px;
-  font-size: 30px;
-  font-variation-settings:'FILL' 0,'wght' 170,'GRAD' 0,'opsz' 24
-}
-
-.controleTecnor:hover {
-  font-variation-settings:'FILL' 1,'wght' 170,'GRAD' 0,'opsz' 24
 }
 
 ::-webkit-scrollbar {

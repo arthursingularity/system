@@ -1,0 +1,27 @@
+.ai-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ai-breath {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background-color: #FF6600;
+    box-shadow: 0 0 20px rgba(211, 125, 12, 0.5);
+    animation: pulse 3s infinite ease-in-out;
+    /* Animação de pulso */
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}

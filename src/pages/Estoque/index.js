@@ -36,6 +36,10 @@ function Estoque() {
     const [inputPieceDescription, setInputPieceDescription] = useState('');
 
     useEffect(() => {
+        document.title = "Estoque Estamparia";
+    }, []);
+
+    useEffect(() => {
         const storedValues = boxIds.reduce((acc, id) => {
             ['A', 'B', 'TRILHO'].forEach(letter => {
                 const values = Array(27).fill('').map((_, i) => localStorage.getItem(`${id}-${letter}-${i}`) || '');
@@ -71,36 +75,6 @@ function Estoque() {
     const handleMenuClick = () => {
         focusInputInEstampariaTable();
         toggleListaVisibility();
-    };
-
-    const handleResetAllInputs = () => {
-        const confirmReset = window.confirm("Você tem certeza de que deseja apagar todos os endereçamentos? Esta ação não pode ser desfeita.");
-
-        if (confirmReset) {
-            const resetValues = boxIds.reduce((acc, id) => {
-                ['A', 'B', 'TRILHO'].forEach(letter => {
-                    acc[`${id}-${letter}`] = Array(27).fill('');
-                });
-                return acc;
-            }, {});
-
-            setInputValues(resetValues);
-
-            boxIds.forEach(id => {
-                ['A', 'B', 'TRILHO'].forEach(letter => {
-                    Array(27).fill('').forEach((_, i) => localStorage.removeItem(`${id}-${letter}-${i}`));
-                });
-            });
-
-            const resetHighlighted = boxIds.reduce((acc, id) => {
-                ['A', 'B', 'TRILHO'].forEach(letter => {
-                    acc[`${id}-${letter}`] = false;
-                });
-                return acc;
-            }, {});
-
-            setHighlightedLetters(resetHighlighted);
-        }
     };
 
     const toggleListaVisibility = () => setIsListaVisible(prev => !prev);
@@ -317,7 +291,7 @@ function Estoque() {
                 )}
                 <div className="flex justify-center items-center">
                     <div
-                        className={`modeDiv absolute bg-stam-bg-3 z-50 flex justify-center border border-stam-border rounded-full h-8 cursor-pointer hover:border-stam-orange
+                        className={`modeDiv absolute bg-stam-bg-3 z-30 flex justify-center border border-stam-border rounded-full h-8 cursor-pointer hover:border-stam-orange
                         ${isMoved ? 'border-stam-orange' : ''}`}
                         onClick={handleModeDivClick}>
                         <span
@@ -328,22 +302,9 @@ function Estoque() {
                         </span>
                     </div>
                 </div>
-                {!isListaVisible && !visiblePalletBox && (
-                    <div className="justify-center">
-                        <span
-                            className="material-symbols-outlined z-30 resetButton absolute text-stam-border border border-stam-border rounded-full hover:bg-stam-vermelho cursor-pointer hover:border-stam-vermelho hover:text-black"
-                            onClick={handleResetAllInputs}
-                        >
-                            delete_forever
-                        </span>
-                    </div>
-                )}
                 {searchValue && isSearchSuggestionVisible && <SearchSuggestion searchValue={searchValue} onSuggestionClick={handleSuggestionClick} />}
                 <PieceTable isPieceVisible={isPieceVisible} />
                 <div className="menuDiv flex justify-center space-x-2.5 bg-stam-bg-3 py-3 rounded-full z-20 absolute">
-                    <span className="material-symbols-outlined infoIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer">
-                        info
-                    </span>
                     <span
                         className="material-symbols-outlined pieceIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer"
                         onClick={togglePieceTableVisibility}
@@ -595,6 +556,12 @@ function Estoque() {
             )}
             <div className="flex justify-center">
                 <div className="bg-estoque-bg estoqueBg absolute">
+                    <div className="p-8 flex items-center space-x-1.5">
+                        <span className="material-symbols-outlined SuprimentosBoxIcon text-white">
+                            package_2
+                        </span>
+                        <p className="text-white font-thin text-lg">Estoque Estamparia</p>
+                    </div>
                 </div>
             </div>
         </div>

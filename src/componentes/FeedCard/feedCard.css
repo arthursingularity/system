@@ -1,0 +1,47 @@
+.feedCardBg {
+    height: 440px;
+}
+
+.feedCardWidth {
+    width: 700px;
+}
+
+.backgroundWidth {
+    width: 1040px;
+}
+
+.systemLogoGradient {
+    filter: brightness(0) saturate(100%) invert(5%) sepia(3%) saturate(4107%) hue-rotate(191deg) brightness(98%) contrast(90%);
+}
+
+.orangeGradient {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 17px;
+}
+
+.vibroIcon {
+    font-size: 70px;
+    font-variation-settings:'FILL' 0,'wght' 150,'GRAD' 0,'opsz' 24;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.backgroundGradient {
+    background: linear-gradient(45deg, #da1b4b, #fb7e09, #da1b3b, #fb7e09);
+    background-size: 400% 400%;
+    animation: gradientAnimation 3s ease infinite;
+}
+
+.perfilExample {
+    width: 700px;
+}

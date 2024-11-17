@@ -8,7 +8,7 @@ function Erro404() {
     return (
         <div>
             <div className="flex justify-center">
-                <img src="system-logo.png" className="w-36 absolute top-16"/>
+                <img src="/imagens/systemlogo.png" className="w-36 absolute top-16"/>
             </div>
             <div className="text-white flex h-screen flex-col justify-center items-center space-y-5">
                 <div className="font-light tracking-wide">Desculpe! Não conseguimos encontrar a página que você está procurando.</div>

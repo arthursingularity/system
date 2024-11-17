@@ -189,7 +189,6 @@ const data = [
     { codigo: '1126C800001', descricao: 'ESPELHO 200' },
     { codigo: '11430800001', descricao: 'ESPELHO 201/1201' },
     { codigo: '11431000001', descricao: 'ESPELHO 301-308/316-317' },
-    { codigo: '11431000002', descricao: 'ESPELHO 301-308/316-317 P/ PINTURA' },
     { codigo: '11268900000', descricao: 'ESPELHO 314/315' },
     { codigo: '11261600001', descricao: 'ESPELHO 401' },
     { codigo: '11261600003', descricao: 'ESPELHO 401 - INOX 430' },

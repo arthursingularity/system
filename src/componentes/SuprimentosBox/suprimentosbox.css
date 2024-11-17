@@ -1,9 +1,8 @@
 .SuprimentosBox {
-    margin-top: 55px;
-    margin-left: 40px;
-    height: 58px;
+    margin-top: 40px;
+    margin-right: 110px;
 }
 
 .SuprimentosBoxIcon {
-  font-variation-settings:'FILL' 0,'wght' 200,'GRAD' 0,'opsz' 24;
+  font-variation-settings:'FILL' 0,'wght' 150,'GRAD' 0,'opsz' 24;
 }

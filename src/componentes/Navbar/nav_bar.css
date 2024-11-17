@@ -23,21 +23,37 @@
 }
 
 .lista li {
-    padding-right: 35px;
     letter-spacing: 0.4px;
     font-size: 15px;
 }
 
-.user {
-    margin-top: 12.5px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-right: 15px;
-    padding-left: 15px;
+.searchUsers, .user, .logout {
+    margin-top: 11.5px;
+}
+
+.peopleSuggestion {
+    margin-top: 11px;
+    margin-left: -255px;
+    width: 210px;
+    height: 140px;
+    z-index: 49;
+}
+
+.searchPeopleIcon {
+    left: 12px;
+    top: 13px;
+}
+
+.searchUsers {
+    height: 33px;
+    width: 210px;
+}
+
+.user:hover {
+    filter: brightness(85%);
 }
 
 .logout {
-    margin-top: 12.5px;
     padding-top: 0.5px;
     padding-bottom: 0.5px;
     padding-right: 6px;
@@ -46,4 +62,33 @@
 
 .keyboard_arrow_down {
     font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+}
+
+.notificationIcon {
+    font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+
+.notificationRedDiv {
+    width: 14px;
+    height: 14px;
+    right: 4px;
+    top: 4px;
+}
+
+.notificationQuantity {
+    font-size: 10px;
+}
+
+.notificationDiv {
+    top: 56px;
+    right: 42px;
+}
+
+.notificationDiv2 {
+    width: 305px;
+}
+
+.closeNotificationIcon {
+    font-variation-settings:'FILL' 0,'wght' 250,'GRAD' 0,'opsz' 24;
 }

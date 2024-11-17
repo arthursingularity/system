@@ -1,0 +1,17 @@
+.clearRegisterUserInput {
+    right: 5px;
+    margin-top: 5px;
+    font-variation-settings:'FILL' 0,'wght' 200,'GRAD' 0,'opsz' 24;
+}
+
+.showHidePasswordRegisterIcon {
+    right: 35px;
+    margin-top: 5px;
+    font-variation-settings:'FILL' 0,'wght' 150,'GRAD' 0,'opsz' 24;
+}
+
+.showHideRegisterIcon {
+    right: 35px;
+    margin-top: 5px;
+    font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;
+}
