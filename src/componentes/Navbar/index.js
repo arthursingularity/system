@@ -107,7 +107,7 @@ function Navbar() {
         setNotifications(prevNotifications =>
           prevNotifications.filter(notification => notification.id !== notificationId)
         );
-        console.log(response.data.message); // Exibe uma mensagem de sucesso
+        console.log(response.data.message);
       })
       .catch(error => {
         console.error('Erro ao deletar notificação:', error);

@@ -283,7 +283,7 @@ function VibroAcabamento() {
                 </span>
                 {searchValue && (
                     <span
-                        className="material-symbols-outlined z-40 clearDescriptionVB text-stam-bg-3 bg-stam-border absolute cursor-pointer border border-stam-border hover:bg-stam-vermelho hover:border-stam-vermelho transition-all duration-150 rounded-full"
+                        className="material-symbols-outlined z-40 clearDescriptionVB absolute text-white cursor-pointer rounded-full hover:bg-gray-600 p-1.5"
                         onClick={handleClearInput}
                     >
                         close

@@ -1,6 +1,7 @@
 .SuprimentosBox {
     margin-top: 40px;
     margin-right: 110px;
+    z-index: 1000;
 }
 
 .SuprimentosBoxIcon {

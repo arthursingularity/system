@@ -750,7 +750,7 @@ const EstampariaTable = forwardRef(({ onClose }, ref) => {
     const copyToClipboard = (event, rowIndex) => {
         const row = event.currentTarget.closest("tr");
         if (row) {
-            const descricaoCell = row.querySelectorAll("td")[1];
+            const descricaoCell = row.querySelectorAll("td")[0];
             if (descricaoCell) {
                 const textToCopy = descricaoCell.childNodes[0].nodeValue.trim();
                 navigator.clipboard.writeText(textToCopy)
@@ -794,13 +794,13 @@ const EstampariaTable = forwardRef(({ onClose }, ref) => {
                     onChange={handleFilterChange}
                 />
                 <span
-                    className="material-symbols-outlined z-40 clearInputTable text-stam-bg-3 bg-stam-border absolute cursor-pointer border border-stam-border hover:bg-stam-vermelho hover:border-stam-vermelho transition-all duration-150 rounded-full"
+                    className="material-symbols-outlined text-white clearInputTable z-40 text-stam-bg-3 px-3 py-1 absolute cursor-pointer hover:bg-stam-border rounded-full"
                     onClick={clearFilterInput}
                 >
                     close
                 </span>
                 <span
-                    className="material-symbols-outlined absolute right-40 z-40 bg-stam-bg-3 text-stam-border p-1 cursor-pointer border border-stam-border hover:bg-stam-vermelho hover:border-stam-vermelho hover:text-white transition-all duration-150 rounded-full"
+                    className="material-symbols-outlined absolute closeDataTable z-40 text-white p-2 cursor-pointer hover:bg-stam-bg-4 rounded-lg"
                     onClick={onClose}
                 >
                     close

@@ -21,14 +21,18 @@ td:nth-child(3), th:nth-child(3) {
 }
 
 .clearInputTable {
-    margin-bottom: 1px;
-    right: 335px;
-    font-size: 15px;
-    font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;
+    right: 326px;
+    font-variation-settings:'FILL' 1,'wght' 200,'GRAD' 0,'opsz' 24;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+}
+
+.closeDataTable {
+    right: 30px;
+    font-size: 30px;
+    font-variation-settings:'FILL' 1,'wght' 200,'GRAD' 0,'opsz' 24;
 }
 
 .divInvisivel {

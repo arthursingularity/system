@@ -610,7 +610,7 @@ function SearchSuggestion({ searchValue, onSuggestionClick }) {
 
     return (
         <div>
-            <div className="SearchSuggestionDiv bg-transparent backdrop-blur-xl border border-stam-border absolute z-50 p-4">
+            <div className="SearchSuggestionDiv bg-transparent backdrop-blur-xl border border-stam-border absolute z-30 p-4">
                 <div className='SearchSuggestionDiv2'>
                     <table>
                         {filteredData.map((item, index) => (
