@@ -39,9 +39,10 @@
 .backgroundGradient {
     background: linear-gradient(45deg, #da1b4b, #fb7e09, #da1b3b, #fb7e09);
     background-size: 400% 400%;
-    animation: gradientAnimation 3s ease infinite;
+    animation: gradientAnimation 2.5s ease infinite;
 }
 
 .perfilExample {
-    width: 700px;
+    margin-top: 15px;
+    width: 250px;
 }

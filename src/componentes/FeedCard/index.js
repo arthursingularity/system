@@ -39,7 +39,7 @@ function FeedCard({ title, description, icon, background, style, backgroundSize,
                             </div>
                         </div>
                         <div className={`${perfilStyle} flex justify-center`}>
-                            <img src='./imagens/perfilExample.png' className='perfilExample rounded-tl-2xl rounded-tr-2xl mt-20'/>
+                            <img src='./imagens/perfilExample.png' className='perfilExample rounded-tl-2xl rounded-tr-2xl'/>
                         </div>
                     </div>
                 </a>
