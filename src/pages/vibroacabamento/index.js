@@ -331,12 +331,12 @@ function VibroAcabamento() {
                 <div className={`bg-stam-bg-3 estoqueDivVB p-5 absolute border z-20 ${isMoved ? 'border-stam-orange' : 'border-stam-bg-3'}`}>
                     <div className="flex">
                         <div className="prateleira1VB flex space-x-1 absolute top-0">
-                            {['box67', 'box68','box69'].map(boxId => (
+                            {['box67', 'box68','box69','box70'].map(boxId => (
                                 <AbBox
                                     key={boxId}
                                     id={boxId}
-                                    letter1="A"
-                                    letter2="B"
+                                    letter1="1"
+                                    letter2="2"
                                     selectedLetterId={selectedLetterId}
                                     highlightedLetters={highlightedLetters}
                                     onClick={handleAbBoxClick}
@@ -471,17 +471,11 @@ function VibroAcabamento() {
             </div>
             {!shouldHideBoxNumbersDiv && (
                 <div className="boxNumbersDiv flex justify-center relative">
-                    <div className="p1VBNumbers absolute font-light text-stam-border flex p2">
-                        <p>1</p><p>2</p><p>3</p>
-                    </div>
-                    <div className="p7VBNumbers absolute font-light text-stam-border space-y-16">
-                        <p>3</p><p>2</p><p>1</p>
-                    </div>
                     <div className="absolute font-light text-stam-border flex p1 p1BoxNumbers">
                         <p>1</p><p>2</p>
                     </div>
                     <div className="absolute font-light text-stam-border flex p2">
-                        <p className="ml-24">1</p><p>2</p><p>3</p><p>4</p><p>5</p>
+                        <p className="ml-36">1</p><p>2</p><p>3</p><p>4</p><p>5</p>
                     </div>
                     <div className="prateleira4vbnumbers3 absolute font-light text-stam-border flex p4">
                         <p className="absolute p5BoxNumber">6</p>
@@ -493,8 +487,8 @@ function VibroAcabamento() {
                     <div>
                         <div className="absolute rounded-3xl font-regular text-3xl text-stam-bg-4">
                             <p className="absolute extra z-30">EXTRA</p>
-                            <p className="prateleira1 absolute left-0">1</p>
-                            <p className="prateleira2 absolute left-14">2</p>
+                            <p className="prateleira1 absolute left-5">1</p>
+                            <p className="prateleira2 absolute left-20 ml-1">2</p>
                             <p className="prateleira3vbnumbers2 absolute">3</p>
                             <p className="prateleira4vbnumbers absolute">4</p>
                         </div>
