@@ -1,4 +1,8 @@
 .letter {
-    padding-right: 9px;
-    padding-left: 9px;
+    width: 34px;
+    height: 34px;
+}
+
+.letterTrilho {
+    width: 100px;
 }

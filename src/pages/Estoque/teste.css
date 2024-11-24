@@ -240,12 +240,12 @@
     outline: none;
 }
 
-.prateleira1, .prateleira1VB, .p7VBNumbers, .prateleira7VB, .prateleira2, .prateleira3vbnumbers2, .prateleira3, .prateleira4, .prateleira5, .prateleira6, .prateleiraSete, .prateleiraOito, .prateleira4vbnumbers {
+.prateleira1, .prateleira1VB, .prateleira1VB2, .prateleira1VB3, .prateleira1VB4, .prateleira1VB1, .prateleira1VB22, .p7VBNumbers, .prateleira7VB, .prateleira7VB2, .prateleira7VB3,.prateleira2, .prateleira3vbnumbers2, .prateleira3, .prateleira4, .prateleira5, .prateleira6, .prateleiraSete, .prateleiraOito, .prateleira4vbnumbers {
     z-index: 20;
 }
 
 .extra {
-    top: 300px;
+    top: 350px;
     left: -450px;
 }
 
@@ -262,9 +262,49 @@
     top: 21px;
 }
 
+.prateleira1VB1 {
+    left: 146px;
+    top: 69px;
+}
+
+.prateleira1VB2 {
+    left: 146px;
+    top: 21px;
+}
+
+.prateleira1VB22 {
+    left: 232px;
+    top: 69px;
+}
+
+.prateleira1VB3 {
+    left: 232px;
+    top: 21px;
+}
+
+.prateleira1VB32 {
+    left: 318px;
+    top: 69px;
+}
+
+.prateleira1VB4 {
+    left: 318px;
+    top: 21px;
+}
+
 .prateleira7VB {
-    left: -86px;
+    left: 1px;
+    top: 257px;
+}
+
+.prateleira7VB2 {
+    left: 1px;
     top: 171px;
+}
+
+.prateleira7VB3 {
+    left: 1px;
+    top: 85px;
 }
 
 .prateleira4vbnumbers2 {

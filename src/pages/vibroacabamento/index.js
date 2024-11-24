@@ -9,9 +9,9 @@ import SearchSuggestionVB from "../../componentes/SearchsuggestionVB/Searchsugge
 
 const boxIds = [
     'box46', 'box47', 'box48', 'box49', 'box50', 'box51', 'box52', 'box53',
-    'box54', 'box55', 'box56', 'box57', 'box58', 'box599', 'box60', 'box61', 'box62', 'box63', 'box64', 'box65', 'box66',
+    'box54', 'box55', 'box56', 'box57', 'box58', 'box59', 'box60', 'box61', 'box62', 'box63', 'box64', 'box65', 'box66',
     'box67', 'box68', 'box69', 'box70', 'box71', 'box72', 'box73', 'box74', 'box75', 'box76', 'box77', 'box78',
-    'box79', 'box80', 'box81', 'box82', 'box83', 'box84', 'box85', 'box86', 'box87', 'box88', 'box44', 'box45',
+    'box79', 'box80', 'box81', 'box82', 'box83', 'box84', 'box85', 'box86', 'box87', 'box88', 'box89', 'box990',
     'box100'
 ];
 
@@ -41,7 +41,12 @@ function VibroAcabamento() {
 
     useEffect(() => {
         const storedValues = boxIds.reduce((acc, id) => {
-            ['A', 'B', 'TRILHO'].forEach(letter => {
+            [
+             'A', 'B', 'C', 'D', 'E', 'F',
+             '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14',
+             'TRILHO'
+            ]
+            .forEach(letter => {
                 const values = Array(27).fill('').map((_, i) => localStorage.getItem(`${id}-${letter}-${i}`) || '');
                 acc[`${id}-${letter}`] = values;
             });
@@ -331,7 +336,7 @@ function VibroAcabamento() {
                 <div className={`bg-stam-bg-3 estoqueDivVB p-5 absolute border z-20 ${isMoved ? 'border-stam-orange' : 'border-stam-bg-3'}`}>
                     <div className="flex">
                         <div className="prateleira1VB flex space-x-1 absolute top-0">
-                            {['box67', 'box68','box69','box70'].map(boxId => (
+                            {['box100'].map(boxId => (
                                 <AbBox
                                     key={boxId}
                                     id={boxId}
@@ -344,8 +349,50 @@ function VibroAcabamento() {
                                 />
                             ))}
                         </div>
+                        <div className="prateleira1VB2 flex space-x-1 absolute top-0">
+                            {['box47'].map(boxId => (
+                                <AbBox
+                                    key={boxId}
+                                    id={boxId}
+                                    letter1="3"
+                                    letter2="4"
+                                    selectedLetterId={selectedLetterId}
+                                    highlightedLetters={highlightedLetters}
+                                    onClick={handleAbBoxClick}
+                                    resetState={resetState}
+                                />
+                            ))}
+                        </div>
+                        <div className="prateleira1VB3 flex space-x-1 absolute top-0">
+                            {['box48'].map(boxId => (
+                                <AbBox
+                                    key={boxId}
+                                    id={boxId}
+                                    letter1="5"
+                                    letter2="6"
+                                    selectedLetterId={selectedLetterId}
+                                    highlightedLetters={highlightedLetters}
+                                    onClick={handleAbBoxClick}
+                                    resetState={resetState}
+                                />
+                            ))}
+                        </div>
+                        <div className="prateleira1VB4 flex space-x-1 absolute top-0">
+                            {['box49'].map(boxId => (
+                                <AbBox
+                                    key={boxId}
+                                    id={boxId}
+                                    letter1="7"
+                                    letter2="8"
+                                    selectedLetterId={selectedLetterId}
+                                    highlightedLetters={highlightedLetters}
+                                    onClick={handleAbBoxClick}
+                                    resetState={resetState}
+                                />
+                            ))}
+                        </div>
                         <div className="prateleira1V flex space-x-1">
-                            {['box47', 'box48'].map(boxId => (
+                            {['box50', 'box51'].map(boxId => (
                                 <AbBox
                                     key={boxId}
                                     id={boxId}
@@ -359,7 +406,7 @@ function VibroAcabamento() {
                             ))}
                         </div>
                         <div className="prateleira2V flex space-x-1">
-                            {['box49', 'box50', 'box51', 'box52', 'box53'].map(boxId => (
+                            {['box52', 'box53', 'box54', 'box55', 'box56'].map(boxId => (
                                 <AbBox
                                     key={boxId}
                                     id={boxId}
@@ -373,27 +420,100 @@ function VibroAcabamento() {
                             ))}
                         </div>
                     </div>
+                    <div className="flex">
+                        <div className="prateleira1VB1 flex space-x-1 absolute top-0">
+                            {['box57'].map(boxId => (
+                                <AbBox
+                                    key={boxId}
+                                    id={boxId}
+                                    letter1="9"
+                                    letter2="10"
+                                    selectedLetterId={selectedLetterId}
+                                    highlightedLetters={highlightedLetters}
+                                    onClick={handleAbBoxClick}
+                                    resetState={resetState}
+                                />
+                            ))}
+                        </div>
+                        <div className="prateleira1VB22 flex space-x-1 absolute top-0">
+                            {['box58'].map(boxId => (
+                                <AbBox
+                                    key={boxId}
+                                    id={boxId}
+                                    letter1="11"
+                                    letter2="12"
+                                    selectedLetterId={selectedLetterId}
+                                    highlightedLetters={highlightedLetters}
+                                    onClick={handleAbBoxClick}
+                                    resetState={resetState}
+                                />
+                            ))}
+                        </div>
+                        <div className="prateleira1VB32 flex space-x-1 absolute top-0">
+                            {['box59'].map(boxId => (
+                                <AbBox
+                                    key={boxId}
+                                    id={boxId}
+                                    letter1="13"
+                                    letter2="14"
+                                    selectedLetterId={selectedLetterId}
+                                    highlightedLetters={highlightedLetters}
+                                    onClick={handleAbBoxClick}
+                                    resetState={resetState}
+                                />
+                            ))}
+                        </div>
+                    </div>
                     <div className="prateleira7VB absolute flex space-x-1 -rotate-90">
-                                {['box70', 'box71', 'box72'].map(boxId => (
-                                    <AbBox
-                                        key={boxId}
-                                        id={boxId}
-                                        letter1="A"
-                                        letter2="B"
-                                        selectedLetterId={selectedLetterId}
-                                        highlightedLetters={highlightedLetters}
-                                        onClick={handleAbBoxClick}
-                                        resetState={resetState}
-                                    />
-                                ))}
-                            </div>
+                        {['box60'].map(boxId => (
+                            <AbBox
+                                key={boxId}
+                                id={boxId}
+                                letter1="A"
+                                letter2="B"
+                                selectedLetterId={selectedLetterId}
+                                highlightedLetters={highlightedLetters}
+                                onClick={handleAbBoxClick}
+                                resetState={resetState}
+                            />
+                        ))}
+                    </div>
+                    <div className="prateleira7VB2 absolute flex space-x-1 -rotate-90">
+                        {['box61'].map(boxId => (
+                            <AbBox
+                                key={boxId}
+                                id={boxId}
+                                letter1="C"
+                                letter2="D"
+                                selectedLetterId={selectedLetterId}
+                                highlightedLetters={highlightedLetters}
+                                onClick={handleAbBoxClick}
+                                resetState={resetState}
+                            />
+                        ))}
+                    </div>
+                    <div className="prateleira7VB3 absolute flex space-x-1 -rotate-90">
+                        {['box62'].map(boxId => (
+                            <AbBox
+                                key={boxId}
+                                id={boxId}
+                                letter1="E"
+                                letter2="F"
+                                selectedLetterId={selectedLetterId}
+                                highlightedLetters={highlightedLetters}
+                                onClick={handleAbBoxClick}
+                                resetState={resetState}
+                            />
+                        ))}
+                    </div>
                     <div className="prateleira9 flex space-x-1 absolute -right-4 mt-8">
-                        {['box100'].map(boxId => (
+                        {['box63'].map(boxId => (
                             <AbBox
                                 props="rotate-90"
                                 letterVisibility="hidden"
                                 key={boxId}
                                 id={boxId}
+                                type="letterTrilho"
                                 letter1="TRILHO"
                                 selectedLetterId={selectedLetterId}
                                 highlightedLetters={highlightedLetters}
@@ -404,7 +524,7 @@ function VibroAcabamento() {
                     </div>
                     <div className="block">
                         <div className="prateleira5VB flex space-x-1 absolute">
-                            {['box66'].map(boxId => (
+                            {['box64'].map(boxId => (
                                 <AbBox
                                     key={boxId}
                                     id={boxId}
@@ -421,7 +541,7 @@ function VibroAcabamento() {
                     <div className="flex">
                         <div className="block">
                             <div className="prateleira4VB flex space-x-1 absolute">
-                                {['box59', 'box60', 'box61', 'box62', 'box63', 'box64', 'box65'].map(boxId => (
+                                {['box65', 'box66', 'box67', 'box68', 'box69', 'box70', 'box71'].map(boxId => (
                                     <AbBox
                                         key={boxId}
                                         id={boxId}
@@ -437,7 +557,7 @@ function VibroAcabamento() {
                         </div>
                         <div className="block">
                             <div className="prateleira3VB flex space-x-1 mt-28">
-                                {['box54', 'box55', 'box56', 'box57', 'box58'].map(boxId => (
+                                {['box72', 'box73', 'box74', 'box75', 'box76'].map(boxId => (
                                     <AbBox
                                         key={boxId}
                                         id={boxId}

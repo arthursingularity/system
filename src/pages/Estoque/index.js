@@ -374,6 +374,7 @@ function Estoque() {
                                 key={boxId}
                                 id={boxId}
                                 letter1="TRILHO"
+                                type="letterTrilho"
                                 selectedLetterId={selectedLetterId}
                                 highlightedLetters={highlightedLetters}
                                 onClick={handleAbBoxClick}
@@ -419,6 +420,7 @@ function Estoque() {
                                         key={boxId}
                                         id={boxId}
                                         letter1="TRILHO"
+                                        type="letterTrilho"
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
