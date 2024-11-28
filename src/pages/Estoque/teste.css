@@ -351,9 +351,9 @@
 }
 
 .prateleira2vbnumbers {
-    z-index: 1000;
+    z-index: 20;
     top: 466px;
-    margin-right: 644px;
+    margin-right: 645px;
     gap: 77px;
 }
 

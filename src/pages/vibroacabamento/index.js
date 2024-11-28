@@ -595,7 +595,7 @@ function VibroAcabamento() {
                         <p>2</p><p>1</p>
                     </div>
                     <div className="prateleira2vbnumbers absolute font-light text-stam-border flex">
-                        <p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>
+                        <p>5</p><p>4</p><p>3</p><p>2</p><p>1</p>
                     </div>
                     <div className="prateleira4vbnumbers3 absolute font-light text-stam-border flex">
                         <p>1</p><p>2</p><p>3</p><p>4</p>
