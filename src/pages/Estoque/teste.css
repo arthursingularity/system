@@ -50,6 +50,11 @@
     margin-top: 13px;
 }
 
+.prateleira9V {
+    margin-top: 212px;
+    margin-left: 4px;
+}
+
 .colarButton {
     margin-top: 120px;
     margin-left: 348px;
@@ -240,13 +245,24 @@
     outline: none;
 }
 
-.prateleira1, .prateleira1VB, .prateleira1VB2, .prateleira1VB3, .prateleira1VB4, .prateleira1VB1, .prateleira1VB22, .p7VBNumbers, .prateleira7VB, .prateleira7VB2, .prateleira7VB3,.prateleira2, .prateleira3vbnumbers2, .prateleira3, .prateleira4, .prateleira5, .prateleira6, .prateleiraSete, .prateleiraOito, .prateleira4vbnumbers {
+.prateleira1, .prateleira1VB, .prateleira1VNumber, .prateleira2VNumber, .prateleira1VB2, .prateleira1VB3, .prateleira1VB4, .prateleira1VB1, .prateleira1VB22, .p7VBNumbers, .prateleira7VB, .prateleira7VB2, .prateleira7VB3,.prateleira2, .prateleira3vbnumbers2, .prateleira3, .prateleira4, .prateleira5, .prateleira6, .prateleiraSete, .prateleiraOito, .prateleira4vbnumbers {
     z-index: 20;
 }
 
+.prateleira1VNumber {
+    top: 493px;
+    right: 30px;
+}
+
+.prateleira2VNumber {
+    top: 493px;
+    right: 83px;
+}
+
+
 .extra {
-    top: 350px;
-    left: -450px;
+    top: 300px;
+    left: 300px;
 }
 
 .prateleira1, .prateleira2, .prateleira1V, .prateleira2V {
@@ -258,58 +274,64 @@
 }
 
 .prateleira1VB {
-    left: 60px;
-    top: 21px;
+    right: 60px;
+    bottom: 21px;
 }
 
 .prateleira1VB1 {
-    left: 146px;
-    top: 69px;
+    right: 318px;
+    bottom: 69px;
 }
 
 .prateleira1VB2 {
-    left: 146px;
-    top: 21px;
+    right: 146px;
+    bottom: 21px;
 }
 
 .prateleira1VB22 {
-    left: 232px;
-    top: 69px;
+    right: 232px;
+    bottom: 69px;
 }
 
 .prateleira1VB3 {
-    left: 232px;
-    top: 21px;
+    right: 232px;
+    bottom: 21px;
 }
 
 .prateleira1VB32 {
-    left: 318px;
-    top: 69px;
+    right: 146px;
+    bottom: 69px;
 }
 
 .prateleira1VB4 {
-    left: 318px;
-    top: 21px;
+    right: 318px;
+    bottom: 21px;
 }
 
 .prateleira7VB {
-    left: 1px;
-    top: 257px;
+    right: -1px;
+    top: 246px;
 }
 
 .prateleira7VB2 {
-    left: 1px;
-    top: 171px;
+    right: -1px;
+    top: 161px;
 }
 
 .prateleira7VB3 {
-    left: 1px;
-    top: 85px;
+    right: -1px;
+    top: 75px;
 }
 
 .prateleira4vbnumbers2 {
-    margin-top: 137px;
-    margin-left: 1165px;
+    z-index: 20;
+    top: 247px;
+    margin-right: 565px;
+    gap: 77px;
+}
+
+.boxSozinho {
+    left: 497px;
 }
 
 .p1VBNumbers {
@@ -322,12 +344,22 @@
 }
 
 .prateleira4vbnumbers3 {
-    margin-left: 650px;
+    z-index: 20;
+    top: 380px;
+    margin-right: 729px;
+    gap: 77px;
+}
+
+.prateleira2vbnumbers {
+    z-index: 1000;
+    top: 466px;
+    margin-right: 644px;
+    gap: 77px;
 }
 
 .prateleira3vbnumbers2 {
-    top: 357px;
-    margin-left: 35px;
+    top: 340px;
+    right: 169px;
 }
 
 .p5BoxNumber {
@@ -335,17 +367,20 @@
 }
 
 .prateleira4VB {
-    top: 310px;
-    right: 60px;
+    top: 20px;
+    left: 60px;
 }
 
 .prateleira5VB {
-    top: 172px;
-    left: 661px;
+    top: 20px;
+    left: 576px;
 }
 
 .p1BoxNumbers {
-    margin-left: 632px;
+    z-index: 20;
+    top: 465px;
+    margin-left: 122px;
+    gap: 78px;
 }
 
 .prateleira1 {
@@ -353,7 +388,8 @@
 }
 
 .prateleira1V {
-    margin-left: 420px;
+    margin-top: 105px;
+    margin-left: 557px;
 }
 
 .prateleira2 {
@@ -361,7 +397,8 @@
 }
 
 .prateleira2V {
-    margin-left: 100px;
+    margin-top: 105px;
+    left: 65px;
 }
 
 .prateleira3 {
@@ -369,8 +406,8 @@
 }
 
 .prateleira3VB {
-    margin-top: 108px;
-    margin-left: 690px;
+    top: 155px;
+    margin-left: 44px;
 }
 
 .prateleira4 {
@@ -378,8 +415,8 @@
 }
 
 .prateleira4vbnumbers {
-    left: -93px;
-    top: 495px;
+    left: 30px;
+    top: 205px;
 }
 
 .prateleira5 {

@@ -1,5 +1,5 @@
 .palletBoxVB {
-    margin-top: 252px;
+    margin-top: 649px;
     z-index: 50;
     border-radius: 30px;
     width: 1200px;
@@ -16,4 +16,8 @@
 
 .palletBoxVB.hide {
     transform: scale(0);
+}
+
+.closePalletBox {
+    font-variation-settings:'FILL' 0,'wght' 200,'GRAD' 0,'opsz' 24;
 }

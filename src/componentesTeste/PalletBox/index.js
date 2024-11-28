@@ -86,6 +86,12 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
     return (
         <div className="flex justify-center items-center z-50">
             <div className={`bg-stam-bg-3 palletBox absolute border border-stam-border p-4 ${animationClass}`}>
+                <span
+                    className="closePalletBox material-symbols-outlined absolute right-2 top-2 text-white hover:bg-stam-border rounded-full bg-stam-bg-4 p-1 cursor-pointer"
+                    onClick={onClose}
+                >
+                    close
+                </span>
                 <div className={`border ${isAnyInputMatchDescricao(0, 9) ? 'border-stam-orange' : 'border-stam-border'} borders`}>
                     <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-xl">
                         <p className="font-medium text-white text-6xl">3</p>
