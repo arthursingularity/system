@@ -1,8 +1,12 @@
 import React from "react";
 import Navbar from "../../componentes/Navbar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import './home.css';
 import FeedCard from "../../componentes/FeedCard";
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import Modelo3D from "../../componentes/Modelo3D";
 
 function Home() {
     const [currentDate, setCurrentDate] = useState('');
@@ -16,7 +20,6 @@ function Home() {
 
         const [dayOfWeek, dayAndMonth] = formattedDate.split(', ');
         const finalDate = `${dayOfWeek.toUpperCase()} ${dayAndMonth.toUpperCase()}`;
-
         setCurrentDate(finalDate);
     }, []);
 
@@ -73,10 +76,12 @@ function Home() {
                                 perfilStyle='hidden'
                                 route="/vibroacabamento"
                             />
+                            <Modelo3D filePath="/models/suportedatesta.glb"/>
                         </div>
                     </div>
                 </div>
             </div>
+            
         </div>
     );
 }
