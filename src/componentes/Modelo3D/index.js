@@ -4,7 +4,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { useState, useEffect, useRef } from "react";
 import './modelo3d.css'
 
-function Modelo3D({ filePath }) {
+function Modelo3D({ filePath, description }) {
     const mountRef = useRef(null);
 
     useEffect(() => {
@@ -104,7 +104,7 @@ function Modelo3D({ filePath }) {
                 <span class="material-symbols-outlined icon3D absolute left-1 top-1 text-gray-400">
                     3d_rotation
                 </span>
-                <p className="text-white absolute bottom-2 font-light text-center text-sm">SUPORTE TESTA 500/600/800/900/1500/1800/2001</p>
+                <p className="text-white absolute bottom-2 font-light text-center text-sm">{description}</p>
             </div>
         </div>
     )

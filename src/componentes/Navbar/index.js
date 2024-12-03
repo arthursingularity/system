@@ -171,6 +171,7 @@ function Navbar() {
                 )}
               </div>
             </li>
+            <li className='hover:text-stam-orange cursor-pointer'><a href='/componentes'>Componentes</a></li>
           </div>
         </ul>
         <ul className="lista3 fixed justify-center items-center flex list-none md:right-6 right-2 z-50 space-x-2">

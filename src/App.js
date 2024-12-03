@@ -11,6 +11,7 @@ import Notificar from './pages/notificar';
 import ProgramacaoEstamparia from './pages/programacaoEstamparia';
 import Embalagem from './pages/Embalagem';
 import VibroAcabamento from './pages/vibroacabamento';
+import Componentes from './pages/Componentes';
 
 function App() {
   return (
@@ -84,6 +85,12 @@ function App() {
             path="/vibroacabamento"
             element={
                 <VibroAcabamento />
+            }
+          />
+          <Route
+            path="/componentes"
+            element={
+                <Componentes />
             }
           />
         </Routes>
