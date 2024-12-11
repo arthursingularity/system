@@ -1,6 +1,7 @@
 import ListaComponentes from "../../componentes/ListaComponentes";
 import Navbar from "../../componentes/Navbar";
 import PieceTable from "../../componentes/PieceTable";
+import ProgGalvaEstoque from "../../componentes/ProgGalvaEstoque";
 import SearchSuggestion from "../../componentes/Searchsuggestion";
 import AbBox from "../../componentesTeste/AbBox";
 import PalletBox from "../../componentesTeste/PalletBox";
@@ -22,6 +23,8 @@ function Estoque() {
     const [searchValue, setSearchValue] = useState('');
     const [highlightedLetters, setHighlightedLetters] = useState({});
     const [isListaVisible, setIsListaVisible] = useState(false);
+    const [isPieceVisible, setIsPieceVisible] = useState(false)
+    const [isGalvaProgEstoque, setIsGalvaProgEstoque] = useState(false);
     const [inputBorderClass, setInputBorderClass] = useState('border-stam-border');
     const [resetState, setResetState] = useState(false);
     const [matchingInputPositions, setMatchingInputPositions] = useState({});
@@ -31,7 +34,6 @@ function Estoque() {
     const [isMoved, setIsMoved] = useState(false);
     const [isPasting, setIsPasting] = useState(false);
     const [selectedItemIndex, setSelectedItemIndex] = useState(0);
-    const [isPieceVisible, setIsPieceVisible] = useState(false)
     const inputDescriptionRef = useRef(null);
     const [inputPieceDescription, setInputPieceDescription] = useState('');
 
@@ -77,7 +79,7 @@ function Estoque() {
         toggleListaVisibility();
     };
 
-    const toggleListaVisibility = () => setIsListaVisible(prev => !prev);
+    const toggleListaVisibility = () => setIsListaVisible(prev => !prev)
 
     const handleAbBoxClick = (id, letter) => {
         setVisiblePalletBox(id);
@@ -186,6 +188,10 @@ function Estoque() {
         setIsPieceVisible(!isPieceVisible)
     }
 
+    function toggleProgGalvaEstoqueVisibility() {
+        setIsGalvaProgEstoque(!isGalvaProgEstoque)
+    }
+
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (isSearchSuggestionVisible) {
@@ -238,7 +244,9 @@ function Estoque() {
                     setIsPieceVisible(!isPieceVisible);
                 } else if (visiblePalletBox) {
                     handlePalletBoxClose();
-                } else if (!isMoved) {
+                } else if (isGalvaProgEstoque) {
+                    setIsGalvaProgEstoque(!isGalvaProgEstoque)
+                }  else if(!isMoved) {
                     handleResetHighlightedBoxes();
                 }
             }
@@ -246,7 +254,7 @@ function Estoque() {
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [isListaVisible, visiblePalletBox, isMoved, isPieceVisible]);
+    }, [isListaVisible, visiblePalletBox, isMoved, isPieceVisible, isGalvaProgEstoque]);
 
     const shouldHideBoxNumbersDiv = visiblePalletBox || isListaVisible;
     const shouldHidePrateleirasDiv = visiblePalletBox || isListaVisible;
@@ -277,6 +285,7 @@ function Estoque() {
         <div>
             <Navbar />
             <ListaComponentes visible={isListaVisible} toggleVisibility={toggleListaVisibility} ref={estampariaTableRef} />
+            <ProgGalvaEstoque ProgGalvaEstoqueVisibility={isGalvaProgEstoque} closeButton={toggleProgGalvaEstoqueVisibility} />
             <div className="flex justify-center">
                 <span class="material-symbols-outlined searchIcon absolute text-stam-border text-2xl z-40">
                     search
@@ -303,8 +312,14 @@ function Estoque() {
                     </div>
                 </div>
                 {searchValue && isSearchSuggestionVisible && <SearchSuggestion searchValue={searchValue} onSuggestionClick={handleSuggestionClick} />}
-                <PieceTable isPieceVisible={isPieceVisible} />
-                <div className="menuDiv flex justify-center space-x-2.5 bg-stam-bg-3 py-3 rounded-full z-20 absolute">
+                <PieceTable isPieceVisible={isPieceVisible} togglePieceTableVisibility={togglePieceTableVisibility}/>
+                <div className="menuDiv flex justify-center space-x-2.5 bg-stam-bg-3 py-3 px-3 rounded-full z-20 absolute">
+                    <span
+                        className="material-symbols-outlined pieceIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer"
+                        onClick={toggleProgGalvaEstoqueVisibility}
+                    >
+                        list_alt
+                    </span>
                     <span
                         className="material-symbols-outlined pieceIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer"
                         onClick={togglePieceTableVisibility}

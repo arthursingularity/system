@@ -121,7 +121,6 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                             className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index);
-                                                handleCopyClick(index);
                                             }}
                                         >
                                             close
@@ -152,7 +151,6 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                             className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 3)
-                                                handleCopyClick(index + 3)
                                             }}
                                         >
                                             close
@@ -183,7 +181,6 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                             className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 6)
-                                                handleCopyClick(index + 6)
                                             }}
                                         >
                                             close
@@ -221,7 +218,6 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                             className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 9)
-                                                handleCopyClick(index + 9)
                                             }}
                                         >
                                             close
@@ -252,7 +248,6 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                             className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 12)
-                                                handleCopyClick(index + 12)
                                             }}
                                         >
                                             close
@@ -283,7 +278,6 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                             className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 15)
-                                                handleCopyClick(index + 15)
                                             }}
                                         >
                                             close
@@ -321,7 +315,6 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                             className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 18)
-                                                handleCopyClick(index + 18)
                                             }}
                                         >
                                             close
@@ -352,7 +345,6 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                             className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 21)
-                                                handleCopyClick(index + 21)
                                             }}
                                         >
                                             close
@@ -383,7 +375,6 @@ function PalletBox2({ values, onInputChange, onClose, isVisible, descricao, togg
                                             className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 24)
-                                                handleCopyClick(index + 24)
                                             }}
                                         >
                                             close

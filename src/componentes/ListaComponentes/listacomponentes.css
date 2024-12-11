@@ -8,7 +8,7 @@
     z-index: 40;
     transform: scale(0);
     transform-origin: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .listaComponentes.visible {

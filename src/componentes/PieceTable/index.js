@@ -2,7 +2,7 @@ import PieceBox from '../PieceBox';
 import './piecetable.css';
 import { useState } from 'react';
 
-function PieceTable({ isPieceVisible }) {
+function PieceTable({ isPieceVisible, togglePieceTableVisibility }) {
     const [inputValue, setInputValue] = useState('');
     const [boxClicked, setBoxClicked] = useState(false);
 
@@ -627,7 +627,13 @@ function PieceTable({ isPieceVisible }) {
     return (
         <div>
             <div className='flex justify-center'>
-                <div className={`pieceTableDiv flex justify-center absolute bg-stam-bg-3 z-30 border border-stam-border duration-300 p-5 ${isPieceVisible ? 'scale-100' : 'scale-0'}`}>
+                <div className={`pieceTableDiv flex justify-center absolute bg-stam-bg-3 z-30 border border-stam-border duration-200 p-5 ${isPieceVisible ? 'scale-100' : 'scale-0'}`}>
+                    <span
+                        className="closeProgGalvaDiv material-symbols-outlined text-white absolute right-2 top-2 hover:bg-gray-600 p-1.5 rounded-full cursor-pointer"
+                        onClick={togglePieceTableVisibility}
+                    >
+                        close
+                    </span>
                     <div className='block overflow-hidden overflow-y-auto overflow-x-hidden'>
                         <div className='flex justify-center'>
                             <input

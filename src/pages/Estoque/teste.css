@@ -79,7 +79,7 @@
 }
 
 .searchIcon {
-    margin-right: 430px;
+    margin-right: 390px;
     margin-top: 115px;
 }
 
@@ -89,7 +89,6 @@
 }
 
 .menuDiv {
-    width: 648px;
     margin-top: 104px;
 }
 
@@ -118,7 +117,7 @@
 
 .clearDescription {
     margin-top: 112px;
-    margin-left: 362px;
+    margin-left: 403px;
     font-size: 25px;
     font-variation-settings:'FILL' 1,'wght' 200,'GRAD' 0,'opsz' 24;
 }
