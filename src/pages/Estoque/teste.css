@@ -174,8 +174,8 @@
 
 .p2 {
     top: 247px;
-    margin-left: 508px;
-    gap: 79.5px;
+    margin-left: 500px;
+    gap: 78.5px;
 }
 
 .p3 {
@@ -186,8 +186,8 @@
 
 .p4 {
     top: 334px;
-    margin-left: 328px;
-    gap: 79.5px;
+    margin-left: 319px;
+    gap: 78px;
 }
 
 .p5 {
@@ -198,18 +198,18 @@
 
 .p6 {
     top: 450px;
-    margin-left: 329px;
-    gap: 80px;
+    margin-left: 319px;
+    gap: 78.5px;
 }
 
 .p7 {
     top: 538px;
-    margin-left: 4px;
+    margin-left: -2px;
 }
 
 .p8 {
     top: 336px;
-    margin-left: 1019px;
+    margin-left: 1014px;
 }
 
 .p8 p {
@@ -217,23 +217,27 @@
 }
 
 .p7n2 {
-    margin-left: 81px;
+    margin-left: 78px;
 }
 
 .p7n3, .p7n4, .p7n5, .p7n6,.p7n9  {
     margin-left: 79px;
 }
 
-.p7n7, .p7n8 {
+.p7n7 {
+    margin-left: 76px;
+}
+
+.p7n8 {
     margin-left: 80px;
 }
 
 .p7n10 {
-    margin-left: 77px;
+    margin-left: 75px;
 }
 
 .p7n11 {
-    margin-left: 74px;
+    margin-left: 72px;
 }
 
 .p7n12 {
