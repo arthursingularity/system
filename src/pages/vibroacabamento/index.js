@@ -308,7 +308,7 @@ function VibroAcabamento() {
                     </div>
                 </div>
                 {searchValue && isSearchSuggestionVisible && <SearchSuggestionVB searchValue={searchValue} onSuggestionClick={handleSuggestionClick} />}
-                <div className="menuDivVB flex justify-center space-x-2.5 bg-stam-bg-3 py-3 rounded-full z-20 absolute">
+                <div className="menuDivVB border border-stam-border flex justify-center space-x-2.5 bg-stam-bg-3 py-3 rounded-full z-20 absolute">
                     <span
                         className="material-symbols-outlined menuIconVB text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer"
                         onClick={handleMenuClick}
@@ -333,7 +333,7 @@ function VibroAcabamento() {
                 </div>
             </div>
             <div className="boxes flex justify-center">
-                <div className={`bg-stam-bg-3 estoqueDivVB p-5 absolute border z-20 ${isMoved ? 'border-stam-orange' : 'border-stam-bg-3'}`}>
+                <div className={`bg-stam-bg-3 estoqueDivVB p-5 absolute border z-20 ${isMoved ? 'border-stam-orange' : 'border border-stam-border'}`}>
                     <div className="flex">
                         <div className="prateleira1VB flex space-x-1 absolute">
                             {['box100'].map(boxId => (
@@ -615,7 +615,7 @@ function VibroAcabamento() {
                 </div>
             )}
             <div className="flex justify-center">
-                <div className="bg-estoque-bg estoqueBgVB absolute">
+                <div className="bg-estoque-bg estoqueBgVB absolute border border-stam-border">
                     <div className="p-8 flex items-center space-x-2">
                         <span className="material-symbols-outlined SuprimentosBoxIcon text-white">
                             vibration

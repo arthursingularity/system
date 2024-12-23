@@ -35,6 +35,69 @@ function ProgGalvaEstoque({ ProgGalvaEstoqueVisibility, closeButton }) {
                         arrow_forward
                     </span>
                 </div>
+                <div className="flex justify-center">
+                    <div className="progGalvaTableDiv mt-5 rounded-xl border border-tableBorder overflow-hidden">
+                        <table className="w-full">
+                            <tr className="text-white font-regular text-lg bg-tableHeadBg border-b border-tableBorder">
+                                <th className="px-6 py-2 border-r border-tableBorder font-normal">
+                                    <p>Segunda-feira</p>
+                                    <p className="font-light text-base leading-tight -mt-0.5">23/11</p>
+                                </th>
+                                <th className="px-8 border-r border-tableBorder font-normal">
+                                    <p>Terça-feira</p>
+                                    <p className="font-light text-base leading-tight -mt-0.5">24/11</p>
+                                </th>
+                                <th className="px-7 border-r border-tableBorder font-normal">
+                                    <p>Quarta-feira</p>
+                                    <p className="font-light text-base leading-tight -mt-0.5">25/11</p>
+                                </th>
+                                <th className="px-8 border-r border-tableBorder font-normal">
+                                    <p>Quinta-feira</p>
+                                    <p className="font-light text-base leading-tight -mt-0.5">26/11</p>
+                                </th>
+                                <th className="px-8 font-normal">
+                                    <p>Sexta-feira</p>
+                                    <p className="font-light text-base leading-tight -mt-0.5">27/11</p>
+                                </th>
+                            </tr>
+                            <tr className="text-white font-thin border-b border-tableBorder">
+                                <td className="border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                            </tr>
+                            <tr className="text-white font-thin border-b border-tableBorder">
+                                <td className="border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                            </tr>
+                            <tr className="text-white font-thin border-b border-tableBorder">
+                                <td className="border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                            </tr>
+                            <tr className="text-white font-thin border-b border-tableBorder">
+                                <td className="border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                            </tr>
+                            <tr className="text-white font-thin">
+                                <td className="border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center border-r border-tableBorder px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                                <td className="text-center px-2 pt-3 pb-2">ESPELHO 503 BUZIOS INOX 430 S/PVC - BRANCO</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     )

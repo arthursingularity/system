@@ -313,7 +313,7 @@ function Estoque() {
                 </div>
                 {searchValue && isSearchSuggestionVisible && <SearchSuggestion searchValue={searchValue} onSuggestionClick={handleSuggestionClick} />}
                 <PieceTable isPieceVisible={isPieceVisible} togglePieceTableVisibility={togglePieceTableVisibility}/>
-                <div className="menuDiv flex justify-center space-x-2.5 bg-stam-bg-3 py-3 px-3 rounded-full z-20 absolute">
+                <div className="menuDiv border border-gray-700 flex justify-center space-x-2.5 bg-stam-bg-3 py-3 px-3 rounded-full z-20 absolute">
                     <span
                         className="material-symbols-outlined pieceIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer"
                         onClick={toggleProgGalvaEstoqueVisibility}
@@ -350,7 +350,7 @@ function Estoque() {
                 </div>
             </div>
             <div className="boxes flex justify-center">
-                <div className={`bg-stam-bg-3 estoqueDiv p-5 absolute border z-20 ${isMoved ? 'border-stam-orange' : 'border-stam-bg-3'}`}>
+                <div className={`bg-stam-bg-3 estoqueDiv border p-5 absolute border z-20 ${isMoved ? 'border-stam-orange' : 'border-gray-700'}`}>
                     <div className="flex">
                         <div className="prateleira1 flex space-x-1 ml-10">
                             {['box1', 'box2', 'box3'].map(boxId => (
@@ -572,7 +572,7 @@ function Estoque() {
                 </div>
             )}
             <div className="flex justify-center">
-                <div className="bg-estoque-bg estoqueBg absolute">
+                <div className="bg-estoque-bg estoqueBg absolute border border-gray-700">
                     <div className="p-8 flex items-center space-x-1.5">
                         <span className="material-symbols-outlined SuprimentosBoxIcon text-white">
                             package_2
