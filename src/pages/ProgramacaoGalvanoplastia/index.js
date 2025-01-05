@@ -8,6 +8,7 @@ function ProgramacaoGalvanoplastia() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [animationDirection, setAnimationDirection] = useState('');
     const [isUpdateProgVisible, setIsUpdateProgVisible] = useState(false)
+    const [isFiltrar, setIsFiltrar] = useState(false)
     const [isCreateProg, setIsCreateProg] = useState(false)
     const [isBlurred, setIsBlurred] = useState(false);
     const [selectedDay, setSelectedDay] = useState('');
@@ -16,6 +17,7 @@ function ProgramacaoGalvanoplastia() {
     const [isSearchSuggestionVisible, setIsSearchSuggestionVisible] = useState(true);
     const [selectedItemIndex, setSelectedItemIndex] = useState(0);
     const inputDescriptionRef = useRef(null);
+    const [activeFilterIndex, setActiveFilterIndex] = useState(null);
 
     useEffect(() => {
         document.title = "Programação Galvanoplastia";
@@ -132,12 +134,16 @@ function ProgramacaoGalvanoplastia() {
         setSearchValue('')
     };
 
+    function toggleFiltar(index) {
+        setActiveFilterIndex(prevIndex => (prevIndex === index ? null : index));
+    }
+
     return (
         <div>
             <Navbar />
             <div className={`createProg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 transform transition-transform duration-150 ${isCreateProg ? 'scale-100' : 'scale-0'}`}>
                 {searchValue && isSearchSuggestionVisible && <SearchProgGalvaSuggestion searchValue={searchValue} onSuggestionClick={handleSuggestionClick} />}
-                <div className="bg-estoque-bg p-4 rounded-2xl border border-stam-border relative">
+                <div className="bg-estoque-bg p-3 rounded-2xl border border-stam-border relative">
                     <h1 className="text-white font-regular text-xl text-center mt-2">Programar componente</h1>
                     <span
                         className="closeUpdateProg material-symbols-outlined absolute right-2 top-2 text-white rounded-lg hover:bg-gray-600 p-1.5 cursor-pointer"
@@ -145,7 +151,7 @@ function ProgramacaoGalvanoplastia() {
                     >
                         close
                     </span>
-                    <div className="bg-stam-bg-3 p-4 mt-6 border border-stam-border rounded-xl">
+                    <div className="bg-stam-bg-3 p-4 mt-6 border border-stam-border rounded-lg">
                         <div className="text-white flex space-x-3 justify-center font-light">
                             <p className="text-lg">{selectedDay || 'Dia da semana'}</p>
                             <p className="text-lg">-</p>
@@ -192,7 +198,7 @@ function ProgramacaoGalvanoplastia() {
                 </div>
             </div>
             <div className={`updateProgDiv fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 transform transition-transform duration-150 ${isUpdateProgVisible ? 'scale-100' : 'scale-0'}`}>
-                <div className="bg-estoque-bg p-4 rounded-2xl border border-stam-border relative">
+                <div className="bg-estoque-bg p-3 rounded-2xl border border-stam-border relative">
                     <h1 className="text-white font-regular text-xl text-center mt-2">Atualizar progamação</h1>
                     <span
                         className="closeUpdateProg material-symbols-outlined absolute right-2 top-2 text-white rounded-lg hover:bg-gray-600 p-1.5 cursor-pointer"
@@ -200,7 +206,7 @@ function ProgramacaoGalvanoplastia() {
                     >
                         close
                     </span>
-                    <div className="bg-stam-bg-3 p-4 mt-6 border border-stam-border rounded-xl">
+                    <div className="bg-stam-bg-3 p-4 mt-6 border border-stam-border rounded-lg">
                         <div className="mt-4">
                             <input
                                 className="desciptionCreateProgGalvaInput rounded-lg bg-transparent border border-stam-border outline-none text-white pl-1.5 font-light caret-stam-orange hover:border-stam-orange h-8"
@@ -268,7 +274,34 @@ function ProgramacaoGalvanoplastia() {
                                             {currentWeek.map((day, index) => (
                                                 <th key={index} className="w-56 py-2 border-r border-gray-500 font-normal">
                                                     <div className="flex justify-center items-center relative">
-                                                        <span className="filterGalvaButton rotate-90 material-symbols-outlined absolute left-3 cursor-pointer bg-gray-400 text-white rounded w-6 h-6 flex justify-center items-center buttonHover">
+                                                    {activeFilterIndex === index && (
+                                                            <div className="filtrarDiv bg-stam-bg-7 p-2 border border-gray-500 absolute z-20 rounded-lg">
+                                                                <span
+                                                                    className="closeUpdateProg material-symbols-outlined absolute right-1 top-1 text-white rounded-lg hover:bg-gray-500 p-1 cursor-pointer"
+                                                                    onClick={() => toggleFiltar(index)}
+                                                                >
+                                                                    close
+                                                                </span>
+                                                                <div className="bg-gray-600 p-3 rounded">
+                                                                    <div className="flex justify-center">
+                                                                        <div className="font-light leading-none space-y-2 w-44">
+                                                                            <p className="cursor-pointer hover:text-stam-orange hover:font-regular" onClick={() => toggleFiltar(index)}>A-Z</p>
+                                                                            <p className="cursor-pointer hover:text-stam-orange hover:font-regular" onClick={() => toggleFiltar(index)}>Separação</p>
+                                                                            <p className="cursor-pointer hover:text-stam-orange hover:font-regular" onClick={() => toggleFiltar(index)}>Preto Fosco</p>
+                                                                            <p className="cursor-pointer hover:text-stam-orange hover:font-regular" onClick={() => toggleFiltar(index)}>Branco</p>
+                                                                            <p className="cursor-pointer hover:text-stam-orange hover:font-regular" onClick={() => toggleFiltar(index)}>Zinco Preto</p>
+                                                                            <p className="cursor-pointer hover:text-stam-orange hover:font-regular" onClick={() => toggleFiltar(index)}>Zincado</p>
+                                                                            <p className="cursor-pointer hover:text-stam-orange hover:font-regular" onClick={() => toggleFiltar(index)}>Niquelado</p>
+                                                                            <p className="cursor-pointer hover:text-stam-orange hover:font-regular" onClick={() => toggleFiltar(index)}>Gold </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                        <span
+                                                            className="filterGalvaButton rotate-90 material-symbols-outlined absolute left-3 cursor-pointer bg-gray-400 text-white rounded w-6 h-6 flex justify-center items-center buttonHover"
+                                                            onClick={() => toggleFiltar(index)}
+                                                        >
                                                             play_arrow
                                                         </span>
                                                         <div>

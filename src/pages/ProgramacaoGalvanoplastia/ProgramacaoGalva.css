@@ -2,6 +2,12 @@
     width: 1150px;
 }
 
+.filtrarDiv {
+    top: 54px;
+    left: 7px;
+    width: 215px;
+}
+
 .prioridadeInput {
     width: 88px;
 }
