@@ -34,7 +34,7 @@ function Home() {
                         <div className="md:flex block space-x-10">
                             <FeedCard
                                 title="SISTEMA ATUALIZADO!"
-                                icon="https://media.licdn.com/dms/image/v2/D4D03AQGVOfRDOxagqg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1730323825860?e=1735776000&v=beta&t=m1MXxuR3a3N90PMVrNoD7GveliUCwvYfLpniQjdtfNs"
+                                icon="https://i.imgur.com/XwLhjzT.jpeg"
                                 description="O System atualizou! Agora com inúmeras novas melhorias e funcionalidades que foram implementadas, todas projetadas para oferecer uma experiência mais robusta e eficiente."
                                 backgroundSize="hidden"
                                 feedCardWidth="feedCardWidth backgroundGradient"

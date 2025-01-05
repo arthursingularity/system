@@ -30,6 +30,14 @@ function SuprimentosBox({ isVisible, onMouseEnter, onMouseLeave }) {
             <p className='ml-2 mr-2'>Programação Estamparia</p>
           </div>
         </a>
+        <a href='/programacaogalvanoplastia'>
+          <div className='flex justify-center items-center p-4 cursor-pointer hover:bg-stam-bg-4 rounded-lg'>
+            <span className="material-symbols-outlined SuprimentosBoxIcon">
+              list_alt
+            </span>
+            <p className='ml-2 mr-2'>Programação Galvanoplastia</p>
+          </div>
+        </a>
       </div>
     </div>
   );

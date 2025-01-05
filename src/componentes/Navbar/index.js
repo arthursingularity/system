@@ -99,11 +99,10 @@ function Navbar() {
   }
 
   function handleDeleteNotification(notificationId) {
-    const userId = usuarios.find(user => user.login === loggedInUser)._id; // Recupera o ID do usuário logado
+    const userId = usuarios.find(user => user.login === loggedInUser)._id;
 
     axios.delete(`http://localhost:4000/usuarios/${userId}/notifications/${notificationId}`)
       .then(response => {
-        // Atualiza as notificações no estado local após deletar
         setNotifications(prevNotifications =>
           prevNotifications.filter(notification => notification.id !== notificationId)
         );
@@ -117,7 +116,7 @@ function Navbar() {
   return (
     <div>
       <nav className="font-light">
-        <ul className="lista fixed flex z-50 justify-center items-center text-white list-none w-full bg-stam-bg-3">
+        <ul className="lista fixed flex z-50 justify-center items-center text-white list-none w-full bg-stam-bg-3 border-b border-stam-border">
           <li><a href='/'><img src='/imagens/systemlogo.png' id='logo' className="navbarLogo absolute w-24 z-20 left-5" alt='logoSymbol' /></a></li>
           <div className='md:flex hidden space-x-8 flex'>
             <li className='hover:text-stam-orange cursor-pointer'><a href='/'>Página inicial</a></li>
