@@ -60,9 +60,7 @@ function App() {
           <Route
             path='/programacaoestamparia'
             element={
-              <ProtectedRoute>
                 <ProgramacaoEstamparia/>
-              </ProtectedRoute>
             }
           />
           <Route
