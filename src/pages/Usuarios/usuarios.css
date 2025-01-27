@@ -2,10 +2,6 @@
     border-radius: 40px;
 }
 
-.buttonHover:hover {
-    filter: brightness(85%);
-}
-
 .followersDiv:hover {
     filter: brightness(75%);
 }

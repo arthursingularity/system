@@ -74,12 +74,12 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
     };
 
     const getInputProductClass = (value, descricao) => {
-        return `bg-stam-bg-3 inputProduct border border-stam-border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange cursor-default ${value === descricao.trim() && value !== "" ? 'text-stam-orange font-semibold' : ''
+        return `bg-stam-bg-3 inputProduct border border-stam-border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange ${value === descricao.trim() && value !== "" ? 'text-stam-orange font-semibold' : ''
             }`;
     };
 
     const getInputProduct2Class = (value, descricao) => {
-        return `bg-stam-bg-3 inputProduct2 border border-stam-border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange cursor-default ${value === descricao.trim() && value !== "" ? 'text-stam-orange font-semibold' : ''
+        return `bg-stam-bg-3 inputProduct2 border border-stam-border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange ${value === descricao.trim() && value !== "" ? 'text-stam-orange font-semibold' : ''
             }`;
     };
 

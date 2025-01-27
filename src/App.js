@@ -12,7 +12,6 @@ import ProgramacaoEstamparia from './pages/programacaoEstamparia';
 import Embalagem from './pages/Embalagem';
 import VibroAcabamento from './pages/vibroacabamento';
 import Componentes from './pages/Componentes';
-import ProgramacaoGalvanoplastia from './pages/ProgramacaoGalvanoplastia';
 
 function App() {
   return (
@@ -64,12 +63,6 @@ function App() {
               <ProtectedRoute>
                 <ProgramacaoEstamparia/>
               </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/programacaogalvanoplastia'
-            element={
-                <ProgramacaoGalvanoplastia/>
             }
           />
           <Route
