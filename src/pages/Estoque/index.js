@@ -51,21 +51,6 @@ function Estoque() {
         setInputValues(storedValues);
     }, []);
 
-    useEffect(() => {
-        const handleShiftDown = (e) => {
-            if (e.key === 'Shift') {
-                handleModeDivClick();
-            }
-        };
-
-        window.addEventListener('keydown', handleShiftDown);
-        return () => { window.removeEventListener('keydown', handleShiftDown); };
-    }, [isMoved]);
-
-    const handleModeDivClick = () => {
-        setIsMoved(!isMoved);
-    };
-
     const focusInputInEstampariaTable = () => {
         if (estampariaTableRef.current) {
             estampariaTableRef.current.focusInput();
@@ -290,16 +275,8 @@ function Estoque() {
                     </span>
                 )}
                 <div className="flex justify-center items-center">
-                    <div
-                        className={`modeDiv absolute bg-stam-bg-3 z-30 flex justify-center border border-stam-border rounded-full h-8 cursor-pointer hover:border-stam-orange
-                        ${isMoved ? 'border-stam-orange' : ''}`}
-                        onClick={handleModeDivClick}>
-                        <span
-                            className={`material-symbols-outlined z-30 absolute left-0 filtrarNecessidadesIcon text-stam-bg-3 bg-stam-border rounded-full 
-                            ${isMoved ? 'moved bg-stam-orange' : ''}`}
-                        >
-                            quick_reference_all
-                        </span>
+                    <div className="modeDiv absolute z-50 border border-stam-border p-1 rounded-full">
+                        <div className="w-44 h-2 bg-stam-orange rounded-full"></div>
                     </div>
                 </div>
                 {searchValue && isSearchSuggestionVisible && <SearchSuggestion searchValue={searchValue} onSuggestionClick={handleSuggestionClick} />}
@@ -557,7 +534,7 @@ function Estoque() {
                 </div>
             )}
             <div className="flex justify-center">
-                <div className="bg-estoque-bg estoqueBg absolute border border-gray-700">
+                <div className="bg-estoque-bg estoqueBg absolute border border-gray-700 rounded-3xl">
                     <div className="p-8 flex items-center space-x-1.5">
                         <span className="material-symbols-outlined SuprimentosBoxIcon text-white">
                             package_2

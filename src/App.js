@@ -8,10 +8,10 @@ import Usuarios from './pages/Usuarios';
 import Register from './pages/register';
 import ProtectedRoute from './componentes/ProtectedRoute';
 import Notificar from './pages/notificar';
-import ProgramacaoEstamparia from './pages/programacaoEstamparia';
 import Embalagem from './pages/Embalagem';
 import VibroAcabamento from './pages/vibroacabamento';
 import Componentes from './pages/Componentes';
+import Dashboard from './pages/dashboard';
 
 function App() {
   return (
@@ -58,12 +58,6 @@ function App() {
             }
           />
           <Route
-            path='/programacaoestamparia'
-            element={
-                <ProgramacaoEstamparia/>
-            }
-          />
-          <Route
             path='/embalagem'
             element={
               <ProtectedRoute>
@@ -83,6 +77,12 @@ function App() {
             path="/vibroacabamento"
             element={
                 <VibroAcabamento />
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+                <Dashboard />
             }
           />
           <Route

@@ -22,12 +22,12 @@ function SuprimentosBox({ isVisible, onMouseEnter, onMouseLeave }) {
             <p className='ml-2 mr-2'>Vibroacabamento</p>
           </div>
         </a>
-        <a href='/programacaoestamparia'>
+        <a href='/dashboard'>
           <div className='flex justify-center items-center p-4 cursor-pointer hover:bg-stam-bg-4 rounded-lg'>
             <span className="material-symbols-outlined SuprimentosBoxIcon">
-              terminal
+              monitoring
             </span>
-            <p className='ml-2 mr-2'>Controle Produção Estamparia</p>
+            <p className='ml-2 mr-2'>Dashboard</p>
           </div>
         </a>
       </div>

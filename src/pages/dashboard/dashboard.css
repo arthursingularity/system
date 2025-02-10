@@ -1,0 +1,14 @@
+.dashboardBg {
+    width: 1195px;
+    height: 510px;
+    top: 85px;
+    border-radius: 45px;
+}
+
+.grafico {
+    width: 500px;
+}
+
+.linhaDashboard {
+    width: 1130px;
+}
