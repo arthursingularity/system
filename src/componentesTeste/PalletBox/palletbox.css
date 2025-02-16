@@ -19,7 +19,7 @@
 
 .inputProduct {
     padding-right: 28px;
-    width: 322px;
+    width: 278px;
     height: 27.5px;
     margin-left: 107px;
     caret-color: #FF6600;
@@ -35,7 +35,7 @@
 
 .inputProduct2 {
     padding-right: 28px;
-    width: 322px;
+    width: 278px;
     height: 27.5px;
     margin-left: 7px;
     caret-color: #FF6600;
@@ -74,7 +74,7 @@
 .clearEnderecamento {
     z-index: 10;
     top: -4px;
-    right: -2px;
+    right: 42px;
     font-variation-settings: 'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;
 }
 
@@ -99,7 +99,7 @@
     border-radius: 50%;
     z-index: 10;
     bottom: -4px;
-    right: -2px;
+    right: 42px;
     font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
 }
 

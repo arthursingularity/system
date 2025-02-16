@@ -34,6 +34,28 @@ function Estoque() {
     const [selectedItemIndex, setSelectedItemIndex] = useState(0);
     const inputDescriptionRef = useRef(null);
     const [inputPieceDescription, setInputPieceDescription] = useState('');
+    const [stockPercentage, setStockPercentage] = useState(0);
+
+    const MAX_BOXES = 6836;
+
+    const updateStockPercentage = () => {
+        const caixaInputs = document.querySelectorAll('.caixasInput');
+        let total = 0;
+        caixaInputs.forEach(input => {
+            const value = parseInt(input.value) || 0;
+            total += value;
+        });
+        const percentage = ((total / MAX_BOXES) * 100).toFixed(2);
+        setStockPercentage(percentage);
+        localStorage.setItem('stockPercentage', percentage);
+    };
+
+    useEffect(() => {
+        const storedPercentage = localStorage.getItem('stockPercentage');
+        if (storedPercentage) {
+            setStockPercentage(storedPercentage);
+        }
+    }, []);
 
     useEffect(() => {
         document.title = "Estoque Estamparia";
@@ -256,12 +278,23 @@ function Estoque() {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
+    }, [])
 
     return (
         <div>
             <Navbar />
             <ListaComponentes visible={isListaVisible} toggleVisibility={toggleListaVisibility} ref={estampariaTableRef} />
+            
+            <div className="barraDePreenchimento modeDiv z-50 absolute">
+            <p className="Preenchimento font-light text-white text-center">{stockPercentage}%</p>
+            <div className="progressBorder p-1 w-48 z-30 border border-stam-border rounded-full flex justify-start items-center overflow-hidden">
+                <div
+                    className="h-2 bg-stam-orange rounded-full"
+                    style={{ width: `${stockPercentage}%` }}
+                ></div>
+            </div>
+        </div>
+
             <div className="flex justify-center">
                 <span class="material-symbols-outlined searchIcon absolute text-stam-border text-2xl z-40">
                     search
@@ -274,11 +307,6 @@ function Estoque() {
                         close
                     </span>
                 )}
-                <div className="flex justify-center items-center">
-                    <div className="modeDiv absolute z-50 border border-stam-border p-1 rounded-full">
-                        <div className="w-44 h-2 bg-stam-orange rounded-full"></div>
-                    </div>
-                </div>
                 {searchValue && isSearchSuggestionVisible && <SearchSuggestion searchValue={searchValue} onSuggestionClick={handleSuggestionClick} />}
                 <PieceTable isPieceVisible={isPieceVisible} togglePieceTableVisibility={togglePieceTableVisibility}/>
                 <div className="menuDiv border border-gray-700 flex justify-center space-x-2.5 bg-stam-bg-3 py-3 px-3 rounded-full z-20 absolute">
@@ -477,6 +505,7 @@ function Estoque() {
                                 searchResults={searchResults}
                                 handlePasteInput={handlePasteInput}
                                 togglePieceTableVisibility={togglePieceTableVisibility}
+                                updateStockPercentage={updateStockPercentage}
                             />
                         }
                     </div>

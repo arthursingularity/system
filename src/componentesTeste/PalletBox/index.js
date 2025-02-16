@@ -1,7 +1,7 @@
 import "./palletbox.css";
 import React, { useEffect, useState } from 'react';
 
-function PalletBox({ values, onInputChange, onClose, isVisible, descricao, togglePieceTableVisibility }) {
+function PalletBox({ values, onInputChange, onClose, isVisible, descricao, togglePieceTableVisibility, updateStockPercentage }) {
     const [animationClass, setAnimationClass] = useState('');
     const [activeIcon, setActiveIcon] = useState(null);
     const [matchingInputPositions, setMatchingInputPositions] = useState([]);
@@ -20,6 +20,22 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
     }, [isVisible]);
 
     useEffect(() => {
+        // Carregar valores do localStorage ao montar o componente
+        document.querySelectorAll('.caixasInput').forEach((input, index) => {
+            const storedValue = localStorage.getItem(`caixasInputValue-${index}`);
+            if (storedValue) {
+                input.value = storedValue;
+            }
+        });
+    }, []);
+
+    const handleInputChange = (index, value) => {
+        const cleanedValue = value.replace(/\D/g, '');
+        localStorage.setItem(`caixasInputValue-${index}`, cleanedValue);
+        updateStockPercentage();
+    };
+
+    useEffect(() => {
         if (searchTriggered) {
             const trimmedDescricao = descricao.trim();
             const matchedIndices = values.map((value, index) => value.trim() === trimmedDescricao ? index : null).filter(index => index !== null);
@@ -28,24 +44,9 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
         }
     }, [searchTriggered, descricao, values]);
 
-    const handleCopyClick = (index) => {
-        const textToCopy = values[index];
-        if (textToCopy) {
-            navigator.clipboard.writeText(textToCopy)
-                .then(() => {
-                    setActiveIcon(index);
-                    setTimeout(() => {
-                        setActiveIcon(null);
-                    }, 1000);
-                })
-                .catch(err => {
-                    console.error('Failed to copy text: ', err);
-                });
-        }
-    };
-
     const handleClearClick = (index) => {
         onInputChange(index, '');
+        updateStockPercentage()
     };
 
     const handlePasteClick = (index) => {
@@ -60,6 +61,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
     const handleChange = (index, value) => {
         const cleanedValue = cleanInputValue(value);
         onInputChange(index, cleanedValue);
+        updateStockPercentage();
     };
 
     const cleanInputValue = (value) => {
@@ -100,12 +102,20 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         <div className="space-y-1">
                             {values.slice(0, 3).map((value, index) => (
                                 <div className="relative" key={index}>
-                                    <input
-                                        value={value}
-                                        onChange={(e) => handleChange(index, e.target.value.trim())}
-                                        className={getInputProductClass(value, descricao)}
-                                        placeholder="Endereçar"
-                                    />
+                                    <div className="flex">
+                                        <input
+                                            value={value}
+                                            onChange={(e) => handleChange(index, e.target.value.trim())}
+                                            className={getInputProductClass(value, descricao)}
+                                            placeholder="Endereçar"
+                                        />
+                                        <input
+                                            className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
+                                            placeholder="CX"
+                                            maxLength={2}
+                                            onChange={(e) => handleInputChange(index, e.target.value)}
+                                        />
+                                    </div>
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"
@@ -130,12 +140,20 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         <div className="space-y-1">
                             {values.slice(3, 6).map((value, index) => (
                                 <div className="relative" key={index + 3}>
-                                    <input
-                                        value={value}
-                                        onChange={(e) => handleChange(index + 3, e.target.value.trim())}
-                                        className={getInputProduct2Class(value, descricao)}
-                                        placeholder="Endereçar"
-                                    />
+                                    <div className="flex">
+                                        <input
+                                            value={value}
+                                            onChange={(e) => handleChange(index + 3, e.target.value.trim())}
+                                            className={getInputProduct2Class(value, descricao)}
+                                            placeholder="Endereçar"
+                                        />
+                                        <input
+                                            className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
+                                            placeholder="CX"
+                                            maxLength={2}
+                                            onChange={(e) => handleInputChange(index + 3, e.target.value)}
+                                        />
+                                    </div>
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"
@@ -160,12 +178,20 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         <div className="space-y-1">
                             {values.slice(6, 9).map((value, index) => (
                                 <div className="relative" key={index + 6}>
-                                    <input
-                                        value={value}
-                                        onChange={(e) => handleChange(index + 6, e.target.value.trim())}
-                                        className={getInputProduct2Class(value, descricao)}
-                                        placeholder="Endereçar"
-                                    />
+                                    <div>
+                                        <input
+                                            value={value}
+                                            onChange={(e) => handleChange(index + 6, e.target.value.trim())}
+                                            className={getInputProduct2Class(value, descricao)}
+                                            placeholder="Endereçar"
+                                        />
+                                        <input
+                                            className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
+                                            placeholder="CX"
+                                            maxLength={2}
+                                            onChange={(e) => handleInputChange(index + 6, e.target.value)}
+                                        />
+                                    </div>
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"
@@ -203,6 +229,12 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                         className={getInputProductClass(value, descricao)}
                                         placeholder="Endereçar"
                                     />
+                                    <input
+                                        className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
+                                        placeholder="CX"
+                                        maxLength={2}
+                                        onChange={(e) => handleInputChange(index + 9, e.target.value)}
+                                    />
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"
@@ -233,6 +265,12 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                         className={getInputProduct2Class(value, descricao)}
                                         placeholder="Endereçar"
                                     />
+                                    <input
+                                        className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
+                                        placeholder="CX"
+                                        maxLength={2}
+                                        onChange={(e) => handleInputChange(index + 12, e.target.value)}
+                                    />
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"
@@ -262,6 +300,12 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                         onChange={(e) => handleChange(index + 15, e.target.value.trim())}
                                         className={getInputProduct2Class(value, descricao)}
                                         placeholder="Endereçar"
+                                    />
+                                    <input
+                                        className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
+                                        placeholder="CX"
+                                        maxLength={2}
+                                        onChange={(e) => handleInputChange(index + 15, e.target.value)}
                                     />
                                     {!value && (
                                         <span
@@ -300,6 +344,12 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                         className={getInputProductClass(value, descricao)}
                                         placeholder="Endereçar"
                                     />
+                                    <input
+                                        className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
+                                        placeholder="CX"
+                                        maxLength={2}
+                                        onChange={(e) => handleInputChange(index + 18, e.target.value)}
+                                    />
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"
@@ -330,6 +380,12 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                         className={getInputProduct2Class(value, descricao)}
                                         placeholder="Endereçar"
                                     />
+                                    <input
+                                        className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
+                                        placeholder="CX"
+                                        maxLength={2}
+                                        onChange={(e) => handleInputChange(index + 21, e.target.value)}
+                                    />
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"
@@ -359,6 +415,12 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                         onChange={(e) => handleChange(index + 24, e.target.value.trim())}
                                         className={getInputProduct2Class(value, descricao)}
                                         placeholder="Endereçar"
+                                    />
+                                    <input
+                                        className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
+                                        placeholder="CX"
+                                        maxLength={2}
+                                        onChange={(e) => handleInputChange(index + 24, e.target.value)}
                                     />
                                     {!value && (
                                         <span
