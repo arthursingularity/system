@@ -20,7 +20,6 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
     }, [isVisible]);
 
     useEffect(() => {
-        // Carregar valores do localStorage ao montar o componente
         document.querySelectorAll('.caixasInput').forEach((input, index) => {
             const storedValue = localStorage.getItem(`caixasInputValue-${index}`);
             if (storedValue) {
@@ -46,7 +45,12 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
 
     const handleClearClick = (index) => {
         onInputChange(index, '');
-        updateStockPercentage()
+        const caixasInput = document.querySelectorAll('.caixasInput')[index];
+        if (caixasInput) {
+            caixasInput.value = '';
+        }
+        localStorage.removeItem(`caixasInputValue-${index}`);
+        updateStockPercentage();
     };
 
     const handlePasteClick = (index) => {
@@ -76,20 +80,35 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
     };
 
     const getInputProductClass = (value, descricao) => {
-        return `bg-stam-bg-3 inputProduct border border-stam-border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange ${value === descricao.trim() && value !== "" ? 'text-stam-orange font-semibold' : ''
-            }`;
+        const isMatch = value === descricao.trim() && value !== "";
+        return `bg-stam-bg-3 inputProduct border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange ${isMatch ? 'border-stam-border text-stam-orange font-semibold' : 'border-stam-border'}`;
     };
 
     const getInputProduct2Class = (value, descricao) => {
-        return `bg-stam-bg-3 inputProduct2 border border-stam-border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange ${value === descricao.trim() && value !== "" ? 'text-stam-orange font-semibold' : ''
-            }`;
+        const isMatch = value === descricao.trim() && value !== "";
+        return `bg-stam-bg-3 inputProduct2 border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange ${isMatch ? 'border-stam-border text-stam-orange font-semibold' : 'border-stam-border'}`;
+    };
+
+    const getCaixasInputClass = (value, descricao) => {
+        const isMatch = value === descricao.trim() && value !== "";
+        return `caixasInput placeholder-gray-600 rounded-full font-light text-white bg-transparent border outline-none w-10 pl-2 ml-1 caret-stam-orange ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'}`;
+    };
+
+    const getEnderecarDiv = (value, descricao) => {
+        const isMatch = value === descricao.trim() && value !== "";
+        return `enderecarBorders flex border p-1 rounded-full ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'}`;
+    };
+
+    const getEnderecar2Div = (value, descricao) => {
+        const isMatch = value === descricao.trim() && value !== "";
+        return `flex border p-1 rounded-full ml-1.5 ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'}`;
     };
 
     return (
         <div className="flex justify-center items-center z-50">
-            <div className={`bg-stam-bg-3 palletBox absolute border border-stam-border p-4 ${animationClass}`}>
+            <div className={`bg-stam-bg-3 palletBox absolute border border-stam-border p-2 ${animationClass}`}>
                 <span
-                    className="closePalletBox material-symbols-outlined absolute right-2 top-2 text-white hover:bg-stam-border rounded-full bg-stam-bg-4 p-1 cursor-pointer"
+                    className="closePalletBox material-symbols-outlined z-30 absolute right-0 top-0 text-white hover:bg-stam-border rounded-full bg-stam-bg-4 p-1 cursor-pointer"
                     onClick={onClose}
                 >
                     close
@@ -102,7 +121,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         <div className="space-y-1">
                             {values.slice(0, 3).map((value, index) => (
                                 <div className="relative" key={index}>
-                                    <div className="flex">
+                                    <div className={getEnderecarDiv(value, descricao)}>
                                         <input
                                             value={value}
                                             onChange={(e) => handleChange(index, e.target.value.trim())}
@@ -110,7 +129,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                             placeholder="Endereçar"
                                         />
                                         <input
-                                            className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
+                                            className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
                                             maxLength={2}
                                             onChange={(e) => handleInputChange(index, e.target.value)}
@@ -140,7 +159,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         <div className="space-y-1">
                             {values.slice(3, 6).map((value, index) => (
                                 <div className="relative" key={index + 3}>
-                                    <div className="flex">
+                                    <div className={getEnderecar2Div(value, descricao)}>
                                         <input
                                             value={value}
                                             onChange={(e) => handleChange(index + 3, e.target.value.trim())}
@@ -148,7 +167,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                             placeholder="Endereçar"
                                         />
                                         <input
-                                            className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
+                                            className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
                                             maxLength={2}
                                             onChange={(e) => handleInputChange(index + 3, e.target.value)}
@@ -178,7 +197,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         <div className="space-y-1">
                             {values.slice(6, 9).map((value, index) => (
                                 <div className="relative" key={index + 6}>
-                                    <div>
+                                    <div className={getEnderecar2Div(value, descricao)}>
                                         <input
                                             value={value}
                                             onChange={(e) => handleChange(index + 6, e.target.value.trim())}
@@ -186,7 +205,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                             placeholder="Endereçar"
                                         />
                                         <input
-                                            className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
+                                            className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
                                             maxLength={2}
                                             onChange={(e) => handleInputChange(index + 6, e.target.value)}
@@ -215,7 +234,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         </div>
                     </div>
                 </div>
-                <div className={`border ${isAnyInputMatchDescricao(9, 18) ? 'border-stam-orange' : 'border-stam-border'} borders mt-3`}>
+                <div className={`border ${isAnyInputMatchDescricao(9, 18) ? 'border-stam-orange' : 'border-stam-border'} borders mt-2`}>
                     <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-xl">
                         <p className="font-medium text-white text-6xl">2</p>
                     </div>
@@ -223,18 +242,20 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         <div className="space-y-1">
                             {values.slice(9, 12).map((value, index) => (
                                 <div className="relative" key={index + 9}>
-                                    <input
-                                        value={value}
-                                        onChange={(e) => handleChange(index + 9, e.target.value.trim())}
-                                        className={getInputProductClass(value, descricao)}
-                                        placeholder="Endereçar"
-                                    />
-                                    <input
-                                        className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
-                                        placeholder="CX"
-                                        maxLength={2}
-                                        onChange={(e) => handleInputChange(index + 9, e.target.value)}
-                                    />
+                                    <div className={getEnderecarDiv(value, descricao)}>
+                                        <input
+                                            value={value}
+                                            onChange={(e) => handleChange(index + 9, e.target.value.trim())}
+                                            className={getInputProductClass(value, descricao)}
+                                            placeholder="Endereçar"
+                                        />
+                                        <input
+                                            className={getCaixasInputClass(value, descricao)}
+                                            placeholder="CX"
+                                            maxLength={2}
+                                            onChange={(e) => handleInputChange(index + 9, e.target.value)}
+                                        />
+                                    </div>
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"
@@ -259,18 +280,20 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         <div className="space-y-1">
                             {values.slice(12, 15).map((value, index) => (
                                 <div className="relative" key={index + 12}>
-                                    <input
-                                        value={value}
-                                        onChange={(e) => handleChange(index + 12, e.target.value.trim())}
-                                        className={getInputProduct2Class(value, descricao)}
-                                        placeholder="Endereçar"
-                                    />
-                                    <input
-                                        className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
-                                        placeholder="CX"
-                                        maxLength={2}
-                                        onChange={(e) => handleInputChange(index + 12, e.target.value)}
-                                    />
+                                    <div className={getEnderecar2Div(value, descricao)}>
+                                        <input
+                                            value={value}
+                                            onChange={(e) => handleChange(index + 12, e.target.value.trim())}
+                                            className={getInputProduct2Class(value, descricao)}
+                                            placeholder="Endereçar"
+                                        />
+                                        <input
+                                            className={getCaixasInputClass(value, descricao)}
+                                            placeholder="CX"
+                                            maxLength={2}
+                                            onChange={(e) => handleInputChange(index + 12, e.target.value)}
+                                        />
+                                    </div>
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"
@@ -295,18 +318,20 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         <div className="space-y-1">
                             {values.slice(15, 18).map((value, index) => (
                                 <div className="relative" key={index + 15}>
-                                    <input
-                                        value={value}
-                                        onChange={(e) => handleChange(index + 15, e.target.value.trim())}
-                                        className={getInputProduct2Class(value, descricao)}
-                                        placeholder="Endereçar"
-                                    />
-                                    <input
-                                        className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
-                                        placeholder="CX"
-                                        maxLength={2}
-                                        onChange={(e) => handleInputChange(index + 15, e.target.value)}
-                                    />
+                                    <div className={getEnderecar2Div(value, descricao)}>
+                                        <input
+                                            value={value}
+                                            onChange={(e) => handleChange(index + 15, e.target.value.trim())}
+                                            className={getInputProduct2Class(value, descricao)}
+                                            placeholder="Endereçar"
+                                        />
+                                        <input
+                                            className={getCaixasInputClass(value, descricao)}
+                                            placeholder="CX"
+                                            maxLength={2}
+                                            onChange={(e) => handleInputChange(index + 15, e.target.value)}
+                                        />
+                                    </div>
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"
@@ -330,7 +355,7 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         </div>
                     </div>
                 </div>
-                <div className={`border ${isAnyInputMatchDescricao(18, 27) ? 'border-stam-orange' : 'border-stam-border'} borders mt-3`}>
+                <div className={`border ${isAnyInputMatchDescricao(18, 27) ? 'border-stam-orange' : 'border-stam-border'} borders mt-2`}>
                     <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-xl">
                         <p className="font-medium text-white text-6xl">1</p>
                     </div>
@@ -338,18 +363,20 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         <div className="space-y-1">
                             {values.slice(18, 21).map((value, index) => (
                                 <div className="relative" key={index + 18}>
-                                    <input
-                                        value={value}
-                                        onChange={(e) => handleChange(index + 18, e.target.value.trim())}
-                                        className={getInputProductClass(value, descricao)}
-                                        placeholder="Endereçar"
-                                    />
-                                    <input
-                                        className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
-                                        placeholder="CX"
-                                        maxLength={2}
-                                        onChange={(e) => handleInputChange(index + 18, e.target.value)}
-                                    />
+                                    <div className={getEnderecarDiv(value, descricao)}>
+                                        <input
+                                            value={value}
+                                            onChange={(e) => handleChange(index + 18, e.target.value.trim())}
+                                            className={getInputProductClass(value, descricao)}
+                                            placeholder="Endereçar"
+                                        />
+                                        <input
+                                            className={getCaixasInputClass(value, descricao)}
+                                            placeholder="CX"
+                                            maxLength={2}
+                                            onChange={(e) => handleInputChange(index + 18, e.target.value)}
+                                        />
+                                    </div>
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"
@@ -374,18 +401,20 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         <div className="space-y-1">
                             {values.slice(21, 24).map((value, index) => (
                                 <div className="relative" key={index + 21}>
-                                    <input
-                                        value={value}
-                                        onChange={(e) => handleChange(index + 21, e.target.value.trim())}
-                                        className={getInputProduct2Class(value, descricao)}
-                                        placeholder="Endereçar"
-                                    />
-                                    <input
-                                        className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
-                                        placeholder="CX"
-                                        maxLength={2}
-                                        onChange={(e) => handleInputChange(index + 21, e.target.value)}
-                                    />
+                                    <div className={getEnderecar2Div(value, descricao)}>
+                                        <input
+                                            value={value}
+                                            onChange={(e) => handleChange(index + 21, e.target.value.trim())}
+                                            className={getInputProduct2Class(value, descricao)}
+                                            placeholder="Endereçar"
+                                        />
+                                        <input
+                                            className={getCaixasInputClass(value, descricao)}
+                                            placeholder="CX"
+                                            maxLength={2}
+                                            onChange={(e) => handleInputChange(index + 21, e.target.value)}
+                                        />
+                                    </div>
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"
@@ -410,18 +439,20 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                         <div className="space-y-1">
                             {values.slice(24, 27).map((value, index) => (
                                 <div className="relative" key={index + 24}>
-                                    <input
-                                        value={value}
-                                        onChange={(e) => handleChange(index + 24, e.target.value.trim())}
-                                        className={getInputProduct2Class(value, descricao)}
-                                        placeholder="Endereçar"
-                                    />
-                                    <input
-                                        className="caixasInput rounded-full text-white bg-transparent border border-stam-border outline-none w-10 font-thin pl-2 ml-1 caret-stam-orange"
-                                        placeholder="CX"
-                                        maxLength={2}
-                                        onChange={(e) => handleInputChange(index + 24, e.target.value)}
-                                    />
+                                    <div className={getEnderecar2Div(value, descricao)}>
+                                        <input
+                                            value={value}
+                                            onChange={(e) => handleChange(index + 24, e.target.value.trim())}
+                                            className={getInputProduct2Class(value, descricao)}
+                                            placeholder="Endereçar"
+                                        />
+                                        <input
+                                            className={getCaixasInputClass(value, descricao)}
+                                            placeholder="CX"
+                                            maxLength={2}
+                                            onChange={(e) => handleInputChange(index + 24, e.target.value)}
+                                        />
+                                    </div>
                                     {!value && (
                                         <span
                                             className="material-symbols-outlined arrowPasteIcon p-1.5"

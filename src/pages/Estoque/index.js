@@ -245,7 +245,7 @@ function Estoque() {
                     setIsPieceVisible(!isPieceVisible);
                 } else if (visiblePalletBox) {
                     handlePalletBoxClose();
-                }  else if(!isMoved) {
+                } else if (!isMoved) {
                     handleResetHighlightedBoxes();
                 }
             }
@@ -284,16 +284,18 @@ function Estoque() {
         <div>
             <Navbar />
             <ListaComponentes visible={isListaVisible} toggleVisibility={toggleListaVisibility} ref={estampariaTableRef} />
-            
-            <div className="barraDePreenchimento modeDiv z-50 absolute">
-            <p className="Preenchimento font-light text-white text-center">{stockPercentage}%</p>
-            <div className="progressBorder p-1 w-48 z-30 border border-stam-border rounded-full flex justify-start items-center overflow-hidden">
-                <div
-                    className="h-2 bg-stam-orange rounded-full"
-                    style={{ width: `${stockPercentage}%` }}
-                ></div>
+
+            <div className="barraDePreenchimento flex justify-center">
+                <div className="modeDiv z-50 absolute">
+                    <p className="Preenchimento font-light text-white text-center">{stockPercentage}%</p>
+                    <div className="progressBorder p-1 w-48 z-30 border border-stam-border rounded-full flex justify-start items-center overflow-hidden">
+                        <div
+                            className="h-2 bg-stam-orange rounded-full"
+                            style={{ width: `${stockPercentage}%` }}
+                        ></div>
+                    </div>
+                </div>
             </div>
-        </div>
 
             <div className="flex justify-center">
                 <span class="material-symbols-outlined searchIcon absolute text-stam-border text-2xl z-40">
@@ -308,7 +310,7 @@ function Estoque() {
                     </span>
                 )}
                 {searchValue && isSearchSuggestionVisible && <SearchSuggestion searchValue={searchValue} onSuggestionClick={handleSuggestionClick} />}
-                <PieceTable isPieceVisible={isPieceVisible} togglePieceTableVisibility={togglePieceTableVisibility}/>
+                <PieceTable isPieceVisible={isPieceVisible} togglePieceTableVisibility={togglePieceTableVisibility} />
                 <div className="menuDiv border border-gray-700 flex justify-center space-x-2.5 bg-stam-bg-3 py-3 px-3 rounded-full z-20 absolute">
                     <span
                         className="material-symbols-outlined pieceIcon text-stam-bg-3 bg-stam-orange rounded-full hover:bg-stam-orange cursor-pointer"
