@@ -21,7 +21,7 @@ function PieceTable({ isPieceVisible, togglePieceTableVisibility }) {
         { description: "ALAVANCA FECH. ELETRICA", imgSize: "w-20", image: "./illustrations/alavancafechelet.svg" },
         { description: "ALAVANCA LINGUETA 504/803/1500/1800", imgSize: "w-20", image: "./illustrations/" },
         { description: "ALAVANCA LINGUETA 701/1701", imgSize: "w-20", image: "./illustrations/alavancalingueta701.svg" },
-        { description: "ALAVANCA LINGUETA 901/905", imgSize: "w-20", image: "./illustrations/alavancalingueta901.svg" },
+        { description: "ALAVANCA LINGUETA 901/940/950/1940/2003", imgSize: "w-20", image: "./illustrations/alavancalingueta901.svg" },
         { description: "ALAVANCA LINGUETA 1940", imgSize: "w-20", image: "./illustrations/alavancalingueta1940.svg" },
         { description: "ALAVANCA TRINCO 500/504/803/1800", imgSize: "w-20", image: "./illustrations/alavancatrinco504.svg" },
         { description: "ALAVANCA TRINCO 600", imgSize: "w-20", image: "./tampalingueta2002.svg" },

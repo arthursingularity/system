@@ -35,20 +35,19 @@ function Estoque() {
     const inputDescriptionRef = useRef(null);
     const [inputPieceDescription, setInputPieceDescription] = useState('');
     const [stockPercentage, setStockPercentage] = useState(0);
+    const [caixasValues, setCaixasValues] = useState(Array(27).fill(''));
 
     const MAX_BOXES = 6836;
 
-    const updateStockPercentage = () => {
-        const caixaInputs = document.querySelectorAll('.caixasInput');
-        let total = 0;
-        caixaInputs.forEach(input => {
-            const value = parseInt(input.value) || 0;
-            total += value;
-        });
+    const updateStockPercentage = (newCaixasValues) => {
+        const total = newCaixasValues.reduce(
+          (acc, val) => acc + (parseInt(val, 10) || 0),
+          0
+        );
         const percentage = ((total / MAX_BOXES) * 100).toFixed(2);
         setStockPercentage(percentage);
-        localStorage.setItem('stockPercentage', percentage);
-    };
+        // Se não precisar persistir, não é necessário gravar no localStorage
+      };
 
     useEffect(() => {
         const storedPercentage = localStorage.getItem('stockPercentage');
@@ -56,6 +55,15 @@ function Estoque() {
             setStockPercentage(storedPercentage);
         }
     }, []);
+
+    const handleCaixasChange = (index, value) => {
+        setCaixasValues(prev => {
+          const newValues = [...prev];
+          newValues[index] = value;
+          updateStockPercentage(newValues);
+          return newValues;
+        });
+      };
 
     useEffect(() => {
         document.title = "Estoque Estamparia";
@@ -507,7 +515,9 @@ function Estoque() {
                                 searchResults={searchResults}
                                 handlePasteInput={handlePasteInput}
                                 togglePieceTableVisibility={togglePieceTableVisibility}
-                                updateStockPercentage={updateStockPercentage}
+                                updateStockPercentage={() => updateStockPercentage(caixasValues)}
+                                onCaixasInputChange={handleCaixasChange}
+                                caixasValues={caixasValues}
                             />
                         }
                     </div>

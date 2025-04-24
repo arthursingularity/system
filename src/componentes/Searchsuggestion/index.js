@@ -6,7 +6,7 @@ const data = [
     { codigo: '11118300001', descricao: 'ALAVANCA FECH. ELETRICA' },
     { codigo: '11115200001', descricao: 'ALAVANCA LINGUETA 504/803/1500/1800' },
     { codigo: '11112200002', descricao: 'ALAVANCA LINGUETA 701/1701' },
-    { codigo: '11112900001', descricao: 'ALAVANCA LINGUETA 901/905' },
+    { codigo: '11112900001', descricao: 'ALAVANCA LINGUETA 901/940/950/1940/2003' },
     { codigo: '11116700001', descricao: 'ALAVANCA LINGUETA 1940' },
     { codigo: '1111B400002', descricao: 'ALAVANCA TRINCO 500/504/803/1800' },
     { codigo: '1111C700002', descricao: 'ALAVANCA TRINCO 600' },

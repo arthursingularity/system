@@ -1,9 +1,18 @@
 import "./palletbox.css";
 import React, { useEffect, useState } from 'react';
 
-function PalletBox({ values, onInputChange, onClose, isVisible, descricao, togglePieceTableVisibility, updateStockPercentage }) {
+function PalletBox({
+    values,
+    onInputChange,
+    onClose,
+    isVisible,
+    descricao,
+    togglePieceTableVisibility,
+    updateStockPercentage,
+    onCaixasInputChange, // Função vinda do Estoque
+    caixasValues         // Valores vinda do Estoque
+}) {
     const [animationClass, setAnimationClass] = useState('');
-    const [activeIcon, setActiveIcon] = useState(null);
     const [matchingInputPositions, setMatchingInputPositions] = useState([]);
     const [searchTriggered, setSearchTriggered] = useState(false);
 
@@ -20,88 +29,79 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
     }, [isVisible]);
 
     useEffect(() => {
-        document.querySelectorAll('.caixasInput').forEach((input, index) => {
-            const storedValue = localStorage.getItem(`caixasInputValue-${index}`);
-            if (storedValue) {
-                input.value = storedValue;
-            }
-        });
-    }, []);
-
-    const handleInputChange = (index, value) => {
-        const cleanedValue = value.replace(/\D/g, '');
-        localStorage.setItem(`caixasInputValue-${index}`, cleanedValue);
-        updateStockPercentage();
-    };
-
-    useEffect(() => {
         if (searchTriggered) {
             const trimmedDescricao = descricao.trim();
-            const matchedIndices = values.map((value, index) => value.trim() === trimmedDescricao ? index : null).filter(index => index !== null);
+            const matchedIndices = values
+                .map((value, index) => (value.trim() === trimmedDescricao ? index : null))
+                .filter(index => index !== null);
             setMatchingInputPositions(matchedIndices);
             setSearchTriggered(false);
         }
     }, [searchTriggered, descricao, values]);
 
+    const handleCaixasInputChange = (index, value) => {
+        const cleanedValue = value.replace(/\D/g, '');
+        onCaixasInputChange(index, cleanedValue);
+    };
+
     const handleClearClick = (index) => {
         onInputChange(index, '');
-        const caixasInput = document.querySelectorAll('.caixasInput')[index];
-        if (caixasInput) {
-            caixasInput.value = '';
-        }
-        localStorage.removeItem(`caixasInputValue-${index}`);
-        updateStockPercentage();
+        onCaixasInputChange(index, '');
     };
 
     const handlePasteClick = (index) => {
-        navigator.clipboard.readText().then(text => {
-            const cleanedText = cleanInputValue(text);
-            onInputChange(index, cleanedText);
-        }).catch(err => {
-            console.error('Failed to paste text: ', err);
-        });
+        navigator.clipboard.readText()
+            .then(text => {
+                const cleanedText = text.replace(/\s{2,}/g, ' ').trim();
+                onInputChange(index, cleanedText);
+            })
+            .catch(err => {
+                console.error('Failed to paste text: ', err);
+            });
     };
 
     const handleChange = (index, value) => {
-        const cleanedValue = cleanInputValue(value);
+        const cleanedValue = value.replace(/\s{2,}/g, ' ').trim();
         onInputChange(index, cleanedValue);
         updateStockPercentage();
     };
 
-    const cleanInputValue = (value) => {
-        return value.replace(/\s{2,}/g, ' ').trim();
+    const getInputProductClass = (value, descricao) => {
+        const isMatch = value === descricao.trim() && value !== "";
+        return `bg-stam-bg-3 pr-[26px] inputProduct border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange ${isMatch ? 'border-stam-border text-stam-orange font-semibold' : 'border-stam-border'
+            }`;
     };
+
+    const getInputProduct2Class = (value, descricao) => {
+        const isMatch = value === descricao.trim() && value !== "";
+        return `bg-stam-bg-3 pr-[26px] inputProduct2 border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange ${isMatch ? 'border-stam-border text-stam-orange font-semibold' : 'border-stam-border'
+            }`;
+    };
+
+    const getCaixasInputClass = (value, descricao) => {
+        const isMatch = value === descricao.trim() && value !== "";
+        return `caixasInput placeholder-gray-600 rounded-full font-light text-white bg-transparent border outline-none w-10 pl-2 ml-1 caret-stam-orange ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'
+            }`;
+    };
+
+    const getEnderecarDiv = (value, descricao) => {
+        const isMatch = value === descricao.trim() && value !== "";
+        return `enderecarBorders flex border p-1 rounded-full ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'
+            }`;
+    };
+
+    const getEnderecar2Div = (value, descricao) => {
+        const isMatch = value === descricao.trim() && value !== "";
+        return `flex border p-1 rounded-full ml-1.5 ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'
+            }`;
+    };
+
 
     const isAnyInputMatchDescricao = (startIndex, endIndex) => {
         const trimmedDescricao = descricao.trim();
         return values.slice(startIndex, endIndex).some(value =>
             value.trim() !== '' && value.trim() === trimmedDescricao
         );
-    };
-
-    const getInputProductClass = (value, descricao) => {
-        const isMatch = value === descricao.trim() && value !== "";
-        return `bg-stam-bg-3 inputProduct border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange ${isMatch ? 'border-stam-border text-stam-orange font-semibold' : 'border-stam-border'}`;
-    };
-
-    const getInputProduct2Class = (value, descricao) => {
-        const isMatch = value === descricao.trim() && value !== "";
-        return `bg-stam-bg-3 inputProduct2 border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange ${isMatch ? 'border-stam-border text-stam-orange font-semibold' : 'border-stam-border'}`;
-    };
-
-    const getCaixasInputClass = (value, descricao) => {
-        const isMatch = value === descricao.trim() && value !== "";
-        return `caixasInput placeholder-gray-600 rounded-full font-light text-white bg-transparent border outline-none w-10 pl-2 ml-1 caret-stam-orange ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'}`;
-    };
-
-    const getEnderecarDiv = (value, descricao) => {
-        const isMatch = value === descricao.trim() && value !== "";
-        return `enderecarBorders flex border p-1 rounded-full ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'}`;
-    };
-
-    const getEnderecar2Div = (value, descricao) => {
-        const isMatch = value === descricao.trim() && value !== "";
-        return `flex border p-1 rounded-full ml-1.5 ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'}`;
     };
 
     return (
@@ -129,10 +129,11 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={caixasValues[index] || ''}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
                                             maxLength={2}
-                                            onChange={(e) => handleInputChange(index, e.target.value)}
+                                            onChange={(e) => handleCaixasInputChange(index, e.target.value)}
                                         />
                                     </div>
                                     {!value && (
@@ -167,10 +168,11 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={caixasValues[index + 3]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
                                             maxLength={2}
-                                            onChange={(e) => handleInputChange(index + 3, e.target.value)}
+                                            onChange={(e) => handleCaixasInputChange(index + 3, e.target.value)}
                                         />
                                     </div>
                                     {!value && (
@@ -205,10 +207,11 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={caixasValues[index + 6]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
                                             maxLength={2}
-                                            onChange={(e) => handleInputChange(index + 6, e.target.value)}
+                                            onChange={(e) => handleCaixasInputChange(index + 6, e.target.value)}
                                         />
                                     </div>
                                     {!value && (
@@ -250,10 +253,11 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={caixasValues[index + 9]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
                                             maxLength={2}
-                                            onChange={(e) => handleInputChange(index + 9, e.target.value)}
+                                            onChange={(e) => handleCaixasInputChange(index + 9, e.target.value)}
                                         />
                                     </div>
                                     {!value && (
@@ -288,10 +292,11 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={caixasValues[index + 12]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
                                             maxLength={2}
-                                            onChange={(e) => handleInputChange(index + 12, e.target.value)}
+                                            onChange={(e) => handleCaixasInputChange(index + 12, e.target.value)}
                                         />
                                     </div>
                                     {!value && (
@@ -326,10 +331,11 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={caixasValues[index + 15]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
                                             maxLength={2}
-                                            onChange={(e) => handleInputChange(index + 15, e.target.value)}
+                                            onChange={(e) => handleCaixasInputChange(index + 15, e.target.value)}
                                         />
                                     </div>
                                     {!value && (
@@ -371,10 +377,11 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={caixasValues[index + 18]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
                                             maxLength={2}
-                                            onChange={(e) => handleInputChange(index + 18, e.target.value)}
+                                            onChange={(e) => handleCaixasInputChange(index + 18, e.target.value)}
                                         />
                                     </div>
                                     {!value && (
@@ -409,10 +416,11 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={caixasValues[index + 21]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
                                             maxLength={2}
-                                            onChange={(e) => handleInputChange(index + 21, e.target.value)}
+                                            onChange={(e) => handleCaixasInputChange(index + 21, e.target.value)}
                                         />
                                     </div>
                                     {!value && (
@@ -447,10 +455,11 @@ function PalletBox({ values, onInputChange, onClose, isVisible, descricao, toggl
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={caixasValues[index + 24]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
                                             maxLength={2}
-                                            onChange={(e) => handleInputChange(index + 24, e.target.value)}
+                                            onChange={(e) => handleCaixasInputChange(index + 24, e.target.value)}
                                         />
                                     </div>
                                     {!value && (
