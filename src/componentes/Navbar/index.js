@@ -120,12 +120,6 @@ function Navbar() {
           <li><a href='/'><img src='/imagens/systemlogo.png' id='logo' className="navbarLogo absolute w-24 z-20 left-5" alt='logoSymbol' /></a></li>
           <div className='md:flex hidden space-x-8 flex'>
             <li className='hover:text-stam-orange cursor-pointer'><a href='/'>Página inicial</a></li>
-            {loggedInUser === "arthurm" && (
-              <li className='hover:text-stam-orange cursor-pointer'>
-                <a href='/administracao'>Administração</a>
-              </li>
-            )}
-            <li className='hover:text-stam-orange cursor-pointer'><a href='/notificar'>Notificar</a></li>
             <li
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
