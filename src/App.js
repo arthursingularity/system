@@ -3,12 +3,10 @@ import Login from './pages/login/login';
 import Home from './pages/home/home';
 import Erro404 from './pages/erro404/erro404';
 import Estoque from './pages/Estoque';
-import Administracao from './pages/administracao';
 import Usuarios from './pages/Usuarios';
 import Register from './pages/register';
 import ProtectedRoute from './componentes/ProtectedRoute';
 import Notificar from './pages/notificar';
-import Embalagem from './pages/Embalagem';
 import VibroAcabamento from './pages/vibroacabamento';
 import Componentes from './pages/Componentes';
 import Dashboard from './pages/dashboard';
@@ -33,14 +31,6 @@ function App() {
                 <Estoque />
             }
           />
-          <Route 
-            path='/administracao' 
-            element={
-              <ProtectedRoute allowedUser="arthurm">
-                <Administracao />
-              </ProtectedRoute>
-            } 
-          />
           <Route
             path="/usuarios/:login"
             element={
@@ -54,22 +44,6 @@ function App() {
             element={
               <ProtectedRoute>
                 <Notificar />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/embalagem'
-            element={
-              <ProtectedRoute>
-                <Embalagem/>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/embalagem/:code"
-            element={
-              <ProtectedRoute>
-                <Embalagem />
               </ProtectedRoute>
             }
           />

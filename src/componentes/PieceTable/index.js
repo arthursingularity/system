@@ -7,8 +7,9 @@ function PieceTable({ isPieceVisible, togglePieceTableVisibility }) {
     const [boxClicked, setBoxClicked] = useState(false);
 
     function handleInputChange(event) {
-        const upperCaseValue = event.target.value.toUpperCase();
-        setInputValue(upperCaseValue);
+        let value = event.target.value.toUpperCase();
+        value = value.replace(/\s+/g, ' ');
+        setInputValue(value);
     }
 
     function handleBoxClick() {

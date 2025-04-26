@@ -71,20 +71,6 @@ function Home() {
                                 perfilStyle='hidden'
                             />
                             <FeedCard
-                                title="SISTEMA DE PERFIL"
-                                icon="./imagens/systemIcon.png"
-                                description="O System agora conta com um sistema de perfil, onde você pode se conectar com outros usuários."
-                                background="https://scontent-gig4-1.cdninstagram.com/v/t39.30808-6/458140658_935586761926028_7845448588632815243_n.jpg?stp=dst-jpg_e35&cb=9b69d9bc-1c402c4c&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMDgweDEzNTAuc2RyLmYzMDgwOC5kZWZhdWx0X2ltYWdlIn0&_nc_ht=scontent-gig4-1.cdninstagram.com&_nc_cat=108&_nc_ohc=gPaP0OUi_hoQ7kNvgG4APwq&_nc_gid=4cd0f16b39a74abe84653b3089eb5e0a&edm=APoiHPcAAAAA&ccb=7-5&ig_cache_key=MzQ0OTg1NzAyMDg3NjUwNTEzMA%3D%3D.3-ccb7-5-cb9b69d9bc-1c402c4c&oh=00_AYB0Kj_rKdVL0HknhXw6Wy8LDIlTfhNs9udxKhJZz01bqw&oe=67237CF4&_nc_sid=22de04"
-                                style="hidden"
-                                feedCardWidth="bg-dark-bg"
-                                userName="System"
-                                vibroStyle='hidden'
-                                logoStyle="hidden"
-                                route="/usuarios/arthurm"
-                            />
-                        </div>
-                        <div className="flex space-x-10">
-                            <FeedCard
                                 title="AGORA NO VIBRO!"
                                 icon="./imagens/systemIcon.png"
                                 description="O sistema de localização do estoque agora presente também no vibroacabamento."
@@ -96,25 +82,10 @@ function Home() {
                                 perfilStyle='hidden'
                                 route="/vibroacabamento"
                             />
-                            <FeedCard
-                                title="CARDÁPIO SEMANAL"
-                                icon="./imagens/systemIcon.png"
-                                description="Cardápio semanal"
-                                backgroundSize="hidden"
-                                feedCardWidth="feedCardWidth backgroundGradient"
-                                backgroundWidth="backgroundWidth"
-                                logoStyle="w-80 top-28"
-                                userName="System"
-                                route="/"
-                                vibroStyle='hidden'
-                                perfilStyle='hidden'
-                            />
                         </div>
-                        
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }
