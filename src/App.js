@@ -3,10 +3,8 @@ import Login from './pages/login/login';
 import Home from './pages/home/home';
 import Erro404 from './pages/erro404/erro404';
 import Estoque from './pages/Estoque';
-import Usuarios from './pages/Usuarios';
 import Register from './pages/register';
 import ProtectedRoute from './componentes/ProtectedRoute';
-import Notificar from './pages/notificar';
 import VibroAcabamento from './pages/vibroacabamento';
 import Componentes from './pages/Componentes';
 import Dashboard from './pages/dashboard';
@@ -29,22 +27,6 @@ function App() {
             path='/estoqueestamparia'
             element={
                 <Estoque />
-            }
-          />
-          <Route
-            path="/usuarios/:login"
-            element={
-              <ProtectedRoute>
-                <Usuarios />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/notificar"
-            element={
-              <ProtectedRoute>
-                <Notificar />
-              </ProtectedRoute>
             }
           />
           <Route

@@ -53,6 +53,13 @@ function Home() {
                             <p className="text-white font-thin text-2xl">As oportunidades não aparecem, <span className="text-stam-orange font-light">você as cria</span>.</p>
                             <p className="text-gray-300 font-thin">- Chris Grosser</p>
                         </div>
+                        <video
+                                className="bg-neutral-900 rounded-lg w-[900px] border border-neutral-600"
+                                src="./imagens/apresentacao.mp4"
+                                poster="./imagens/thumb.JPEG"
+                                controls
+                                playsInline
+                            />
                     </div>
                     <div className="space-y-10 mt-6">
                         <div className="md:flex block space-x-10">
