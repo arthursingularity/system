@@ -15,6 +15,16 @@ const boxIds = [
     'box46'
 ];
 
+const getCorredorFromBoxId = (boxId) => {
+    if (["box1", "box2", "box3", "box4", "box5", "box6", "box7", "box8", "box9"].includes(boxId)) return "A";
+    if (["box10", "box11", "box12", "box13", "box14", "box15", "box16", "box17", "box18", "box19"].includes(boxId)) return "B";
+    if (["box20", "box21", "box22", "box23", "box24", "box25", "box26", "box27", "box28", "box29"].includes(boxId)) return "C";
+    if (["box30", "box31", "box32", "box33", "box34", "box35", "box36", "box37", "box38", "box39", "box40", "box41"].includes(boxId)) return "D";
+    if (["box42", "box43", "box44"].includes(boxId)) return "E";
+    if (["box45", "box46"].includes(boxId)) return "X"; // ou TRILHO se quiser
+    return "";
+  };
+
 function Estoque() {
     const [visiblePalletBox, setVisiblePalletBox] = useState(null);
     const [selectedLetterId, setSelectedLetterId] = useState('');
@@ -35,32 +45,35 @@ function Estoque() {
     const inputDescriptionRef = useRef(null);
     const [inputPieceDescription, setInputPieceDescription] = useState('');
     const [stockPercentage, setStockPercentage] = useState(0);
-    const [caixasValues, setCaixasValues] = useState(Array(27).fill(''));
+    const [caixasValues, setCaixasValues] = useState({});
+    const [saldoValues, setSaldoValues] = useState({});
+    const selectedBoxId = selectedLetterId.split('-')[0] || '';
 
     const MAX_BOXES = 6836;
 
-    const updateStockPercentage = (newCaixasValues) => {
-        const total = newCaixasValues.reduce(
-            (acc, val) => acc + (parseInt(val, 10) || 0),
-            0
-        );
+    const updateStockPercentage = (allCaixasValues) => {
+        const total = Object.values(allCaixasValues).reduce((acc, palletArray) => {
+            const subtotal = palletArray.reduce((sum, val) => sum + (parseInt(val, 10) || 0), 0);
+            return acc + subtotal;
+        }, 0);
+
         const percentage = ((total / MAX_BOXES) * 100).toFixed(2);
         setStockPercentage(percentage);
-        // Se não precisar persistir, não é necessário gravar no localStorage
     };
 
     useEffect(() => {
-        const storedPercentage = localStorage.getItem('stockPercentage');
-        if (storedPercentage) {
-            setStockPercentage(storedPercentage);
-        }
-    }, []);
+        updateStockPercentage(caixasValues);
+    }, [caixasValues]);
 
-    const handleCaixasChange = (index, value) => {
+    const handleCaixasChange = (palletId, index, value) => {
         setCaixasValues(prev => {
-            const newValues = [...prev];
-            newValues[index] = value;
-            updateStockPercentage(newValues);
+            const newValues = { ...prev };
+
+            if (!newValues[palletId]) {
+                newValues[palletId] = Array(27).fill("");
+            }
+
+            newValues[palletId][index] = value;
             return newValues;
         });
     };
@@ -80,6 +93,19 @@ function Estoque() {
 
         setInputValues(storedValues);
     }, []);
+
+    const handleSaldoInputChange = (palletId, index, value) => {
+        setSaldoValues(prev => {
+            const updated = { ...prev };
+
+            if (!updated[palletId]) {
+                updated[palletId] = Array(27).fill("");
+            }
+
+            updated[palletId][index] = value; // valor sem ponto
+            return updated;
+        });
+    };
 
     const focusInputInEstampariaTable = () => {
         if (estampariaTableRef.current) {
@@ -292,7 +318,6 @@ function Estoque() {
         <div>
             <Navbar />
             <ListaComponentes visible={isListaVisible} toggleVisibility={toggleListaVisibility} ref={estampariaTableRef} />
-
             <div className="barraDePreenchimento flex justify-center">
                 <div className="modeDiv z-50 absolute">
                     <p className="Preenchimento font-light text-white text-center">{stockPercentage}%</p>
@@ -302,11 +327,12 @@ function Estoque() {
                             style={{ width: `${stockPercentage}%` }}
                         ></div>
                     </div>
+                    <p className="text-white font-light text-center mt-1 tracking-wider text-[14px] text-slate-300">Preenchimento</p>
                 </div>
             </div>
 
             <div className="flex justify-center">
-                <span class="material-symbols-outlined searchIcon absolute text-stam-border text-2xl z-40">
+                <span class="material-symbols-outlined searchIcon absolute text-stam-border text-[23px] z-40">
                     search
                 </span>
                 {searchValue && (
@@ -352,7 +378,7 @@ function Estoque() {
             <div className="boxes flex justify-center">
                 <div className={`bg-stam-bg-3 estoqueDiv border p-5 absolute border z-20 ${isMoved ? 'border-stam-orange' : 'border-gray-700'}`}>
                     <div className="flex">
-                        <div className="prateleira1 flex space-x-1 ml-10">
+                        <div className="prateleira1 corredorA flex space-x-1 ml-10">
                             {[
                                 { id: "box1", letters: ["01", "02"] },
                                 { id: "box2", letters: ["03", "04"] },
@@ -370,7 +396,7 @@ function Estoque() {
                                 />
                             ))}
                         </div>
-                        <div className="prateleira2 flex space-x-1 ml-64">
+                        <div className="prateleira2 corredorA flex space-x-1 ml-64">
                             {[
                                 { id: "box4", letters: ["07", "08"] },
                                 { id: "box5", letters: ["09", "10"] },
@@ -410,7 +436,7 @@ function Estoque() {
                     </div>
                     <div className="flex">
                         <div className="block">
-                            <div className="prateleira3 flex space-x-1 ml-10 mt-8 -mb-3">
+                            <div className="corredorB prateleira3 flex space-x-1 ml-10 mt-8 -mb-3">
                                 {[
                                     { id: "box10", letters: ["01", "02"] },
                                     { id: "box11", letters: ["03", "04"] },
@@ -429,7 +455,7 @@ function Estoque() {
                                     />
                                 ))}
                             </div>
-                            <div className="prateleira5 flex space-x-1 ml-10 mt-5">
+                            <div className="corredorC prateleira5 flex space-x-1 ml-10 mt-5">
                                 {[
                                     { id: "box20", letters: ["01", "02"] },
                                     { id: "box21", letters: ["03", "04"] },
@@ -464,7 +490,7 @@ function Estoque() {
                                     />
                                 ))}
                             </div>
-                            <div className="prateleira7 absolute flex space-x-1 mt-8 ml-10">
+                            <div className="corredorD prateleira7 absolute flex space-x-1 mt-8 ml-10">
                                 {[
                                     { id: "box30", letters: ["01", "02"] },
                                     { id: "box31", letters: ["03", "04"] },
@@ -493,7 +519,7 @@ function Estoque() {
                             </div>
                         </div>
                         <div className="block">
-                            <div className="prateleira4 flex space-x-1 ml-20 mt-8">
+                            <div className="corredorB prateleira4 flex space-x-1 ml-20 mt-8">
                                 {[
                                     { id: "box14", letters: ["09", "10"] },
                                     { id: "box15", letters: ["11", "12"] },
@@ -514,7 +540,7 @@ function Estoque() {
                                     />
                                 ))}
                             </div>
-                            <div className="prateleira8 absolute flex space-x-1 rotate-90">
+                            <div className="corredorE prateleira8 absolute flex space-x-1 rotate-90">
                                 {[
                                     { id: "box42", letters: ["01", "02"] },
                                     { id: "box43", letters: ["03", "04"] },
@@ -532,7 +558,7 @@ function Estoque() {
                                     />
                                 ))}
                             </div>
-                            <div className="prateleira6 flex space-x-1 mt-2 ml-20">
+                            <div className="corredorC prateleira6 flex space-x-1 mt-2 ml-20">
                                 {[
                                     { id: "box24", letters: ["09", "10"] },
                                     { id: "box25", letters: ["11", "12"] },
@@ -558,6 +584,7 @@ function Estoque() {
                     <div>
                         {visiblePalletBox &&
                             <PalletBox
+                                palletId={selectedLetterId}
                                 className="z-50"
                                 values={inputValues[selectedLetterId] || Array(27).fill('')}
                                 onInputChange={(index, value) => handleInputChange(index, value)}
@@ -568,8 +595,16 @@ function Estoque() {
                                 handlePasteInput={handlePasteInput}
                                 togglePieceTableVisibility={togglePieceTableVisibility}
                                 updateStockPercentage={() => updateStockPercentage(caixasValues)}
-                                onCaixasInputChange={handleCaixasChange}
-                                caixasValues={caixasValues}
+                                onCaixasInputChange={(index, value) =>
+                                    handleCaixasChange(selectedLetterId, index, value)
+                                }
+                                caixasValues={caixasValues[selectedLetterId] || Array(27).fill('')}
+                                saldoValues={saldoValues[selectedLetterId] || Array(27).fill('')}
+                                onSaldoInputChange={(index, value) =>
+                                    handleSaldoInputChange(selectedLetterId, index, value)
+                                }
+                                selectedColuna={selectedLetterId.split('-')[1] || ''}
+                                corredor={getCorredorFromBoxId(selectedBoxId)}
                             />
                         }
                     </div>

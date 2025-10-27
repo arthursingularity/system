@@ -27,6 +27,11 @@
   src: url(../public/fonts/SFProSemibold.ttf);
 }
 
+@font-face {
+  font-family: 'SF Pro Bold';
+  src: url(../public/fonts/SFProBold.ttf);
+}
+
 * {
   margin: 0;
   padding: 0;

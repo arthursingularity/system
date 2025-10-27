@@ -11,6 +11,7 @@ module.exports = {
         thin: ['SF Pro Thin'],
         semibold: ['SF Pro Semibold'],
         regular: ['SF Pro Regular'],
+        bold: ['SF Pro Bold'],
       },
       colors: {
         'dark-bg': '#16171B',

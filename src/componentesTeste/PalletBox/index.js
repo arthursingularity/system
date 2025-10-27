@@ -9,8 +9,12 @@ function PalletBox({
     descricao,
     togglePieceTableVisibility,
     updateStockPercentage,
-    onCaixasInputChange, // Função vinda do Estoque
-    caixasValues         // Valores vinda do Estoque
+    onCaixasInputChange,
+    caixasValues,
+    saldoValues,
+    onSaldoInputChange,
+    selectedColuna,
+    corredor
 }) {
     const [animationClass, setAnimationClass] = useState('');
     const [matchingInputPositions, setMatchingInputPositions] = useState([]);
@@ -47,6 +51,7 @@ function PalletBox({
     const handleClearClick = (index) => {
         onInputChange(index, '');
         onCaixasInputChange(index, '');
+        onSaldoInputChange(index, '');
     };
 
     const handlePasteClick = (index) => {
@@ -66,33 +71,50 @@ function PalletBox({
         updateStockPercentage();
     };
 
+    const formatNumber = (value) => {
+        if (!value) return '';
+        const onlyDigits = String(value).replace(/\D/g, '');
+        return onlyDigits.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    };
+
+    const handleSaldoInputChange = (index, value) => {
+        const raw = value.replace(/\D/g, '');
+        onSaldoInputChange(index, raw); // envia sem pontos
+    };
+
     const getInputProductClass = (value, descricao) => {
         const isMatch = value === descricao.trim() && value !== "";
-        return `bg-stam-bg-3 pr-[26px] inputProduct border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange ${isMatch ? 'border-stam-border text-stam-orange font-semibold' : 'border-stam-border'
+        return `bg-stam-bg-3 pr-[26px] inputProduct border rounded-[10px] outline-none font-light text-white px-2 hover:border-stam-orange ${isMatch ? 'border-stam-border text-stam-orange font-semibold' : 'border-stam-border'
             }`;
     };
 
     const getInputProduct2Class = (value, descricao) => {
         const isMatch = value === descricao.trim() && value !== "";
-        return `bg-stam-bg-3 pr-[26px] inputProduct2 border rounded-full outline-none font-light text-white px-2 hover:border-stam-orange ${isMatch ? 'border-stam-border text-stam-orange font-semibold' : 'border-stam-border'
+        return `bg-stam-bg-3 pr-[26px] inputProduct2 border rounded-[10px] outline-none font-light text-white px-2 hover:border-stam-orange ${isMatch ? 'border-stam-border text-stam-orange font-semibold' : 'border-stam-border'
+            }`;
+    };
+
+    const getInputSaldoClass = (value, descricao) => {
+        const isMatch = value === descricao.trim() && value !== "";
+        return `bg-stam-bg-3 placeholder-gray-600 inputSaldo border rounded-[10px] outline-none font-light text-white px-2 hover:border-stam-orange ${isMatch ? 'border-stam-border text-stam-orange font-semibold' : 'border-stam-border'
             }`;
     };
 
     const getCaixasInputClass = (value, descricao) => {
         const isMatch = value === descricao.trim() && value !== "";
-        return `caixasInput placeholder-gray-600 rounded-full font-light text-white bg-transparent border outline-none w-10 pl-2 ml-1 caret-stam-orange ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'
+        return `caixasInput placeholder-gray-600 rounded-[10px] font-light text-white bg-transparent border outline-none w-[37px] pl-2 caret-stam-orange ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'
             }`;
     };
 
     const getEnderecarDiv = (value, descricao) => {
         const isMatch = value === descricao.trim() && value !== "";
-        return `enderecarBorders flex border p-1 rounded-full ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'
+        return `enderecarBorders space-x-1 flex border p-1 rounded-[14px] ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'
             }`;
     };
 
     const getEnderecar2Div = (value, descricao) => {
         const isMatch = value === descricao.trim() && value !== "";
-        return `flex border p-1 rounded-full ml-1.5 ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'
+        return `flex border p-1 space-x-1 rounded-[14px] ml-1.5 ${isMatch ? 'font-semibold text-stam-orange' : 'border-stam-border hover:border-stam-orange'
             }`;
     };
 
@@ -104,19 +126,35 @@ function PalletBox({
         );
     };
 
+    const totalcxN3 = caixasValues
+        .slice(0, 9)
+        .reduce((acc, val) => acc + (parseInt(val) || 0), 0);
+
+    const totalcxN2 = caixasValues
+        .slice(9, 18)
+        .reduce((acc, val) => acc + (parseInt(val) || 0), 0);
+
+    const totalcxN1 = caixasValues
+        .slice(18, 27)
+        .reduce((acc, val) => acc + (parseInt(val) || 0), 0);
+
     return (
         <div className="flex justify-center items-center z-50">
             <div className={`bg-stam-bg-3 palletBox absolute border border-stam-border p-2 ${animationClass}`}>
                 <span
-                    className="closePalletBox material-symbols-outlined z-30 absolute right-0 top-0 text-white hover:bg-stam-border rounded-full bg-stam-bg-4 p-1 cursor-pointer"
+                    className="closePalletBox material-symbols-outlined z-30 absolute -right-2 -top-2 text-white hover:bg-stam-border rounded-full bg-stam-bg-4 p-1 cursor-pointer"
                     onClick={onClose}
                 >
                     close
                 </span>
-                <div className={`border ${isAnyInputMatchDescricao(0, 9) ? 'border-stam-orange' : 'border-stam-border'} borders`}>
-                    <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-xl">
-                        <p className="font-medium text-white text-6xl">3</p>
+                <div className={`Nivel3 border ${isAnyInputMatchDescricao(0, 9) ? 'border-stam-orange' : 'border-stam-border'} borders`}>
+                    <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-xl border border-gray-500">
+                        <div className="-space-y-1 mt-1">
+                            <p className="font-medium text-white text-center text-4xl">N3</p>
+                            <p className="font-bold text-black text-center text-[17px]">{totalcxN3} cxs</p>
+                        </div>
                     </div>
+                    <p className="absolute border border-gray-500 bottom-[305px] left-[18px] font-medium py-[4px] text-white text-[14px] tracking-tight bg-stam-bg-4 w-[75px] text-center rounded-[10px]">05<span className="text-stam-bg-4">.</span>{corredor}<span className="text-stam-bg-4">.</span>{selectedColuna}<span className="text-stam-bg-4">.</span>N3</p>
                     <div className="flex">
                         <div className="space-y-1">
                             {values.slice(0, 3).map((value, index) => (
@@ -129,6 +167,12 @@ function PalletBox({
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={formatNumber(saldoValues[index] || '')}
+                                            onChange={(e) => handleSaldoInputChange(index, e.target.value)}
+                                            className={getInputSaldoClass(value, descricao)}
+                                            placeholder="Saldo"
+                                        />
+                                        <input
                                             value={caixasValues[index] || ''}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
@@ -138,7 +182,7 @@ function PalletBox({
                                     </div>
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
+                                            className="material-symbols-outlined arrowPasteIcon p-1"
                                             onClick={() => handlePasteClick(index)}
                                         >
                                             arrow_forward
@@ -146,7 +190,7 @@ function PalletBox({
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index);
                                             }}
@@ -168,6 +212,12 @@ function PalletBox({
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={formatNumber(saldoValues[index + 3] || '')}
+                                            onChange={(e) => handleSaldoInputChange(index + 3, e.target.value)}
+                                            className={getInputSaldoClass(value, descricao)}
+                                            placeholder="Saldo"
+                                        />
+                                        <input
                                             value={caixasValues[index + 3]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
@@ -177,7 +227,7 @@ function PalletBox({
                                     </div>
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
+                                            className="material-symbols-outlined arrowPasteIcon p-1"
                                             onClick={() => handlePasteClick(index + 3)}
                                         >
                                             arrow_forward
@@ -185,7 +235,7 @@ function PalletBox({
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 3)
                                             }}
@@ -207,6 +257,12 @@ function PalletBox({
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={formatNumber(saldoValues[index + 6] || '')}
+                                            onChange={(e) => handleSaldoInputChange(index + 6, e.target.value)}
+                                            className={getInputSaldoClass(value, descricao)}
+                                            placeholder="Saldo"
+                                        />
+                                        <input
                                             value={caixasValues[index + 6]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
@@ -216,7 +272,7 @@ function PalletBox({
                                     </div>
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
+                                            className="material-symbols-outlined arrowPasteIcon p-1"
                                             onClick={() => handlePasteClick(index + 6)}
                                         >
                                             arrow_forward
@@ -224,7 +280,7 @@ function PalletBox({
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 6)
                                             }}
@@ -237,10 +293,14 @@ function PalletBox({
                         </div>
                     </div>
                 </div>
-                <div className={`border ${isAnyInputMatchDescricao(9, 18) ? 'border-stam-orange' : 'border-stam-border'} borders mt-2`}>
-                    <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-xl">
-                        <p className="font-medium text-white text-6xl">2</p>
+                <div className={`Nivel2 border ${isAnyInputMatchDescricao(9, 18) ? 'border-stam-orange' : 'border-stam-border'} borders mt-2`}>
+                    <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center border border-gray-500 rounded-xl">
+                        <div className="-space-y-1 mt-1">
+                            <p className="font-medium text-white text-4xl text-center">N2</p>
+                            <p className="font-bold text-black text-center text-[17px]">{totalcxN2} cxs</p>
+                        </div>
                     </div>
+                    <p className="absolute border border-gray-500 bottom-[163px] left-[18px] font-medium py-[4px] text-white text-[14px] tracking-tight bg-stam-bg-4 w-[75px] text-center rounded-[10px]">05<span className="text-stam-bg-4">.</span>{corredor}<span className="text-stam-bg-4">.</span>{selectedColuna}<span className="text-stam-bg-4">.</span>N2</p>
                     <div className="flex">
                         <div className="space-y-1">
                             {values.slice(9, 12).map((value, index) => (
@@ -253,6 +313,12 @@ function PalletBox({
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={formatNumber(saldoValues[index + 9] || '')}
+                                            onChange={(e) => handleSaldoInputChange(index + 9, e.target.value)}
+                                            className={getInputSaldoClass(value, descricao)}
+                                            placeholder="Saldo"
+                                        />
+                                        <input
                                             value={caixasValues[index + 9]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
@@ -262,7 +328,7 @@ function PalletBox({
                                     </div>
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
+                                            className="material-symbols-outlined arrowPasteIcon p-1"
                                             onClick={() => handlePasteClick(index + 9)}
                                         >
                                             arrow_forward
@@ -270,7 +336,7 @@ function PalletBox({
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 9)
                                             }}
@@ -292,6 +358,12 @@ function PalletBox({
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={formatNumber(saldoValues[index + 12] || '')}
+                                            onChange={(e) => handleSaldoInputChange(index + 12, e.target.value)}
+                                            className={getInputSaldoClass(value, descricao)}
+                                            placeholder="Saldo"
+                                        />
+                                        <input
                                             value={caixasValues[index + 12]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
@@ -301,7 +373,7 @@ function PalletBox({
                                     </div>
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
+                                            className="material-symbols-outlined arrowPasteIcon p-1"
                                             onClick={() => handlePasteClick(index + 12)}
                                         >
                                             arrow_forward
@@ -309,7 +381,7 @@ function PalletBox({
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 12)
                                             }}
@@ -331,6 +403,12 @@ function PalletBox({
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={formatNumber(saldoValues[index + 15] || '')}
+                                            onChange={(e) => handleSaldoInputChange(index + 15, e.target.value)}
+                                            className={getInputSaldoClass(value, descricao)}
+                                            placeholder="Saldo"
+                                        />
+                                        <input
                                             value={caixasValues[index + 15]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
@@ -340,7 +418,7 @@ function PalletBox({
                                     </div>
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
+                                            className="material-symbols-outlined arrowPasteIcon p-1"
                                             onClick={() => handlePasteClick(index + 15)}
                                         >
                                             arrow_forward
@@ -348,7 +426,7 @@ function PalletBox({
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 15)
                                             }}
@@ -361,10 +439,14 @@ function PalletBox({
                         </div>
                     </div>
                 </div>
-                <div className={`border ${isAnyInputMatchDescricao(18, 27) ? 'border-stam-orange' : 'border-stam-border'} borders mt-2`}>
-                    <div className="bg-stam-orange orangeBoxes absolute flex justify-center items-center rounded-xl">
-                        <p className="font-medium text-white text-6xl">1</p>
+                <div className={`Nivel1 border ${isAnyInputMatchDescricao(18, 27) ? 'border-stam-orange' : 'border-stam-border'} borders mt-2`}>
+                    <div className="bg-stam-orange orangeBoxes absolute flex justify-center text-center border border-gray-500 items-center rounded-xl">
+                        <div className="-space-y-1 mt-1">
+                            <p className="font-medium text-white text-center text-4xl">N1</p>
+                            <p className="font-bold text-black text-center text-[17px] ">{totalcxN1} cxs</p>
+                        </div>
                     </div>
+                    <p className="absolute border border-gray-500 bottom-[20px] left-[18px] font-medium py-[4px] text-white text-[14px] tracking-tight bg-stam-bg-4 w-[75px] text-center rounded-[10px]">05<span className="text-stam-bg-4">.</span>{corredor}<span className="text-stam-bg-4">.</span>{selectedColuna}<span className="text-stam-bg-4">.</span>N1</p>
                     <div className="flex">
                         <div className="space-y-1">
                             {values.slice(18, 21).map((value, index) => (
@@ -377,6 +459,12 @@ function PalletBox({
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={formatNumber(saldoValues[index + 18] || '')}
+                                            onChange={(e) => handleSaldoInputChange(index + 18, e.target.value)}
+                                            className={getInputSaldoClass(value, descricao)}
+                                            placeholder="Saldo"
+                                        />
+                                        <input
                                             value={caixasValues[index + 18]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
@@ -386,7 +474,7 @@ function PalletBox({
                                     </div>
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
+                                            className="material-symbols-outlined arrowPasteIcon p-1"
                                             onClick={() => handlePasteClick(index + 18)}
                                         >
                                             arrow_forward
@@ -394,7 +482,7 @@ function PalletBox({
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 18)
                                             }}
@@ -416,6 +504,12 @@ function PalletBox({
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={formatNumber(saldoValues[index + 21] || '')}
+                                            onChange={(e) => handleSaldoInputChange(index + 21, e.target.value)}
+                                            className={getInputSaldoClass(value, descricao)}
+                                            placeholder="Saldo"
+                                        />
+                                        <input
                                             value={caixasValues[index + 21]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
@@ -425,7 +519,7 @@ function PalletBox({
                                     </div>
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
+                                            className="material-symbols-outlined arrowPasteIcon p-1"
                                             onClick={() => handlePasteClick(index + 21)}
                                         >
                                             arrow_forward
@@ -433,7 +527,7 @@ function PalletBox({
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 21)
                                             }}
@@ -455,6 +549,12 @@ function PalletBox({
                                             placeholder="Endereçar"
                                         />
                                         <input
+                                            value={formatNumber(saldoValues[index + 24] || '')}
+                                            onChange={(e) => handleSaldoInputChange(index + 24, e.target.value)}
+                                            className={getInputSaldoClass(value, descricao)}
+                                            placeholder="Saldo"
+                                        />
+                                        <input
                                             value={caixasValues[index + 24]}
                                             className={getCaixasInputClass(value, descricao)}
                                             placeholder="CX"
@@ -464,7 +564,7 @@ function PalletBox({
                                     </div>
                                     {!value && (
                                         <span
-                                            className="material-symbols-outlined arrowPasteIcon p-1.5"
+                                            className="material-symbols-outlined arrowPasteIcon p-1"
                                             onClick={() => handlePasteClick(index + 24)}
                                         >
                                             arrow_forward
@@ -472,7 +572,7 @@ function PalletBox({
                                     )}
                                     {value && (
                                         <span
-                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1.5 rounded-full"
+                                            className="clearEnderecamento text-white material-symbols-outlined absolute cursor-pointer p-1 rounded-full"
                                             onClick={() => {
                                                 handleClearClick(index + 24)
                                             }}

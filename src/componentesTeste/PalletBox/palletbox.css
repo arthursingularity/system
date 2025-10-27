@@ -18,13 +18,19 @@
 }
 
 .inputProduct {
-    width: 275px;
+    width: 215px;
     height: 27.5px;
     caret-color: #FF6600;
 }
 
 .inputProduct2 {
-    width: 275px;
+    width: 220px;
+    height: 27.5px;
+    caret-color: #FF6600;
+}
+
+.inputSaldo {
+    width: 69px;
     height: 27.5px;
     caret-color: #FF6600;
 }
@@ -58,10 +64,10 @@
 }
 
 .orangeBoxes {
-    margin-top: 5px;
-    margin-left: 5px;
-    width: 110px;
-    height: 110px;
+    margin-top: 3px;
+    margin-left: 3px;
+    width: 75px;
+    height: 75px;
 }
 
 .borders {
@@ -70,14 +76,14 @@
 }
 
 .enderecarBorders {
-    margin-left: 126px;
+    margin-left: 86px;
 }
 
 .clearEnderecamento {
     z-index: 10;
-    top: 0.5px;
-    right: 45px;
-    font-variation-settings: 'FILL' 1, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+    top: 3px;
+    right: 118px;
+    font-variation-settings: 'FILL' 1, 'wght' 250, 'GRAD' 0, 'opsz' 24;
 }
 
 .clearEnderecamento:hover {
@@ -100,8 +106,8 @@
     position: absolute;
     border-radius: 50%;
     z-index: 10;
-    bottom: 1px;
-    right: 45px;
+    bottom: 3px;
+    right: 118px;
     font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
 }
 
