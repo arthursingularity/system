@@ -41,13 +41,13 @@ function Estoque() {
 
     const updateStockPercentage = (newCaixasValues) => {
         const total = newCaixasValues.reduce(
-          (acc, val) => acc + (parseInt(val, 10) || 0),
-          0
+            (acc, val) => acc + (parseInt(val, 10) || 0),
+            0
         );
         const percentage = ((total / MAX_BOXES) * 100).toFixed(2);
         setStockPercentage(percentage);
         // Se não precisar persistir, não é necessário gravar no localStorage
-      };
+    };
 
     useEffect(() => {
         const storedPercentage = localStorage.getItem('stockPercentage');
@@ -58,12 +58,12 @@ function Estoque() {
 
     const handleCaixasChange = (index, value) => {
         setCaixasValues(prev => {
-          const newValues = [...prev];
-          newValues[index] = value;
-          updateStockPercentage(newValues);
-          return newValues;
+            const newValues = [...prev];
+            newValues[index] = value;
+            updateStockPercentage(newValues);
+            return newValues;
         });
-      };
+    };
 
     useEffect(() => {
         document.title = "Estoque Estamparia";
@@ -71,7 +71,7 @@ function Estoque() {
 
     useEffect(() => {
         const storedValues = boxIds.reduce((acc, id) => {
-            ['A', 'B', 'TRILHO'].forEach(letter => {
+            ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', 'A', 'B', 'TRILHO'].forEach(letter => {
                 const values = Array(27).fill('').map((_, i) => localStorage.getItem(`${id}-${letter}-${i}`) || '');
                 acc[`${id}-${letter}`] = values;
             });
@@ -353,12 +353,16 @@ function Estoque() {
                 <div className={`bg-stam-bg-3 estoqueDiv border p-5 absolute border z-20 ${isMoved ? 'border-stam-orange' : 'border-gray-700'}`}>
                     <div className="flex">
                         <div className="prateleira1 flex space-x-1 ml-10">
-                            {['box1', 'box2', 'box3'].map(boxId => (
+                            {[
+                                { id: "box1", letters: ["01", "02"] },
+                                { id: "box2", letters: ["03", "04"] },
+                                { id: "box3", letters: ["05", "06"] },
+                            ].map(({ id, letters }) => (
                                 <AbBox
-                                    key={boxId}
-                                    id={boxId}
-                                    letter1="A"
-                                    letter2="B"
+                                    key={id}
+                                    id={id}
+                                    letter1={letters[0]}
+                                    letter2={letters[1]}
                                     selectedLetterId={selectedLetterId}
                                     highlightedLetters={highlightedLetters}
                                     onClick={handleAbBoxClick}
@@ -367,12 +371,19 @@ function Estoque() {
                             ))}
                         </div>
                         <div className="prateleira2 flex space-x-1 ml-64">
-                            {['box4', 'box5', 'box6', 'box7', 'box8', 'box9'].map(boxId => (
+                            {[
+                                { id: "box4", letters: ["07", "08"] },
+                                { id: "box5", letters: ["09", "10"] },
+                                { id: "box6", letters: ["12", "13"] },
+                                { id: "box7", letters: ["14", "15"] },
+                                { id: "box8", letters: ["15", "16"] },
+                                { id: "box9", letters: ["17", "18"] },
+                            ].map(({ id, letters }) => (
                                 <AbBox
-                                    key={boxId}
-                                    id={boxId}
-                                    letter1="A"
-                                    letter2="B"
+                                    key={id}
+                                    id={id}
+                                    letter1={letters[0]}
+                                    letter2={letters[1]}
                                     selectedLetterId={selectedLetterId}
                                     highlightedLetters={highlightedLetters}
                                     onClick={handleAbBoxClick}
@@ -400,12 +411,17 @@ function Estoque() {
                     <div className="flex">
                         <div className="block">
                             <div className="prateleira3 flex space-x-1 ml-10 mt-8 -mb-3">
-                                {['box10', 'box11', 'box12', 'box13'].map(boxId => (
+                                {[
+                                    { id: "box10", letters: ["01", "02"] },
+                                    { id: "box11", letters: ["03", "04"] },
+                                    { id: "box12", letters: ["05", "06"] },
+                                    { id: "box13", letters: ["07", "08"] },
+                                ].map(({ id, letters }) => (
                                     <AbBox
-                                        key={boxId}
-                                        id={boxId}
-                                        letter1="B"
-                                        letter2="A"
+                                        key={id}
+                                        id={id}
+                                        letter1={letters[0]}
+                                        letter2={letters[1]}
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
@@ -414,12 +430,17 @@ function Estoque() {
                                 ))}
                             </div>
                             <div className="prateleira5 flex space-x-1 ml-10 mt-5">
-                                {['box20', 'box21', 'box22', 'box23'].map(boxId => (
+                                {[
+                                    { id: "box20", letters: ["01", "02"] },
+                                    { id: "box21", letters: ["03", "04"] },
+                                    { id: "box22", letters: ["05", "06"] },
+                                    { id: "box23", letters: ["07", "08"] },
+                                ].map(({ id, letters }) => (
                                     <AbBox
-                                        key={boxId}
-                                        id={boxId}
-                                        letter1="A"
-                                        letter2="B"
+                                        key={id}
+                                        id={id}
+                                        letter1={letters[0]}
+                                        letter2={letters[1]}
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
@@ -444,12 +465,25 @@ function Estoque() {
                                 ))}
                             </div>
                             <div className="prateleira7 absolute flex space-x-1 mt-8 ml-10">
-                                {['box30', 'box31', 'box32', 'box33', 'box34', 'box35', 'box36', 'box37', 'box38', 'box39', 'box40', 'box41'].map(boxId => (
+                                {[
+                                    { id: "box30", letters: ["01", "02"] },
+                                    { id: "box31", letters: ["03", "04"] },
+                                    { id: "box32", letters: ["05", "06"] },
+                                    { id: "box33", letters: ["07", "08"] },
+                                    { id: "box34", letters: ["09", "10"] },
+                                    { id: "box35", letters: ["11", "12"] },
+                                    { id: "box36", letters: ["13", "14"] },
+                                    { id: "box37", letters: ["15", "16"] },
+                                    { id: "box38", letters: ["17", "18"] },
+                                    { id: "box39", letters: ["19", "20"] },
+                                    { id: "box40", letters: ["21", "22"] },
+                                    { id: "box41", letters: ["23", "24"] },
+                                ].map(({ id, letters }) => (
                                     <AbBox
-                                        key={boxId}
-                                        id={boxId}
-                                        letter1="B"
-                                        letter2="A"
+                                        key={id}
+                                        id={id}
+                                        letter1={letters[0]}
+                                        letter2={letters[1]}
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
@@ -460,12 +494,19 @@ function Estoque() {
                         </div>
                         <div className="block">
                             <div className="prateleira4 flex space-x-1 ml-20 mt-8">
-                                {['box14', 'box15', 'box16', 'box17', 'box18', 'box19'].map(boxId => (
+                                {[
+                                    { id: "box14", letters: ["09", "10"] },
+                                    { id: "box15", letters: ["11", "12"] },
+                                    { id: "box16", letters: ["13", "14"] },
+                                    { id: "box17", letters: ["15", "16"] },
+                                    { id: "box18", letters: ["17", "18"] },
+                                    { id: "box19", letters: ["19", "20"] },
+                                ].map(({ id, letters }) => (
                                     <AbBox
-                                        key={boxId}
-                                        id={boxId}
-                                        letter1="B"
-                                        letter2="A"
+                                        key={id}
+                                        id={id}
+                                        letter1={letters[0]}
+                                        letter2={letters[1]}
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
@@ -474,12 +515,16 @@ function Estoque() {
                                 ))}
                             </div>
                             <div className="prateleira8 absolute flex space-x-1 rotate-90">
-                                {['box42', 'box43', 'box44'].map(boxId => (
+                                {[
+                                    { id: "box42", letters: ["01", "02"] },
+                                    { id: "box43", letters: ["03", "04"] },
+                                    { id: "box44", letters: ["05", "06"] },
+                                ].map(({ id, letters }) => (
                                     <AbBox
-                                        key={boxId}
-                                        id={boxId}
-                                        letter1="A"
-                                        letter2="B"
+                                        key={id}
+                                        id={id}
+                                        letter1={letters[0]}
+                                        letter2={letters[1]}
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
@@ -488,12 +533,19 @@ function Estoque() {
                                 ))}
                             </div>
                             <div className="prateleira6 flex space-x-1 mt-2 ml-20">
-                                {['box24', 'box25', 'box26', 'box27', 'box28', 'box29'].map(boxId => (
+                                {[
+                                    { id: "box24", letters: ["09", "10"] },
+                                    { id: "box25", letters: ["11", "12"] },
+                                    { id: "box26", letters: ["13", "14"] },
+                                    { id: "box27", letters: ["15", "16"] },
+                                    { id: "box28", letters: ["17", "18"] },
+                                    { id: "box29", letters: ["19", "20"] },
+                                ].map(({ id, letters }) => (
                                     <AbBox
-                                        key={boxId}
-                                        id={boxId}
-                                        letter1="A"
-                                        letter2="B"
+                                        key={id}
+                                        id={id}
+                                        letter1={letters[0]}
+                                        letter2={letters[1]}
                                         selectedLetterId={selectedLetterId}
                                         highlightedLetters={highlightedLetters}
                                         onClick={handleAbBoxClick}
@@ -561,15 +613,14 @@ function Estoque() {
                         <p>1</p><p>2</p><p>3</p>
                     </div>
                     <div>
-                        <div className="absolute rounded-3xl font-regular text-3xl text-stam-bg-4">
-                            <p className="prateleira1 absolute">1</p>
-                            <p className="prateleira2 absolute">2</p>
-                            <p className="prateleira3 absolute">3</p>
-                            <p className="prateleira4 absolute">4</p>
-                            <p className="prateleira5 absolute">5</p>
-                            <p className="prateleira6 absolute">6</p>
-                            <p className="prateleiraSete absolute">7</p>
-                            <p className="prateleiraOito absolute">8</p>
+                        <div className="absolute rounded-3xl font-regular text-4xl text-stam-bg-4">
+                            <p className="prateleira1 absolute">A</p>
+                            <p className="prateleira3 absolute">B</p>
+                            <p className="prateleira5 absolute">C</p>
+                            <p className="prateleiraSete absolute">D</p>
+                            <p className="prateleiraOito absolute">E</p>
+                            <p className="prateleirax absolute">X</p>
+                            <p className="prateleiray absolute">Y</p>
                         </div>
                     </div>
                 </div>

@@ -241,13 +241,8 @@
     outline: none;
 }
 
-.prateleira1, .prateleira1VB, .prateleira1VNumber, .prateleira2VNumber, .prateleira1VB2, .prateleira1VB3, .prateleira1VB4, .prateleira1VB1, .prateleira1VB22, .p7VBNumbers, .prateleira7VB, .prateleira7VB2, .prateleira7VB3,.prateleira2, .prateleira3vbnumbers2, .prateleira3, .prateleira4, .prateleira5, .prateleira6, .prateleiraSete, .prateleiraOito, .prateleira4vbnumbers {
+.prateleira1, .prateleira2, .prateleira3, .prateleira4, .prateleira5, .prateleira6, .prateleiraSete, .prateleiraOito, .prateleirax, .prateleiray {
     z-index: 20;
-}
-
-.prateleira1VNumber {
-    top: 493px;
-    right: 30px;
 }
 
 .prateleira2VNumber {
@@ -261,115 +256,18 @@
     left: 300px;
 }
 
-.prateleira1, .prateleira2, .prateleira1V, .prateleira2V {
-    top: 204px;
+.prateleira1 {
+    top: 205px;
+    left: -148px;
 }
 
-.prateleira3, .prateleira4 {
-    top: 357px;
-}
-
-.prateleira1VB {
-    right: 60px;
-    bottom: 21px;
-}
-
-.prateleira1VB1 {
-    right: 318px;
-    bottom: 69px;
-}
-
-.prateleira1VB2 {
-    right: 146px;
-    bottom: 21px;
-}
-
-.prateleira1VB22 {
-    right: 232px;
-    bottom: 69px;
-}
-
-.prateleira1VB3 {
-    right: 232px;
-    bottom: 21px;
-}
-
-.prateleira1VB32 {
-    right: 146px;
-    bottom: 69px;
-}
-
-.prateleira1VB4 {
-    right: 318px;
-    bottom: 21px;
-}
-
-.prateleira7VB {
-    right: -1px;
-    top: 246px;
-}
-
-.prateleira7VB2 {
-    right: -1px;
-    top: 161px;
-}
-
-.prateleira7VB3 {
-    right: -1px;
-    top: 75px;
-}
-
-.prateleira4vbnumbers2 {
-    z-index: 20;
-    top: 247px;
-    margin-right: 565px;
-    gap: 77px;
-}
-
-.boxSozinho {
-    left: 497px;
-}
-
-.p1VBNumbers {
-    margin-right: 1286px;
-}
-
-.p7VBNumbers {
-    margin-right: 1003px;
-    margin-top: 274px;
-}
-
-.prateleira4vbnumbers3 {
-    z-index: 20;
-    top: 380px;
-    margin-right: 729px;
-    gap: 77px;
-}
-
-.prateleira2vbnumbers {
-    z-index: 20;
-    top: 466px;
-    margin-right: 645px;
-    gap: 77px;
-}
-
-.prateleira3vbnumbers2 {
-    top: 340px;
-    right: 169px;
+.prateleira3 {
+    top: 355px;
+    left: -148px;
 }
 
 .p5BoxNumber {
     right: 414px;
-}
-
-.prateleira4VB {
-    top: 20px;
-    left: 60px;
-}
-
-.prateleira5VB {
-    top: 20px;
-    left: 576px;
 }
 
 .p1BoxNumbers {
@@ -379,31 +277,8 @@
     gap: 78px;
 }
 
-.prateleira1 {
-    right: 235px;
-}
-
-.prateleira1V {
-    margin-top: 105px;
-    margin-left: 557px;
-}
-
 .prateleira2 {
     right: 15px;
-}
-
-.prateleira2V {
-    margin-top: 105px;
-    left: 65px;
-}
-
-.prateleira3 {
-    right: 148px;
-}
-
-.prateleira3VB {
-    top: 155px;
-    margin-left: 44px;
 }
 
 .prateleira4 {
@@ -416,8 +291,8 @@
 }
 
 .prateleira5 {
-    top: 408px;
-    right: 148px;
+    top: 407px;
+    left: -150px;
 }
 
 .prateleira6 {
@@ -430,7 +305,17 @@
     right: 525px;
 }
 
+.prateleirax {
+    top: 484px;
+    right: 483px;
+}
+
+.prateleiray {
+    top: 279px;
+    right: 483px;
+}
+
 .prateleiraOito {
-    top: 265px;
-    left: 532px;
+    top: 262px;
+    left: 525px;
 }
