@@ -21,7 +21,8 @@ const getCorredorFromBoxId = (boxId) => {
     if (["box20", "box21", "box22", "box23", "box24", "box25", "box26", "box27", "box28", "box29"].includes(boxId)) return "C";
     if (["box30", "box31", "box32", "box33", "box34", "box35", "box36", "box37", "box38", "box39", "box40", "box41"].includes(boxId)) return "D";
     if (["box42", "box43", "box44"].includes(boxId)) return "E";
-    if (["box45", "box46"].includes(boxId)) return "X"; // ou TRILHO se quiser
+    if (["box45"].includes(boxId)) return "Y";
+    if (["box46"].includes(boxId)) return "X";
     return "";
 };
 
@@ -455,7 +456,7 @@ function Estoque() {
                             ))}
                         </div>
                     </div>
-                    <div className="prateleira9 flex space-x-1 -ml-9 mt-8">
+                    <div className="corredorY prateleira9 flex space-x-1 -ml-9 mt-8">
                         {['box45'].map(boxId => (
                             <AbBox
                                 props="-rotate-90"
@@ -511,7 +512,7 @@ function Estoque() {
                                     />
                                 ))}
                             </div>
-                            <div className="prateleira10 flex space-x-1 -ml-9 mt-8">
+                            <div className="corredorX prateleira10 flex space-x-1 -ml-9 mt-8">
                                 {['box46'].map(boxId => (
                                     <AbBox
                                         props="-rotate-90"
