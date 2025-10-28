@@ -49,39 +49,37 @@ function Home() {
                             )}
                             <p className="font-regular text-white text-5xl mt-1">Feed</p>
                         </p>
-                        <div className="fraseMotivacional absolute text-right">
-                            <p className="text-white font-thin text-2xl">As oportunidades não aparecem, <span className="text-stam-orange font-light">você as cria</span>.</p>
-                            <p className="text-gray-300 font-thin">- Chris Grosser</p>
-                        </div>
                     </div>
                     <div className="space-y-10 mt-6">
                         <div className="md:flex block space-x-10">
                             <FeedCard
                                 title="SISTEMA ATUALIZADO!"
-                                icon="./imagens/arthur.jpeg"
+                                icon="./imagens/arthur.png"
                                 description="O System atualizou! Agora com inúmeras novas melhorias e funcionalidades que foram implementadas, todas projetadas para oferecer uma experiência mais robusta e eficiente."
                                 backgroundSize="hidden"
                                 feedCardWidth="feedCardWidth backgroundGradient"
                                 backgroundWidth="backgroundWidth"
                                 logoStyle="w-80 top-28"
                                 userName="Arthur Alves"
-                                department="- Desenvolvedor"
+                                department="- Suprimentos"
                                 route="/"
                                 vibroStyle='hidden'
                                 perfilStyle='hidden'
                             />
-                            <FeedCard
-                                title="AGORA NO VIBRO!"
-                                icon="./imagens/systemIcon.png"
-                                description="O sistema de localização do estoque agora presente também no vibroacabamento."
-                                background="https://scontent-gig4-1.cdninstagram.com/v/t39.30808-6/458140658_935586761926028_7845448588632815243_n.jpg?stp=dst-jpg_e35&cb=9b69d9bc-1c402c4c&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMDgweDEzNTAuc2RyLmYzMDgwOC5kZWZhdWx0X2ltYWdlIn0&_nc_ht=scontent-gig4-1.cdninstagram.com&_nc_cat=108&_nc_ohc=gPaP0OUi_hoQ7kNvgG4APwq&_nc_gid=4cd0f16b39a74abe84653b3089eb5e0a&edm=APoiHPcAAAAA&ccb=7-5&ig_cache_key=MzQ0OTg1NzAyMDg3NjUwNTEzMA%3D%3D.3-ccb7-5-cb9b69d9bc-1c402c4c&oh=00_AYB0Kj_rKdVL0HknhXw6Wy8LDIlTfhNs9udxKhJZz01bqw&oe=67237CF4&_nc_sid=22de04"
-                                style="hidden"
-                                feedCardWidth="bg-stam-bg-5"
-                                userName="System"
-                                logoStyle="hidden"
-                                perfilStyle='hidden'
-                                route="/vibroacabamento"
-                            />
+                            <div className="hidden">
+                                <FeedCard
+                                    title="Card"
+                                    icon="./imagens/systemIcon.png"
+                                    description="Card"
+                                    background="./imagens/systemIcon.png"
+                                    style="hidden"
+                                    feedCardWidth="bg-stam-bg-5"
+                                    userName="System"
+                                    logoStyle="hidden"
+                                    perfilStyle='hidden'
+                                    route="/vibroacabamento"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

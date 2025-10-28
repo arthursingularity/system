@@ -23,7 +23,7 @@ const getCorredorFromBoxId = (boxId) => {
     if (["box42", "box43", "box44"].includes(boxId)) return "E";
     if (["box45", "box46"].includes(boxId)) return "X"; // ou TRILHO se quiser
     return "";
-  };
+};
 
 function Estoque() {
     const [visiblePalletBox, setVisiblePalletBox] = useState(null);
@@ -84,28 +84,27 @@ function Estoque() {
 
     useEffect(() => {
         const storedValues = boxIds.reduce((acc, id) => {
-            ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', 'A', 'B', 'TRILHO'].forEach(letter => {
-                const values = Array(27).fill('').map((_, i) => localStorage.getItem(`${id}-${letter}-${i}`) || '');
-                acc[`${id}-${letter}`] = values;
-            });
+            ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
+                '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+                '21', '22', '23', '24', 'A', 'B', 'TRILHO'].forEach(letter => {
+                    const enderecarValues = Array(27).fill('').map((_, i) => localStorage.getItem(`${id}-${letter}-${i}`) || '');
+                    const cxValues = Array(27).fill('').map((_, i) => localStorage.getItem(`${id}-${letter}-CX-${i}`) || '');
+                    const saldoValues = Array(27).fill('').map((_, i) => localStorage.getItem(`${id}-${letter}-SALDO-${i}`) || '');
+
+                    acc[`${id}-${letter}`] = enderecarValues;
+                    if (!acc.cx) acc.cx = {};
+                    if (!acc.saldo) acc.saldo = {};
+
+                    acc.cx[`${id}-${letter}`] = cxValues;
+                    acc.saldo[`${id}-${letter}`] = saldoValues;
+                });
             return acc;
         }, {});
 
         setInputValues(storedValues);
+        setCaixasValues(storedValues.cx);
+        setSaldoValues(storedValues.saldo);
     }, []);
-
-    const handleSaldoInputChange = (palletId, index, value) => {
-        setSaldoValues(prev => {
-            const updated = { ...prev };
-
-            if (!updated[palletId]) {
-                updated[palletId] = Array(27).fill("");
-            }
-
-            updated[palletId][index] = value; // valor sem ponto
-            return updated;
-        });
-    };
 
     const focusInputInEstampariaTable = () => {
         if (estampariaTableRef.current) {
@@ -158,6 +157,42 @@ function Estoque() {
         });
     };
 
+    const handleCaixasInputChange = (index, value) => {
+        const upperCaseValue = value.toUpperCase();
+        const processedValue = isPasting ? upperCaseValue : upperCaseValue;
+
+        setCaixasValues(prevValues => {
+            const [boxId, letter] = selectedLetterId.split('-');
+            const newValues = { ...prevValues };
+
+            if (!newValues[selectedLetterId]) {
+                newValues[selectedLetterId] = Array(27).fill('');
+            }
+
+            newValues[selectedLetterId][index] = processedValue;
+            localStorage.setItem(`${boxId}-${letter}-CX-${index}`, processedValue);
+            return newValues;
+        });
+    };
+
+    // Armazenar input "Saldo"
+    const handleSaldoInputChange = (index, value) => {
+        const processedValue = value; // pode manter como número ou string
+
+        setSaldoValues(prevValues => {
+            const [boxId, letter] = selectedLetterId.split('-');
+            const newValues = { ...prevValues };
+
+            if (!newValues[selectedLetterId]) {
+                newValues[selectedLetterId] = Array(27).fill('');
+            }
+
+            newValues[selectedLetterId][index] = processedValue;
+            localStorage.setItem(`${boxId}-${letter}-SALDO-${index}`, processedValue);
+            return newValues;
+        });
+    };
+
     const handleSearch = () => {
         const trimmedSearchValue = searchValue.trim();
 
@@ -166,12 +201,14 @@ function Estoque() {
             return;
         }
 
-        const highlighted = Object.entries(inputValues).reduce((acc, [letterId, values]) => {
-            if (values.includes(trimmedSearchValue)) {
-                acc[letterId] = true;
-            }
-            return acc;
-        }, {});
+        const highlighted = Object.entries(inputValues)
+            .filter(([_, values]) => Array.isArray(values))
+            .reduce((acc, [letterId, values]) => {
+                if (values.includes(trimmedSearchValue)) {
+                    acc[letterId] = true;
+                }
+                return acc;
+            }, {});
 
         if (Object.keys(highlighted).length === 0) {
             setInputBorderClass('border-stam-vermelho');
@@ -595,14 +632,10 @@ function Estoque() {
                                 handlePasteInput={handlePasteInput}
                                 togglePieceTableVisibility={togglePieceTableVisibility}
                                 updateStockPercentage={() => updateStockPercentage(caixasValues)}
-                                onCaixasInputChange={(index, value) =>
-                                    handleCaixasChange(selectedLetterId, index, value)
-                                }
                                 caixasValues={caixasValues[selectedLetterId] || Array(27).fill('')}
                                 saldoValues={saldoValues[selectedLetterId] || Array(27).fill('')}
-                                onSaldoInputChange={(index, value) =>
-                                    handleSaldoInputChange(selectedLetterId, index, value)
-                                }
+                                onCaixasInputChange={(index, value) => handleCaixasInputChange(index, value)}
+                                onSaldoInputChange={(index, value) => handleSaldoInputChange(index, value)}
                                 selectedColuna={selectedLetterId.split('-')[1] || ''}
                                 corredor={getCorredorFromBoxId(selectedBoxId)}
                             />
