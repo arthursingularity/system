@@ -438,10 +438,10 @@ function Estoque() {
                             {[
                                 { id: "box4", letters: ["07", "08"] },
                                 { id: "box5", letters: ["09", "10"] },
-                                { id: "box6", letters: ["12", "13"] },
-                                { id: "box7", letters: ["14", "15"] },
-                                { id: "box8", letters: ["16", "17"] },
-                                { id: "box9", letters: ["18", "19"] },
+                                { id: "box6", letters: ["11", "12"] },
+                                { id: "box7", letters: ["13", "14"] },
+                                { id: "box8", letters: ["15", "16"] },
+                                { id: "box9", letters: ["17", "18"] },
                             ].map(({ id, letters }) => (
                                 <AbBox
                                     key={id}
